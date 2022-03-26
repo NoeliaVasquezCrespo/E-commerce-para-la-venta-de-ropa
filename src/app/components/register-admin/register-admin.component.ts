@@ -26,9 +26,7 @@ export class RegisterAdminComponent implements OnInit {
       
         
         this.userForm.patchValue({
-          first_name:"first_name",
-          last_name:"last_name",
-          email:"email",
+          
           
         });
      

@@ -1,6 +1,6 @@
 body {
     font-family: "Karla", sans-serif;
-    background-color: #cdf1e7;
+    background-color: #dff2f3;
     min-height: 100vh;
 }
 
@@ -10,16 +10,16 @@ body {
 }
 
 /*Forma de tarjeta*/  
-.register-card 
+.login-card 
 {
     border: 0;
     border-radius: 27.5px;
     overflow: hidden;
-    background-color: #dbf5e9; 
+    background-color: #e9f6fc; 
 }
 
 /*Formato para la imagen*/
-.register-card-img {
+.login-card-img {
     border-radius: 0;
     position: absolute;
     width: 100%;
@@ -29,12 +29,12 @@ body {
 }
 
 /*Borde para la tarjeta*/
-.register-card .card-body {
+.login-card .card-body {
     padding: 85px 60px 60px; 
 }
 
 /*Subtítulo*/
-.register-card-description {
+.login-card-description {
     font-size: 25px;
     color: #000;
     font-weight: normal;
@@ -42,7 +42,7 @@ body {
 }
 
 /*Título*/
-.register-card-title {
+.login-card-title {
     font-size: 35px;
     color: #043845;
     font-weight: normal;
@@ -50,7 +50,7 @@ body {
 }
 
 /*Labels*/
-.register-card .form-control {
+.login-card .form-control {
     border: 1px solid #070645;
     padding: 15px 25px;
     margin-bottom: 20px;
@@ -61,7 +61,7 @@ body {
 }
 
 /*Boton*/
-.register-card .register-btn { 
+.login-card .login-btn { 
     padding: 13px 20px 12px;
     background-color: #043845;
     border-radius: 4px;
@@ -72,28 +72,28 @@ body {
     margin-bottom: 24px; 
 }
 
-/*Cuando el cursor se pone en el botón de register*/
-.register-card .register-btn:hover {
+/*Cuando el cursor se pone en el botón de Login*/
+.login-card .login-btn:hover {
     border: 1px solid #070645;
     background-color: transparent;
     color: #043845; 
 }
 
 /* Registre aquí*/
-.register-card-footer-text { 
+.login-card-footer-text { 
     font-size: 16px;
     color: #0d2366;
     margin-bottom: 60px; 
 }
 
 @media (max-width: 767px) {
-    .register-card-footer-text {
+    .login-card-footer-text {
         margin-bottom: 24px; 
     } 
 }
 
-.register-card-footer-nav a {
+.login-card-footer-nav a {
     font-size: 14px;
-    color: #85ca8b; 
+    color: #919aa3; 
 }
     
