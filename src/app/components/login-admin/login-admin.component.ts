@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { ActivatedRoute} from '@angular/router';
+import { AuthRequest } from 'src/app/models/AuthRequest';
 import { ApiserviceService } from 'src/app/service/apiservice.service';
+import { AuthService } from 'src/app/service/auth.service';
 import Swal from'sweetalert2';
 @Component({
   selector: 'app-login-admin',
@@ -10,7 +12,13 @@ import Swal from'sweetalert2';
 })
 export class LoginAdminComponent implements OnInit {
 
-  
+  private auth: AuthRequest = {
+    username: '',
+    password: '',
+    tipoUsuarioId:0
+  };
+
+  userForm: FormGroup;
 
   errormsg: any;
   successmsg:any;
@@ -20,16 +28,18 @@ export class LoginAdminComponent implements OnInit {
    
     
         
-    this.userForm.patchValue({
-    
-      
-    });
     
   }
+  constructor(private authService:AuthService,
+    private fb:FormBuilder,){
+    this.userForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+    });
 
-  userForm = new FormGroup ({
-    'email': new FormControl('',Validators.required)
-  });
+  }
+
+  
 
   //create nw user
   userAuth(){
@@ -44,6 +54,18 @@ export class LoginAdminComponent implements OnInit {
 
   }
 
+  login(){
+    console.log("VALIDANDO DATOS");
+    this.auth= {
+      username: this.userForm.value.username,
+      password: this.userForm.value.password,
+      tipoUsuarioId:1
+    }
+    this.authService.login(this.auth).subscribe(resp => {
+      console.log(resp);
+    });
+
+  }
 
   successNotificationLogin(){
     Swal.fire({
