@@ -8,6 +8,9 @@ import { RegisterAdminComponent } from './components/register-admin/register-adm
 import { HttpClientModule } from '@angular/common/http';
 import { ProductsComponent } from './components/products/products.component';
 import { DetailsproductComponent } from './components/detailsproduct/detailsproduct.component';
+import { HomeComponent } from './components/home/home.component';
+import { ProductsListComponent } from './components/products-list/products-list.component';
+import { RegisterProvidersComponent } from './components/register-providers/register-providers.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +18,10 @@ import { DetailsproductComponent } from './components/detailsproduct/detailsprod
     LoginAdminComponent,
     RegisterAdminComponent,
     ProductsComponent,
-    DetailsproductComponent
+    DetailsproductComponent,
+    HomeComponent,
+    ProductsListComponent,
+    RegisterProvidersComponent
   ],
   imports: [
     BrowserModule,

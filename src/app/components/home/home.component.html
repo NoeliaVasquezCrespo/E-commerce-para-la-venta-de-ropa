@@ -1,0 +1,104 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="home.component.css">
+</head>
+
+<div class="ll-hero">
+    <ng-particles [id]="'home_hero__particles'" class="ll-hero__particles" [options]="particlesOptions"></ng-particles>
+    <div class="container">
+      <div class="grid grid-cols-12 gap-x-6">
+        <div class="col-span-12 md:col-span-6 lg:col-span-7 xxl:col-span-6 ll-hero-text">
+          <h1 class="lg:mt-12 text-white font-bold">
+            "La mejor tienda de ropa online del mundo, porque el estilo no tiene reglas, el estilo lo creas tú"
+          </h1>
+  
+        </div>
+        <div class="col-span-12 md:col-span-6 lg:col-span-5 xxl:col-span-6 ll-image mt-10 md:mt-0">
+          <img class="ml-auto" src="https://mx.fashiontrends.style/wp-content/uploads/2021/05/Fashion-Trends-La-ropa-de-lujo-no-pasa-de-moda-2.png" />
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="ll-about mt-28 mb-28">
+    <div class="container">
+      <div class="flex flex-wrap">
+        <div class="lg:w-1/2 lg:order-last">
+          <a>
+            <img src="https://pymesargentina.com/wp-content/uploads/2020/04/25-1.jpg" alt="About" />
+            <mat-icon class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">play_circle_filled</mat-icon>
+          </a>
+        </div>
+        <div class="lg:w-1/2 lg:pr-10 mt-8 lg:mt-0 ll-about__text">
+          <h2 class="font-medium">Un estilo que define la personalidad de nuestro cliente</h2>
+          <div class="mt-12">
+            <h5 class="font-medium text-black">Mejores marcas</h5>
+            <p class="mt-1">Contamos con las mejores marcas del mundo que se dedican exclusivamente a todo tipo de ropa</p>
+          </div>
+          <div class="mt-8">
+            <h5 class="font-medium text-black">Envíos a todo el país</h5>
+            <p class="mt-1">Se realiza envíos a todas las ciudades de Bolivia, hasta la puerta de tu casa</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <ll-home-products></ll-home-products>
+  
+  <div class="ll-process-area mt-16" style="background-color: #63acb9;">
+    <div class="container">
+      <h2 class="ll-process__title text-center mb-8">Algunas de nuestras marcas</h2>
+      <div class="ll-processes grid grid-cols-12 gap-8">
+        <div class="ll-process col-span-12 sm:col-span-6 lg:col-span-3">
+          <div class="number"><img src="https://logos-marcas.com/wp-content/uploads/2020/04/Nike-Logo.png" style="width: 250px; height: 150px;"/></div>
+        </div>
+        <div class="ll-process col-span-12 sm:col-span-6 lg:col-span-3">
+          <div class="number"><img src="https://www.pngplay.com/wp-content/uploads/13/Lacoste-Logo-Transparent-Images.png" style="width: 250px; height: 150px;"/></div>
+        </div>
+        <div class="ll-process col-span-12 sm:col-span-6 lg:col-span-3">
+          <div class="number"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Converse_logo.svg/2560px-Converse_logo.svg.png" style="width: 250px; height: 150px;"/></div>
+        </div>
+        <div class="ll-process col-span-12 sm:col-span-6 lg:col-span-3">
+          <div class="number"><img src="https://logos-marcas.com/wp-content/uploads/2020/04/Chanel-Logo.png" style="width: 250px; height: 150px;"/></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="pt-20 ll-starter">
+    <div class="container">
+      <h2 class="text-center mb-16 xl:mb-0">Ropa para hombre y mujer</h2>
+      <div class="grid xl:grid-cols-2 gap-x-8 mt-10">
+        <div class="ll-starter__card px-5 grid grid-cols-12 place-items-center">
+          <div class="col-span-5 px-5">
+            <img class="-mt-14" src="assets/images/starter-01.png" alt="" />
+          </div>
+          <div class="py-5 col-span-7">
+            <h4 class="text-white mb-4">Ropa para hombre de toda talla y todo color</h4>
+        
+            <a [routerLink]="['/products']" routerLinkActive="router-link-active" mat-flat-button color="warn" class="font-semibold"
+              >Ver todos los productos</a
+            >
+          </div>
+        </div>
+        <div class="ll-starter__card px-5 grid grid-cols-12 place-items-center mt-16 xl:mt-0">
+          <div class="col-span-5 px-5">
+            <img class="-mt-14" src="assets/images/starter-02.png" alt="" />
+          </div>
+          <div class="py-5 col-span-7 order-first text-right">
+            <h4 class="text-white mb-4">Ropa para mujer de toda talla y todo color</h4>
+            <a [routerLink]="['/products']" routerLinkActive="router-link-active" mat-flat-button color="warn" class="font-semibold"
+              >Ver todos los productos</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
