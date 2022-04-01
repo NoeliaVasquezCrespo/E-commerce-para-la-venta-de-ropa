@@ -8,10 +8,19 @@ import { RegisterAdminComponent } from './components/register-admin/register-adm
 import { HttpClientModule } from '@angular/common/http';
 import { ProductsComponent } from './components/products/products.component';
 import { DetailsproductComponent } from './components/detailsproduct/detailsproduct.component';
-import { HomeComponent } from './components/home/home.component';
 import { ProductsListComponent } from './components/products-list/products-list.component';
 import { RegisterProvidersComponent } from './components/register-providers/register-providers.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { FeatureComponent } from './shared/components/feature/feature.component';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { BaseLayoutComponent } from './shared/components/layouts/base-layout/base-layout.component';
+import { SidenavComponent } from './shared/components/sidenav/sidenav.component';
+import {MatListModule} from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,9 +28,10 @@ import { RegisterProvidersComponent } from './components/register-providers/regi
     RegisterAdminComponent,
     ProductsComponent,
     DetailsproductComponent,
-    HomeComponent,
     ProductsListComponent,
-    RegisterProvidersComponent
+    RegisterProvidersComponent,
+  
+    
   ],
   imports: [
     BrowserModule,
@@ -29,6 +39,7 @@ import { RegisterProvidersComponent } from './components/register-providers/regi
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,  SharedModule, NgxSkeletonLoaderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
