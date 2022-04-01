@@ -19,10 +19,10 @@ const routes: Routes = [
     path: 'addproduct',
     loadChildren: () => import('./components/addproduct/addproduct.module').then(m => m.AddproductModule)
   },*/
- /* {
+  {
     path: 'auth',
     loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule)
-  },*/
+  },
   {path: '', redirectTo: '', pathMatch: 'full' },
   {path:'login', component:LoginAdminComponent},
   {path:'register', component:RegisterAdminComponent},
