@@ -8,13 +8,22 @@ import { ProductsListComponent } from './components/products-list/products-list.
 import { RegisterProvidersComponent } from './components/register-providers/register-providers.component';
 import { BaseLayoutComponent } from './shared/components/layouts/base-layout/base-layout.component';
 
-
+const baseLayoutRouting: Routes = [
+    
+  {
+    path: '',
+    pathMatch: 'full',
+    loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule)
+  }
+];
 
 const routes: Routes = [
   {
     path: '',
-    component: BaseLayoutComponent
+    component: BaseLayoutComponent,
+    children: baseLayoutRouting
   },
+
   /*{
     path: 'addproduct',
     loadChildren: () => import('./components/addproduct/addproduct.module').then(m => m.AddproductModule)

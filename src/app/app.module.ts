@@ -13,13 +13,6 @@ import { RegisterProvidersComponent } from './components/register-providers/regi
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-import { FeatureComponent } from './shared/components/feature/feature.component';
-import { HeaderComponent } from './shared/components/header/header.component';
-import { BaseLayoutComponent } from './shared/components/layouts/base-layout/base-layout.component';
-import { SidenavComponent } from './shared/components/sidenav/sidenav.component';
-import {MatListModule} from '@angular/material/list';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
@@ -30,7 +23,6 @@ import { SharedModule } from './shared/shared.module';
     DetailsproductComponent,
     ProductsListComponent,
     RegisterProvidersComponent,
-  
     
   ],
   imports: [
