@@ -22,7 +22,10 @@ const routes: Routes = [
     component: BaseLayoutComponent,
     children: baseLayoutRouting
   },
-
+  {
+    path: 'products',
+    loadChildren: () => import('./components/product/product.module').then(m => m.ProductModule)
+  },
   /*{
     path: 'addproduct',
     loadChildren: () => import('./components/addproduct/addproduct.module').then(m => m.AddproductModule)
