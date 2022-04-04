@@ -10,9 +10,12 @@ const baseLayoutRouting: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule)
+    loadChildren: () => import('./components/app-home/client-home/home.module').then(m => m.HomeModule)
   },
-  
+  {
+    path: 'products',
+    loadChildren: () => import('./components/product/product.module').then(m => m.ProductModule)
+  },
   
 ];
 
@@ -22,13 +25,10 @@ const routes: Routes = [
     component: BaseLayoutComponent,
     children: baseLayoutRouting
   },
-  {
-    path: 'products',
-    loadChildren: () => import('./components/product/product.module').then(m => m.ProductModule)
-  },
+ 
   {
     path: 'authprovider',
-    loadChildren: () => import('./components/auth-provider/auth-provider.module').then(m => m.AuthProviderModule)
+    loadChildren: () => import('./components/auth-session/auth-provider/auth-provider.module').then(m => m.AuthProviderModule)
   },
   {
     path: 'addproduct',
@@ -37,11 +37,11 @@ const routes: Routes = [
   {
     path: 'adminhome',
     pathMatch: 'full',
-    loadChildren: () => import('./components/admin-home/admin-home.module').then(m => m.AdminHomeModule)
+    loadChildren: () => import('./components/app-home/admin-home/admin-home.module').then(m => m.AdminHomeModule)
   },
   {
     path: 'auth',
-    loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule)
+    loadChildren: () => import('./components/auth-session/auth-admin/auth.module').then(m => m.AuthModule)
   },
   {
     path: 'dashboard',
