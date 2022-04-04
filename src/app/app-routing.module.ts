@@ -35,6 +35,11 @@ const routes: Routes = [
     loadChildren: () => import('./components/addproduct/addproduct.module').then(m => m.AddproductModule)
   },*/
   {
+    path: 'adminhome',
+    pathMatch: 'full',
+    loadChildren: () => import('./components/admin-home/admin-home.module').then(m => m.AdminHomeModule)
+  },
+  {
     path: 'auth',
     loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule)
   },
