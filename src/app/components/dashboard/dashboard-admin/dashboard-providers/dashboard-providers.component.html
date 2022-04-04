@@ -1,27 +1,27 @@
 <div>
-	<h5 class="mb-3 font-medium">Orders</h5>
+	<h5 class="mb-3 font-medium">LISTA DE PROVEEDORES</h5>
 	<div class="table-inside">
 		<table class="order-table table-auto ltMd:responsive">
 			<thead>
 				<tr class="border text-left">
 					<th>
-						<span class="text-gray-800">Id</span>
+						<span class="text-gray-800">ID</span>
 					</th>
 					<th>
-						<span class="text-gray-800">Name</span>
+						<span class="text-gray-800">NOMBRE</span>
 					</th>
 					<th>
-						<span class="text-gray-800">Price</span>
+						<span class="text-gray-800">APELLIDO</span>
 					</th>
 	
 					<th>
-						<span class="text-gray-800">Created</span>
+						<span class="text-gray-800">EMAIL</span>
 					</th>
 	
 					<th>
-						<span class="text-gray-800">Status</span>
+						<span class="text-gray-800">USERNAME</span>
 					</th>
-					<th class="text-right">Action</th>
+					<th class="text-right"></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -33,20 +33,13 @@
 						{{order?.orderBy | titlecase }}
 					</td>
 					<td>
-						<span>${{order?.price}}</span>
+						<span>{{order?.price}}</span>
 					</td>
 					<td>
 						<span>{{order?.created}}</span>
 					</td>
 					<td>
-						<div [ngClass]="{
-							'bg-blue-500 text-blue-500': order?.status === 'complated',
-							'bg-red-500 text-red-500': order?.status === 'rejected',
-							'bg-yellow-500 text-yellow-900': order?.status === 'pending',
-							'bg-primary text-primary': order?.status === 'initialized'
-							}" 
-							class="text-[12px] bg-opacity-20 rounded-full px-3 inline-block font-bold py-[3px]"
-						>
+						<div>
 							{{ order?.status | titlecase }}
 						</div>
 					</td>
@@ -57,7 +50,7 @@
 						<mat-menu #menu="matMenu" xposition="before">
 							<button mat-menu-item>
 								<mat-icon>dialpad</mat-icon>
-								<span>Details</span>
+								<span>Editar</span>
 							</button>
 							<button mat-menu-item>
 								<mat-icon>delete</mat-icon>

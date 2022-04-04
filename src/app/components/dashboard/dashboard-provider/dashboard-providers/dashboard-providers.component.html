@@ -1,0 +1,65 @@
+<div>
+	<h5 class="mb-3 font-medium">LISTA DE PROVEEDORES</h5>
+	<div class="table-inside">
+		<table class="order-table table-auto ltMd:responsive">
+			<thead>
+				<tr class="border text-left">
+					<th>
+						<span class="text-gray-800">ID</span>
+					</th>
+					<th>
+						<span class="text-gray-800">NOMBRE</span>
+					</th>
+					<th>
+						<span class="text-gray-800">APELLIDO</span>
+					</th>
+	
+					<th>
+						<span class="text-gray-800">EMAIL</span>
+					</th>
+	
+					<th>
+						<span class="text-gray-800">USERNAME</span>
+					</th>
+					<th class="text-right"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let order of orders" class="border">
+					<td>
+						<a class="text-primary" href="/">#{{order?.id}}</a>
+					</td>
+					<td>
+						{{order?.orderBy | titlecase }}
+					</td>
+					<td>
+						<span>{{order?.price}}</span>
+					</td>
+					<td>
+						<span>{{order?.created}}</span>
+					</td>
+					<td>
+						<div>
+							{{ order?.status | titlecase }}
+						</div>
+					</td>
+					<td class="text-right">
+						<button class="action_icon__btn" mat-icon-button [matMenuTriggerFor]="menu">
+							<mat-icon>more_vert</mat-icon>
+						</button>
+						<mat-menu #menu="matMenu" xposition="before">
+							<button mat-menu-item>
+								<mat-icon>dialpad</mat-icon>
+								<span>Editar</span>
+							</button>
+							<button mat-menu-item>
+								<mat-icon>delete</mat-icon>
+								<span>Delete</span>
+							</button>
+						</mat-menu>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

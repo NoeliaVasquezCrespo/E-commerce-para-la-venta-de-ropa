@@ -9,16 +9,9 @@ export const menuList: Menu[] = [
     name: 'Productos'
   },
   {
-    path: '/about',
+    path: '/cart',
     name: 'Carrito'
   },
-  {
-    path: '/addproduct',
-    name: 'Agregar Producto'
-  },
-  {
-    path: '/dashboard',
-    name: 'Dashboard'
-  },
+  
   
 ];

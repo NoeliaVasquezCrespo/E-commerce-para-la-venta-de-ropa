@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import { LoginAdminComponent } from './components/login-admin/login-admin.component';
 import { RegisterAdminComponent } from './components/register-admin/register-admin.component';
-import { RegisterProvidersComponent } from './components/register-providers/register-providers.component';
 import { BaseLayoutComponent } from './shared/components/layouts/base-layout/base-layout.component';
 
 const baseLayoutRouting: Routes = [
@@ -40,12 +39,21 @@ const routes: Routes = [
     loadChildren: () => import('./components/app-home/admin-home/admin-home.module').then(m => m.AdminHomeModule)
   },
   {
+    path: 'providerhome',
+    pathMatch: 'full',
+    loadChildren: () => import('./components/app-home/provider-home/provider-home.module').then(m => m.ProviderHomeModule)
+  },
+  {
     path: 'auth',
     loadChildren: () => import('./components/auth-session/auth-admin/auth.module').then(m => m.AuthModule)
   },
   {
-    path: 'dashboard',
-    loadChildren: () => import('./components/dashboard/dashboard.module').then(m => m.DashboardModule)
+    path: 'admindashboard',
+    loadChildren: () => import('./components/dashboard/dashboard-admin/dashboard.module').then(m => m.DashboardModule)
+  },
+  {
+    path: 'providerdashboard',
+    loadChildren: () => import('./components/dashboard/dashboard-provider/dashboard.module').then(m => m.DashboardModule)
   },
 
 
@@ -55,7 +63,6 @@ const routes: Routes = [
   {path: '', redirectTo: '', pathMatch: 'full' },
   {path:'login', component:LoginAdminComponent},
   {path:'register', component:RegisterAdminComponent},
-  {path:'register-providers', component:RegisterProvidersComponent},
 ];
 
 

@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="signup.component.scss">
 </head>
 
-<div class="login__page" [style.background-image]="'url(assets/register.jpg)'" >
+<div class="login__page" [style.background-image]="'url(https://st2.depositphotos.com/2933025/6990/i/950/depositphotos_69901955-stock-photo-paris-fashion-clothing-pattern.jpg)'" >
     <div class="login__row min-h-screen">
       <div class="login__hero flex flex-col justify-center items-center py-10 px-4 sm:px-8 xl:px-20 text-white">
         <a [routerLink]="['']" class="w-48 inline-block"><img src="https://images.vexels.com/media/users/3/132103/isolated/preview/2b512b5ece5d914e68950bfdbf73b481-icono-de-circulo-de-carrito-de-compras.png" alt="Trendy" /></a>
@@ -81,6 +81,7 @@
               <button
                 class="w-full bg-gray-800 hover:bg-grey-900 text-white text-sm py-2 px-4 font-semibold rounded focus:outline-none focus:shadow-outline h-10"
                 type="button"
+                [routerLink]="['/adminhome']"
               >
                 Registrar
               </button>

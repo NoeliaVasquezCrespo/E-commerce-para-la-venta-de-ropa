@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { LoginAdminComponent } from './components/login-admin/login-admin.component';
 import { RegisterAdminComponent } from './components/register-admin/register-admin.component';
 import { HttpClientModule } from '@angular/common/http';
-import { RegisterProvidersComponent } from './components/register-providers/register-providers.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
@@ -16,7 +15,6 @@ import { SharedModule } from './shared/shared.module';
     AppComponent,
     LoginAdminComponent,
     RegisterAdminComponent,
-    RegisterProvidersComponent,
     
   ],
   imports: [
