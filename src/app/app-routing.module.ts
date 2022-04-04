@@ -30,10 +30,10 @@ const routes: Routes = [
     path: 'authprovider',
     loadChildren: () => import('./components/auth-provider/auth-provider.module').then(m => m.AuthProviderModule)
   },
-  /*{
+  {
     path: 'addproduct',
     loadChildren: () => import('./components/addproduct/addproduct.module').then(m => m.AddproductModule)
-  },*/
+  },
   {
     path: 'adminhome',
     pathMatch: 'full',
