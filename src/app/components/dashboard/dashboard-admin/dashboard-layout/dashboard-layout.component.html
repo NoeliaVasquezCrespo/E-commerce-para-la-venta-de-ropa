@@ -24,33 +24,42 @@
                   <mat-nav-list class="_sidenav">
                     <a
                       mat-list-item
-                      routerLink="/dashboard"
-                      [routerLinkActiveOptions]="{ exact: true }"
-                      routerLinkActive="bg-gray-200"
-                      class="font-semibold text-gray-500 hover:text-primary"
-                      ><mat-icon class="mr-2">dashboard</mat-icon> Estadísticas</a
-                    >
-                    <a
-                      mat-list-item
-                      routerLink="/dashboard/profile"
+                      routerLink="/admindashboard/profile"
                       routerLinkActive="bg-gray-200"
                       class="font-semibold text-gray-500 hover:text-primary"
                       ><mat-icon class="mr-2">account_circle</mat-icon> Perfil</a
                     >
                     <a
                       mat-list-item
-                      routerLink="/dashboard/saved-items"
+                      routerLink="/admindashboard"
+                      [routerLinkActiveOptions]="{ exact: true }"
                       routerLinkActive="bg-gray-200"
                       class="font-semibold text-gray-500 hover:text-primary"
-                      ><mat-icon class="mr-2">list</mat-icon> Lista de productos</a
+                      ><mat-icon class="mr-2">how_to_reg</mat-icon> Lista de Administradores</a
                     >
                     <a
                       mat-list-item
-                      routerLink="/dashboard/orders"
+                      routerLink="/admindashboard/company"
+                      [routerLinkActiveOptions]="{ exact: true }"
+                      routerLinkActive="bg-gray-200"
+                      class="font-semibold text-gray-500 hover:text-primary"
+                      ><mat-icon class="mr-2">book</mat-icon> Lista de Empresas</a
+                    >
+                    <a
+                      mat-list-item
+                      routerLink="/admindashboard/providers"
                       routerLinkActive="bg-gray-200"
                       class="font-semibold text-gray-500 hover:text-primary"
                       ><mat-icon class="mr-2">article</mat-icon> Lista de proveedores</a
                     >
+                    <a
+                      mat-list-item
+                      routerLink="/admindashboard/products"
+                      routerLinkActive="bg-gray-200"
+                      class="font-semibold text-gray-500 hover:text-primary"
+                      ><mat-icon class="mr-2">list</mat-icon> Lista de productos</a
+                    >
+                    
                     <a (click)="onLogout()" mat-list-item class="font-semibold text-gray-500 hover:text-primary"><mat-icon class="mr-2">logout</mat-icon> Cerrar sesión</a>
                     <a><img src="assets/logo_trendy.png" alt="Logo" /></a>
                   </mat-nav-list>

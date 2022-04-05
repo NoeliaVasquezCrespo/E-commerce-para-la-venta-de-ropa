@@ -16,6 +16,6 @@ export class ProductListComponent implements OnInit {
     setTimeout(() => {
       this.products = productsDB.Product;
       this.isLoaded = true
-    }, 8000)
+    }, 1000)
   }
 }

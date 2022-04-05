@@ -5,6 +5,7 @@ import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.co
 import { DashboardProvidersComponent } from './dashboard-providers/dashboard-providers.component';
 import { DashboardProfileComponent } from './dashboard-profile/dashboard-profile.component';
 import { DashboardProductsComponent } from './dashboard-products/dashboard-products.component';
+import { DashboardCompanyComponent } from './dashboard-company/dashboard-company.component';
 
 const DashboardChildrenRoute: Routes = [
   {
@@ -13,7 +14,7 @@ const DashboardChildrenRoute: Routes = [
     component: DashboardIndexComponent
   },
   {
-    path: 'saved-items',
+    path: 'products',
     component: DashboardProductsComponent
   },
   {
@@ -21,8 +22,12 @@ const DashboardChildrenRoute: Routes = [
     component: DashboardProfileComponent
   },
   {
-    path: 'orders',
+    path: 'providers',
     component: DashboardProvidersComponent
+  },
+  {
+    path: 'company',
+    component: DashboardCompanyComponent
   }
 ];
 
