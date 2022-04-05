@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import { ActivatedRoute} from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import { AuthRequest } from 'src/app/models/AuthRequest';
 import { ApiserviceService } from 'src/app/service/apiservice.service';
 import { AuthService } from 'src/app/service/auth.service';
@@ -32,7 +32,8 @@ export class LoginComponent implements OnInit {
     
   }
   constructor(private authService:AuthService,
-    private fb:FormBuilder,){
+    private fb:FormBuilder,
+    private router: Router,){
     this.userForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -48,22 +49,35 @@ export class LoginComponent implements OnInit {
         this.successNotificationLogin()
       
     } else {
-      this.wrongNotificationLogin()
+      this.wrongNotificationLogin('Complete los espacios vacíos')
     }
     
 
   }
 
   login(){
-    console.log("VALIDANDO DATOS");
-    this.auth= {
-      username: this.userForm.value.username,
-      password: this.userForm.value.password,
-      tipoUsuarioId:1
+    if(this.userForm.valid){
+      console.log("VALIDANDO DATOS");
+      this.auth= {
+        username: this.userForm.value.username,
+        password: this.userForm.value.password,
+        tipoUsuarioId:1
+      }
+      this.authService.login(this.auth).subscribe(resp => {
+        console.log(resp);
+        if(resp.jwttoken!=null){
+          localStorage.setItem('token',resp.jwttoken);
+          localStorage.setItem('userId',resp.userId.toString())
+          this.successNotificationLogin();
+        }
+      },error=>{
+        this.wrongNotificationLogin('Usuario inexistente');
+      });
+    }else{
+      this.wrongNotificationLogin('Complete los espacios vacíos')
     }
-    this.authService.login(this.auth).subscribe(resp => {
-      console.log(resp);
-    });
+
+    
 
   }
 
@@ -77,16 +91,18 @@ export class LoginComponent implements OnInit {
       confirmButtonText: 'Ok',
     }).then((result) => {
       if (result.value) {
-        window.location.href="http://localhost:4200"
+        console.log('admin dashboard')
+        this.router.navigateByUrl('/admindashboard');
+        //window.location.href="http://localhost:4200"
       }
     })
   } 
     
-  wrongNotificationLogin(){
+  wrongNotificationLogin(mensaje:string){
     Swal.fire({
       icon: 'error',
       title: 'Error al iniciar sesión',
-      text: 'Complete los espacios vacíos',
+      text: mensaje,
     })
   }
 

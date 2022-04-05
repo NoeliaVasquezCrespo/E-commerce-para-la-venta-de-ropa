@@ -6,12 +6,16 @@ import { DashboardProvidersComponent } from './dashboard-providers/dashboard-pro
 import { DashboardProfileComponent } from './dashboard-profile/dashboard-profile.component';
 import { DashboardProductsComponent } from './dashboard-products/dashboard-products.component';
 import { DashboardCompanyComponent } from './dashboard-company/dashboard-company.component';
+import { ValidarTokenGuard } from '../../auth-session/auth-admin/guard/validar-token.guard';
 
 const DashboardChildrenRoute: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: DashboardIndexComponent
+    component: DashboardIndexComponent,
+    canLoad: [ ValidarTokenGuard ],
+    canActivate: [ ValidarTokenGuard ],
+    
   },
   {
     path: 'products',

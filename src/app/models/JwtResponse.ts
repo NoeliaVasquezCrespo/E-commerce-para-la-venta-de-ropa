@@ -1,3 +1,5 @@
 export interface JwtResponse{
-    jwttoken:string
+    jwttoken:string,
+    userId:number,
+    messege:string
 }
