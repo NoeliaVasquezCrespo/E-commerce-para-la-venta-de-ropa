@@ -9,8 +9,6 @@ import { DashboardIndexComponent } from './dashboard-index/dashboard-index.compo
 import { SharedModule } from '../../../shared/shared.module';
 import { DashboardProductsComponent } from './dashboard-products/dashboard-products.component';
 import { DashboardProvidersComponent } from './dashboard-providers/dashboard-providers.component';
-import { FormsModule, ReactiveFormsModule, FormGroup, FormControl,Validators } from '@angular/forms';
-
 @NgModule({
   declarations: [
     DashboardLayoutComponent,
@@ -18,6 +16,6 @@ import { FormsModule, ReactiveFormsModule, FormGroup, FormControl,Validators } f
     DashboardProductsComponent,
     DashboardProvidersComponent
   ],
-  imports: [CommonModule, DashboardRoutingModule, SharedModule, MatMenuModule,MatExpansionModule, FormsModule, ReactiveFormsModule,FormGroup, FormControl,Validators]
+  imports: [CommonModule, DashboardRoutingModule, SharedModule, MatMenuModule,MatExpansionModule]
 })
 export class DashboardModule {}

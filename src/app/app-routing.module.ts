@@ -1,7 +1,5 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import { LoginAdminComponent } from './components/login-admin/login-admin.component';
-import { RegisterAdminComponent } from './components/register-admin/register-admin.component';
 import { BaseLayoutComponent } from './shared/components/layouts/base-layout/base-layout.component';
 
 const baseLayoutRouting: Routes = [
@@ -61,8 +59,6 @@ const routes: Routes = [
 
 
   {path: '', redirectTo: '', pathMatch: 'full' },
-  {path:'login', component:LoginAdminComponent},
-  {path:'register', component:RegisterAdminComponent},
 ];
 
 
