@@ -1,0 +1,94 @@
+<div>
+  <div style="text-align: center;">
+    <h1 class="mb-3 font-medium">EMPRESAS</h1>
+  </div>
+
+  <div>
+    <form>  
+     <div class="mb-4 mt-6">
+        <label class="block text-gray-700 text-sm font-semibold mb-2" for="nombre"> Nombre </label>
+        <input
+          class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
+          id="nombre"
+          type="text"
+          placeholder="Nombre de la Empresa"
+        />
+        <div class="mb-4 mt-6">
+          <label class="block text-gray-700 text-sm font-semibold mb-2" for="nit"> NIT </label>
+          <input
+            class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
+            id="nit"
+            type="number"
+            placeholder="Nit"
+          />
+          
+      
+      <div class="flex w-full mt-6">
+        <button
+          class="w-full hover:bg-grey-900 text-white text-sm py-2 px-4 rounded focus:outline-none focus:shadow-outline h-10"
+          type="button"
+          style="background-color: #312862;"
+          
+        >
+          Registrar Empresa
+        </button>
+      </div>
+  </div>
+</div>
+<div>
+  <br>
+	<h1 class="mb-3 font-medium">LISTA EMPRESAS</h1>
+	<div class="table-inside">
+		<table class="order-table table-auto ltMd:responsive">
+			<thead>
+				<tr class="border text-left">
+					<th>
+						<span class="text-gray-800">ID</span>
+					</th>
+					<th>
+						<span class="text-gray-800">NOMBRE DE LA EMPRESA</span>
+					</th>
+					<th>
+						<span class="text-gray-800">NIT</span>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let order of orders" class="border">
+					<td>
+						<a class="text-primary" href="/">#{{order?.id}}</a>
+					</td>
+					<td>
+						{{order?.orderBy | titlecase }}
+					</td>
+					<td>
+						<span>{{order?.price}}</span>
+					</td>
+					<td>
+						<span>{{order?.created}}</span>
+					</td>
+					<td>
+						<div>
+							{{ order?.status | titlecase }}
+						</div>
+					</td>
+					<td class="text-right">
+						<button class="action_icon__btn" mat-icon-button [matMenuTriggerFor]="menu">
+							<mat-icon>more_vert</mat-icon>
+						</button>
+						<mat-menu #menu="matMenu" xposition="before">
+							<button mat-menu-item>
+								<mat-icon>dialpad</mat-icon>
+								<span>Editar</span>
+							</button>
+							<button mat-menu-item>
+								<mat-icon>delete</mat-icon>
+								<span>Delete</span>
+							</button>
+						</mat-menu>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

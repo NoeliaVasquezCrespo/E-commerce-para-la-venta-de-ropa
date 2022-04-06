@@ -18,7 +18,7 @@ export class ProductListComponent implements OnInit {
       this.products = productsDB.Product;
       this.getAllProductsData();
       this.isLoaded = true
-    }, 8000)
+    }, 1000)
   }
 
   getAllProductsData(){

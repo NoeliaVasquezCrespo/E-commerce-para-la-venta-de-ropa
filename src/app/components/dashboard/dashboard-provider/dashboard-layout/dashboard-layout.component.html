@@ -17,14 +17,14 @@
             <div class="col-span-3 hidden xl:block">
               <div class="py-5 min-h-screen">
                 <div class="rounded-md border overflow-hidden h-full">
-                  <div class="user text-center py-10 px-5" style="background-color: #2E9084;">
-                    <img class="ml-auto mr-auto" src="https://cdn-icons-png.flaticon.com/128/1177/1177568.png" alt="admin" style="width:50px;" />
-                    <h4 class="text-white mt-3">PROVEEDOR</h4>
+                  <div class="user text-center py-10 px-5" style="background-color: #902e67;">
+                    <img class="ml-auto mr-auto" src="https://www.iconpacks.net/icons/1/free-user-group-icon-296-thumb.png" alt="admin" style="width:50px;" />
+                    <h2 class="text-white mt-3">PROVEEDOR</h2>
                   </div>
                   <mat-nav-list class="_sidenav">
                     <a
                       mat-list-item
-                      routerLink="/dashboard"
+                      routerLink="/providerdashboard"
                       [routerLinkActiveOptions]="{ exact: true }"
                       routerLinkActive="bg-gray-200"
                       class="font-semibold text-gray-500 hover:text-primary"
@@ -32,25 +32,12 @@
                     >
                     <a
                       mat-list-item
-                      routerLink="/dashboard/profile"
-                      routerLinkActive="bg-gray-200"
-                      class="font-semibold text-gray-500 hover:text-primary"
-                      ><mat-icon class="mr-2">account_circle</mat-icon> Perfil</a
-                    >
-                    <a
-                      mat-list-item
-                      routerLink="/dashboard/saved-items"
+                      routerLink="/providerdashboard/saved-items"
                       routerLinkActive="bg-gray-200"
                       class="font-semibold text-gray-500 hover:text-primary"
                       ><mat-icon class="mr-2">list</mat-icon> Lista de productos</a
                     >
-                    <a
-                      mat-list-item
-                      routerLink="/dashboard/orders"
-                      routerLinkActive="bg-gray-200"
-                      class="font-semibold text-gray-500 hover:text-primary"
-                      ><mat-icon class="mr-2">article</mat-icon> Lista de proveedores</a
-                    >
+                    
                     <a (click)="onLogout()" mat-list-item class="font-semibold text-gray-500 hover:text-primary"><mat-icon class="mr-2">logout</mat-icon> Cerrar sesión</a>
                     <a><img src="assets/logo_trendy.png" alt="Logo" /></a>
                   </mat-nav-list>

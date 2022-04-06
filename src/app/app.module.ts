@@ -7,7 +7,7 @@ import { LoginAdminComponent } from './components/login-admin/login-admin.compon
 import { RegisterAdminComponent } from './components/register-admin/register-admin.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import {MatInputModule} from '@angular/material/input';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { SharedModule } from './shared/shared.module';
 @NgModule({
@@ -23,7 +23,7 @@ import { SharedModule } from './shared/shared.module';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    BrowserAnimationsModule,  SharedModule, NgxSkeletonLoaderModule
+    BrowserAnimationsModule,  SharedModule, NgxSkeletonLoaderModule,MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

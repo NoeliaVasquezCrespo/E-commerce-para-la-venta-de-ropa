@@ -1,8 +1,15 @@
 <div>
-  <div class="filter flex items-center mb-5">
-    <h5>Lista de productos</h5>
+  <div style="text-align: center;">
+    <h1>PRODUCTOS</h1>
   </div>
   <div>
+    <div class="flex justify-between flex-wrap">
+      <h2 class="mb-3 font-medium">LISTA PRODUTOS</h2> 
+      <button class=" text-black text-sm py-2 px-4 rounded font-semi bold focus:outline-none focus:shadow-outline h-10" type="button" style="background-color: #a096ce;"
+      [routerLink]="['/addproduct']" >
+        Agregar Producto
+      </button>
+    </div>	
     <div *ngIf="view === 'list'" class="table-inside">
       <div class="flex flex-col border ltLg:responsive">
         <div class="flex items-center p-4 border-b hover:bg-blue-100">
