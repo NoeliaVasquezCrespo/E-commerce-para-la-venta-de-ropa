@@ -5,7 +5,7 @@ import axios from 'axios';
 import { AddproductService } from 'src/app/service/addproduct.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-
+import Swal from'sweetalert2';
 @Component({
   selector: 'app-addproduct',
   templateUrl: './addproduct.component.html',
@@ -28,7 +28,7 @@ export class AddproductComponent implements OnInit {
     precio : new FormControl('', Validators.required),
     colorId : new FormControl('', Validators.required),
     tallaId : new FormControl('', Validators.required),
-    administradorId : new FormControl('', Validators.required)
+    administradorId : new FormControl(0, Validators.required)
   });
 
   ngOnInit(): void {
@@ -42,23 +42,34 @@ export class AddproductComponent implements OnInit {
 
 
   async addNewProduct(data: product){
-    console.log(this.newProductForm.value);
-    let self = this
-    console.log("EJECUTANDO METODO PARA AGREGAR PRODUCTO");
-    var api = 'http://localhost:8080/products';
     var id = localStorage.getItem('userId');
-    data.administradorId=parseInt(id);
-    data.status=1;
-    console.log('New Product : ', data);
-    axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('token');
-    await axios.post(api,data).then(function (result){
-     console.log(result.data);
-     console.log(result.data.id);
-     let value:number=result.data.id || 0;
-     self.newProductoId=value;
+    console.log(this.newProductForm.value);
+    this.newProductForm.value.administradorId = id;
 
-    });
-    this.upload();
+    if(this.newProductForm.valid){
+      let self = this
+      console.log("EJECUTANDO METODO PARA AGREGAR PRODUCTO");
+      var api = 'http://localhost:8080/products';
+      
+      data.administradorId=parseInt(id);
+      data.status=1;
+      console.log('New Product : ', data);
+      axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('token');
+      await axios.post(api,data).then(function (result){
+      console.log(result.data);
+      console.log(result.data.id);
+      let value:number=result.data.id || 0;
+      self.newProductoId=value;
+
+      });
+      this.upload();
+      this.successNotificationLogin();
+    }else{
+
+      this.wrongNotificationLogin('Complete los espacios vacíos')
+    }
+
+    
   }
 
   upload(): void {
@@ -97,5 +108,26 @@ export class AddproductComponent implements OnInit {
     }
     this.router.navigateByUrl('/providerdashboard');
   }
+  wrongNotificationLogin(mensaje:string){
+    Swal.fire({
+      icon: 'error',
+      title: 'No se pudo registrar producto',
+      text: mensaje,
+    })
+  }
+  successNotificationLogin(){
+    Swal.fire({
+      title: 'REGISTRO EXITOSO',
+      text: 'La operacion se ha realizado completamente',
+      icon: 'success',
+      showCancelButton: false,
+      confirmButtonText: 'Ok',
+    }).then(async (result) => {
+      if (result.value) {
+        await this.router.navigateByUrl('/providerdashboard/saved-items');
+        //window.location.href="http://localhost:4200"
+      }
+    })
+  } 
   
 }
