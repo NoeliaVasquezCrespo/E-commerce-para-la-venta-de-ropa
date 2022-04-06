@@ -57,6 +57,5 @@ export class HomeProductsComponent implements OnInit {
     }).catch(e => console.error(e));
     
     return cadena;
->>>>>>> a97c198a4542a53d01d86788467c2521796ddfca
   }
 }
