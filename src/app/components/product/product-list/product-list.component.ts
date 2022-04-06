@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { productsDB } from '../../../shared/data/products';
+import axios from 'axios';
 
 @Component({
   selector: 'll-product-list',
@@ -15,7 +16,15 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.products = productsDB.Product;
+      this.getAllProductsData();
       this.isLoaded = true
     }, 8000)
+  }
+
+  getAllProductsData(){
+    var api = 'http://localhost:8080/products';
+    axios.get(api).then(function (result){
+      console.log(result);
+    })
   }
 }
