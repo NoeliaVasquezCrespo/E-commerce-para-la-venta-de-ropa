@@ -8,4 +8,5 @@ export interface admin{
     password: string;
     tipoAdministradorId: number;
     status: number;
+    empresaId?: number;
 }

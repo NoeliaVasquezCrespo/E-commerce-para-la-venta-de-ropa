@@ -29,7 +29,7 @@ export class AddproductComponent implements OnInit {
   }
   }
 
-  addNewAdmin(data: product){
+  addNewProduct(data: product){
     var api = 'http://localhost:8080/products';
     var id = localStorage.getItem('userId');
     data.administradorId=parseInt(id);

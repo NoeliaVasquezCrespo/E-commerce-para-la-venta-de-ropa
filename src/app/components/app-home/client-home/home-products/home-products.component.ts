@@ -13,12 +13,15 @@ export class HomeProductsComponent implements OnInit {
     this.getAllProductsData();
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+
+   }
 
   getAllProductsData(){
+    axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('token');
     var api = 'http://localhost:8080/products';
     axios.get(api).then(function (result){
-      console.log(result);
+      console.log(result.data);
     })
   }
 }
