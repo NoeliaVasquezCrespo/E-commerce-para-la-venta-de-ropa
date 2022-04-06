@@ -3,6 +3,10 @@ export interface ProductDetails{
     nombreProducto:string,
     marca:string,
     precio:number,
+    stock?:number,
+    description?:number,
     image?:string,
+    color?:string,
+    talla?:string,
 
 }

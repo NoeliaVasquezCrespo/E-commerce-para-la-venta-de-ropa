@@ -33,6 +33,12 @@ export class HomeProductService {
       map(
         response => response, error => error)); 
   }
+  getProductByProductId(idProducto:number):Observable<FotosProducto>{
+    const url = `${this.baseUrl}products/${idProducto}`;
+    return this.http.get<FotosProducto>(url).pipe(
+      map(
+        response => response, error => error)); 
+  }
   // getRouteImage(path:string, name:string){
   //   const url = `${this.baseUrl}products/image/${idProducto}`;
     

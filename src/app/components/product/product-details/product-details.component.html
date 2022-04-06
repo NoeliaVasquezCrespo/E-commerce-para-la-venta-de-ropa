@@ -7,29 +7,26 @@
         <img class="w-full" src="assets/logo_trendy.png" alt="img not found" />
         <div class="ll-content mt-8">
           <h2>
-            Nombre del Producto: 
+            Nombre del Producto: {{productDetail.nombreProducto}}
           </h2>
           <h2>Descripción del Producto:</h2>
           <p>
-            It is difficult to find talented & motivated process mechanics in Germany. Lateral entrants from Germany can work, but the best
-            are those talents who have learned the process from scratch and can & want to imagine a career with it.
+            {{productDetail.description}}
           </p>
           <h2>Colores disponibles:</h2>
           <p>
-            It is difficult to find talented & motivated process mechanics in Germany. Lateral entrants from Germany can work, but the best
-            are those talents who have learned the process from scratch and can & want to imagine a career with it.
+            {{productDetail.color}}
           </p>
           <h2>Tallas Disponibles:</h2>
           <p>
-            It is difficult to find talented & motivated process mechanics in Germany. Lateral entrants from Germany can work, but the best
-            are those talents who have learned the process from scratch and can & want to imagine a career with it.
+            {{productDetail.talla}}  
           </p>
         </div>
       </div>
       <div class="col-span-12 md:col-span-5 xl:col-span-4">
         <div class="border">
           <div class="border-b text-center pt-10 pb-10">
-            <div class="text-accent text-4xl font-semibold">Bs. 150.00</div>
+            <div class="text-accent text-4xl font-semibold">Bs. {{productDetail.precio}}</div>
             <div class="font-medium text-lg mt-3 text-gray-400 tracking-wider">Precio</div>
             <img class="center" src=" https://cdn-icons-png.flaticon.com/512/1424/1424818.png" style="width: 100px; height: 100px;" alt="img not found" />
           </div>
