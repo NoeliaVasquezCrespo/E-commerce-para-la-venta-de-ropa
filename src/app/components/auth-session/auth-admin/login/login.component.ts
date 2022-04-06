@@ -12,7 +12,7 @@ import Swal from'sweetalert2';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
+  hide = true;
   private auth: AuthRequest = {
     username: '',
     password: '',

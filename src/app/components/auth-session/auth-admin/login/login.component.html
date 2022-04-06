@@ -35,12 +35,11 @@
                 name="password" id="password" formControlName="password"
                 type="password"
                 placeholder="password" style="font-size: 15px;"
-              
+                [type]="hide ? 'password':'text'"
               /> 
-              <button
-              >
-              <mat-icon>remove_red_eye</mat-icon>
-              </button>
+              <i class="material-icons" matSuffix (click)="hide = !hide">
+                {{hide ? 'visibility': 'visibility_off'}} 
+               </i>
               <br>
             </div>
            

@@ -8,7 +8,6 @@ import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.co
 import { DashboardIndexComponent } from './dashboard-index/dashboard-index.component';
 import { SharedModule } from '../../../shared/shared.module';
 import { DashboardProductsComponent } from './dashboard-products/dashboard-products.component';
-import { DashboardProfileComponent } from './dashboard-profile/dashboard-profile.component';
 import { DashboardProvidersComponent } from './dashboard-providers/dashboard-providers.component';
 
 @NgModule({
@@ -16,7 +15,6 @@ import { DashboardProvidersComponent } from './dashboard-providers/dashboard-pro
     DashboardLayoutComponent,
     DashboardIndexComponent,
     DashboardProductsComponent,
-    DashboardProfileComponent,
     DashboardProvidersComponent
   ],
   imports: [CommonModule, DashboardRoutingModule, SharedModule, MatMenuModule,MatExpansionModule,]
