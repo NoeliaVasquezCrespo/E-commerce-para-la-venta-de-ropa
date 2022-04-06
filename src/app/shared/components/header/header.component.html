@@ -21,8 +21,8 @@
           <mat-icon>menu</mat-icon>
         </button>
         <div class="hidden items-center md:flex ml-auto">  
-          <a mat-raised-button color="warn" class="text-lg font-bold py-2 px-5">Iniciar Sesión</a>
-          <a mat-raised-button color="accent" class="text-lg font-bold py-2 px-5 ml-2">Registro</a>
+          <a [routerLink]="['/authclient/login']" mat-raised-button color="warn" class="text-lg font-bold py-2 px-5">Iniciar Sesión</a>
+          <a [routerLink]="['/authclient/signup']" mat-raised-button color="accent" class="text-lg font-bold py-2 px-5 ml-2">Registro</a>
         </div>
       </div>
     </div>

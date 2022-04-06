@@ -28,6 +28,10 @@ const routes: Routes = [
     loadChildren: () => import('./components/auth-session/auth-provider/auth-provider.module').then(m => m.AuthProviderModule)
   },
   {
+    path: 'authclient',
+    loadChildren: () => import('./components/auth-session/auth-client/auth-client.module').then(m => m.AuthClientModule)
+  },
+  {
     path: 'addproduct',
     loadChildren: () => import('./components/addproduct/addproduct.module').then(m => m.AddproductModule)
   },
