@@ -31,11 +31,29 @@ export class SignupComponent implements OnInit {
     data.status=1;
     data.tipoAdministradorId=2;
     console.log('Nuevo Proveedor: ', data);
-    //axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('token');
-    //axios.post(api,data).then(function (result){
-     // console.log(result);
-     // this.successNotification();
-    //})
+    axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('token');
+    axios.post(api,data).then(function (result){
+      console.log(result);
+      Swal.fire({
+        title: 'CORRECTO',
+        text: 'Se registró al administrador correctamente',
+        icon: 'success',
+        showCancelButton: false,
+        confirmButtonText: 'Ok',
+      }).then((result) => {
+        if (result.value) {
+          console.log('admin dashboard')
+          window.location.href="http://localhost:4200/admindashboard/providers"
+        }
+      })
+    }).catch(err=>{
+      this.wrongNotification();
+    })
   }
-
+  wrongNotification(){
+    Swal.fire({
+      icon: 'error',
+      title: 'Error en el registro',
+    })
+  }
 }

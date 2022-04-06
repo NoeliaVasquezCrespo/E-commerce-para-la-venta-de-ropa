@@ -34,16 +34,21 @@ export class SignupComponent implements OnInit {
     axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('token');
     axios.post(api,data).then(function (result){
       console.log(result);
-      this.successNotification();
+      Swal.fire({
+        title: 'CORRECTO',
+        text: 'Se registró al administrador correctamente',
+        icon: 'success',
+        showCancelButton: false,
+        confirmButtonText: 'Ok',
+      }).then((result) => {
+        if (result.value) {
+          console.log('admin dashboard')
+          window.location.href="http://localhost:4200/admindashboard"
+        }
+      })
+    }).catch(err=>{
+      this.wrongNotification();
     })
-  }
-
-  userAuth(){
-    if(this.newAdminForm.valid){
-        this.successNotification() 
-    } else {
-      this.wrongNotification('Complete los espacios vacíos')
-    }
   }
   
   successNotification(){
@@ -61,11 +66,10 @@ export class SignupComponent implements OnInit {
     })
   } 
     
-  wrongNotification(mensaje:string){
+  wrongNotification(){
     Swal.fire({
       icon: 'error',
       title: 'Error en el registro',
-      text: mensaje,
     })
   }
 
