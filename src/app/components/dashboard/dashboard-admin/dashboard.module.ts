@@ -10,8 +10,9 @@ import { SharedModule } from '../../../shared/shared.module';
 import { DashboardProductsComponent } from './dashboard-products/dashboard-products.component';
 import { DashboardProvidersComponent } from './dashboard-providers/dashboard-providers.component';
 import { MaterialModule } from '../../../material.module';
+import { BrowserModule } from '@angular/platform-browser'
 
-@NgModule({
+  @NgModule({
   declarations: [
     DashboardLayoutComponent,
     DashboardIndexComponent,
@@ -19,5 +20,6 @@ import { MaterialModule } from '../../../material.module';
     DashboardProvidersComponent
   ],
   imports: [CommonModule, DashboardRoutingModule, SharedModule, MatMenuModule,MatExpansionModule,MaterialModule]
+
 })
 export class DashboardModule {}

@@ -87,10 +87,10 @@ export class LoginComponent implements OnInit {
       icon: 'success',
       showCancelButton: false,
       confirmButtonText: 'Ok',
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.value) {
         console.log('admin dashboard')
-        this.router.navigateByUrl('/admindashboard');
+        await this.router.navigateByUrl('/admindashboard');
         //window.location.href="http://localhost:4200"
       }
     })

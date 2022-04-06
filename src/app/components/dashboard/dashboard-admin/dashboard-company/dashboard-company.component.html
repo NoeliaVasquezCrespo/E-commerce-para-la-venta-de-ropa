@@ -4,41 +4,42 @@
   </div>
 
   <div>
-    <form>  
-     <div class="mb-4 mt-6">
-        <label class="block text-gray-700 text-sm font-semibold mb-2" for="nombre"> Nombre </label>
-        <input
-          class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
-          id="nombre"
-          type="text"
-          placeholder="Nombre de la Empresa"
-        />
-        <div class="mb-4 mt-6">
-          <label class="block text-gray-700 text-sm font-semibold mb-2" for="nit"> NIT </label>
-          <input
-            class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
-            id="nit"
-            type="number"
-            placeholder="Nit"
-          />
-          
-      
-      <div class="flex w-full mt-6">
-        <button
-          class="w-full hover:bg-grey-900 text-white text-sm py-2 px-4 rounded focus:outline-none focus:shadow-outline h-10"
-          type="button"
-          style="background-color: #312862;"
-          
-        >
-          Registrar Empresa
-        </button>
-      </div>
+		<form  (ngSubmit)="addNewCompany(newCompanyForm.value)">  
+			<div class="mb-4 mt-6">
+				<label class="block text-gray-700 text-sm font-semibold mb-2" for="nombre"> Nombre </label>
+				<input
+				class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
+				id="nombre"
+				type="text"
+				placeholder="Nombre de la Empresa"
+				/>
+				<div class="mb-4 mt-6">
+				<label class="block text-gray-700 text-sm font-semibold mb-2" for="nit"> NIT </label>
+				<input
+					class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
+					id="nit"
+					type="number"
+					placeholder="Nit"
+				/>
+				
+			
+			<div class="flex w-full mt-6">
+				<button
+				class="w-full hover:bg-grey-900 text-white text-sm py-2 px-4 rounded focus:outline-none focus:shadow-outline h-10"
+				type="button"
+				style="background-color: #312862;"
+				
+				>
+				Registrar Empresa
+				</button>
+			</div>
+	
   </div>
 </div>
 <div>
   <br>
 	<h1 class="mb-3 font-medium">LISTA EMPRESAS</h1>
-	<div class="table-inside">
+	<div class="table-inside" *ngFor="let company of products">
 		<table class="order-table table-auto ltMd:responsive">
 			<thead>
 				<tr class="border text-left">
@@ -56,10 +57,10 @@
 			<tbody>
 				<tr *ngFor="let order of orders" class="border">
 					<td>
-						<a class="text-primary" href="/">#{{order?.id}}</a>
+						<a class="text-primary" href="/">#{{company?.id}}</a>
 					</td>
 					<td>
-						{{order?.orderBy | titlecase }}
+						{{company?.nombre }}
 					</td>
 					<td>
 						<span>{{order?.price}}</span>

@@ -24,6 +24,15 @@ export class AuthService {
 
   }
 
+  loginprovider(auth:AuthRequest):Observable<JwtResponse>{
+    console.log("ACCEDIENDO A SERVICIO");
+    const url = `${this.baseUrl}administrador/login/proveedor`;
+    console.log(url);
+     
+    return this.http.post<JwtResponse>(url,auth);
+
+  }
+
   validarToken(id:number, jwt:string):Observable<boolean>{
     return this.verificarSesion(id,jwt)
     .pipe(

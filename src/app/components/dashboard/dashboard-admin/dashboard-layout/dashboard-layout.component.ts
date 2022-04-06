@@ -1,6 +1,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from'sweetalert2';
 
 @Component({
   selector: 'll-dashboard-layout',
@@ -18,6 +19,27 @@ export class DashboardLayoutComponent implements OnInit {
     });
   }
   onLogout(): void {
-    this.router.navigate(['auth/login']);
+    this.successNotificationLogin()
   }
+
+
+  successNotificationLogin(){
+    Swal.fire({
+      title: 'CERRAR SESIÓN',
+      text: '¿Está seguro de cerrar sesión?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Cerrar Sesión',
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.value) {
+        console.log('admin home')
+        this.router.navigateByUrl('/adminhome');
+      }
+    })
+  } 
+
+
 }
+
+
