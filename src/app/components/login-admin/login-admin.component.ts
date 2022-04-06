@@ -14,8 +14,7 @@ export class LoginAdminComponent implements OnInit {
 
   private auth: AuthRequest = {
     username: '',
-    password: '',
-    tipoUsuarioId:0
+    password: ''
   };
 
   userForm: FormGroup;
@@ -59,7 +58,6 @@ export class LoginAdminComponent implements OnInit {
     this.auth= {
       username: this.userForm.value.username,
       password: this.userForm.value.password,
-      tipoUsuarioId:1
     }
     this.authService.login(this.auth).subscribe(resp => {
       console.log(resp);
