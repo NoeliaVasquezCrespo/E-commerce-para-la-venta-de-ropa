@@ -17,7 +17,7 @@ export class productsDB {
             created_by: {
                 name: "LEVI'S",
             },
-            images: ['https://i.ytimg.com/vi/oN0tG5oJ2EQ/maxresdefault.jpg'],
+            images: ['http://localhost:8080/products/image/productImage/egl984fsve20224693546User28.png'],
             name: 'LEVIS 501 ORIGINAL',
             price: 55.30,
             tallas: "S, M, L",

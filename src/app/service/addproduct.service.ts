@@ -16,7 +16,7 @@ export class AddproductService {
     const reqHeader = new HttpHeaders({
       'Authorization': `Bearer ${localStorage.getItem('token')}`
     })
-    const req = new HttpRequest('POST', `${environment.baseUrl}image/${productId}`, formData, {
+    const req = new HttpRequest('POST', `${environment.baseUrl}products/image/${productId}`, formData, {
       reportProgress: true,
       responseType: 'json',
       headers: reqHeader
