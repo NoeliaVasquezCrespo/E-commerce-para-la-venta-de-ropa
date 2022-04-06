@@ -21,6 +21,12 @@ export class HomeProductService {
       map(
         response => response, error => error)); 
   }
+  getListProductsByProviderId(idProvider:number):Observable<ProductDetails[]> {
+    const url = `${this.baseUrl}products/details/${idProvider}`;
+    return this.http.get<ProductDetails[]>(url).pipe(
+      map(
+        response => response, error => error)); 
+  }
   getFirstImageByProductId(idProducto:number):Observable<FotosProducto>{
     const url = `${this.baseUrl}products/image/${idProducto}`;
     return this.http.get<FotosProducto>(url).pipe(
