@@ -40,6 +40,7 @@ export class AddproductComponent implements OnInit {
     this.selectedFiles = event.target.files;
   }
 
+
   async addNewProduct(data: product){
     console.log(this.newProductForm.value);
     let self = this

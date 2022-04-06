@@ -9,13 +9,17 @@ import { DashboardIndexComponent } from './dashboard-index/dashboard-index.compo
 import { SharedModule } from '../../../shared/shared.module';
 import { DashboardProductsComponent } from './dashboard-products/dashboard-products.component';
 import { DashboardProvidersComponent } from './dashboard-providers/dashboard-providers.component';
-@NgModule({
+import { MaterialModule } from '../../../material.module';
+import { BrowserModule } from '@angular/platform-browser'
+
+  @NgModule({
   declarations: [
     DashboardLayoutComponent,
     DashboardIndexComponent,
     DashboardProductsComponent,
     DashboardProvidersComponent
   ],
-  imports: [CommonModule, DashboardRoutingModule, SharedModule, MatMenuModule,MatExpansionModule]
+  imports: [CommonModule, DashboardRoutingModule, SharedModule, MatMenuModule,MatExpansionModule,MaterialModule]
+
 })
 export class DashboardModule {}
