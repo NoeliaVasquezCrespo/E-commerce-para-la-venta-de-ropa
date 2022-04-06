@@ -5,7 +5,7 @@
     </div>
     <div class="login__content flex flex-col justify-center bg-accent" style="background-color: #2f6394;">
       <div class="login w-full max-w-xl rounded-md mx-auto border p-4 sm:p-8 xl:p-20">
-        <form [formGroup]="newProductForm" (ngSubmit)="addNewAdmin(newProductForm.value)">
+        <form [formGroup]="newProductForm" (ngSubmit)="addNewProduct(newProductForm.value)">
           <h1 class="text-2xl font-bold">AGREGAR PRODUCTO</h1>
           <div class="mb-6 mt-6">
             <label class="block text-gray-700 text-sm font-semibold mb-2" for="codigo"> Código del producto </label>
@@ -82,13 +82,13 @@
           </div>  
           <div class="mb-6 mt-6">
             <label class="block text-gray-700 text-sm font-semibold mb-2" for="tipo"> Seleccione fotos </label>
-            <input type="file" name="fotos producto[]" multiple>
+            <input type="file" (change)="selectFile($event)" name="fotos producto[]" multiple>
           </div>         
           <div class="flex w-full mt-6">
             <button
               class="w-full bg-gray-800 hover:bg-grey-900 text-white text-sm py-2 px-4 font-semibold rounded focus:outline-none focus:shadow-outline h-10"
               type="submit"
-              [routerLink]="['/providerdashboard']"
+              
             >
             Agregar Producto
             </button>
