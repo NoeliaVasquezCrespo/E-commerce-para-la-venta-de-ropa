@@ -39,7 +39,7 @@
 <div>
   <br>
 	<h1 class="mb-3 font-medium">LISTA EMPRESAS</h1>
-	<div class="table-inside">
+	<div class="table-inside" *ngFor="let company of products">
 		<table class="order-table table-auto ltMd:responsive">
 			<thead>
 				<tr class="border text-left">
@@ -57,10 +57,10 @@
 			<tbody>
 				<tr *ngFor="let order of orders" class="border">
 					<td>
-						<a class="text-primary" href="/">#{{order?.id}}</a>
+						<a class="text-primary" href="/">#{{company?.id}}</a>
 					</td>
 					<td>
-						{{order?.orderBy | titlecase }}
+						{{company?.nombre }}
 					</td>
 					<td>
 						<span>{{order?.price}}</span>

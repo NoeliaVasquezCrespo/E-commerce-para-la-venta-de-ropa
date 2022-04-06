@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { company } from '../../../../models/Company'
 import axios from 'axios';
 import Swal from'sweetalert2';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'll-dashboard-company',
@@ -12,8 +13,8 @@ import Swal from'sweetalert2';
 export class DashboardCompanyComponent implements OnInit {
   view = 'list';
   advanceSearchExpanded: boolean = false;
-  constructor() {}
-
+  constructor(){}
+  public products: company[];
   public newCompanyForm = new FormGroup({
     nombre: new FormControl('', Validators.required),
     nit: new FormControl('', Validators.required)
@@ -30,6 +31,10 @@ export class DashboardCompanyComponent implements OnInit {
       console.log(result);
       this.successNotification();
     })
+  }
+
+  public getProducts(): void {
+    
   }
 
 }
