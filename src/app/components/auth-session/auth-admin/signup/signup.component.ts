@@ -29,6 +29,7 @@ export class SignupComponent implements OnInit {
     data.status=1;
     data.tipoAdministradorId=1;
     console.log('New Admmin: ', data);
+    axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('token');
     axios.post(api,data).then(function (result){
       console.log(result);
     })
