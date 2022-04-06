@@ -23,4 +23,15 @@ export class AdminlistService {
     return this.http.get<admin[]>(url, { headers: reqHeader });
     
   }
+
+  getListAdminSys():Observable<admin[]> {
+    const url = `${this.baseUrl}administrators/type=1`;
+    let jwt= localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({
+      'Authorization': `Bearer ${jwt}`
+    })
+    console.log(url);
+    return this.http.get<admin[]>(url, { headers: reqHeader });
+    
+  }
 }

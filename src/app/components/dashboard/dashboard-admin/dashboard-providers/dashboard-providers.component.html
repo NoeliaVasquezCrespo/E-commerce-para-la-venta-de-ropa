@@ -24,11 +24,12 @@
 					<th>
 						<span class="text-gray-800">APELLIDO</span>
 					</th>
-	
 					<th>
 						<span class="text-gray-800">EMAIL</span>
 					</th>
-	
+					<th>
+						<span class="text-gray-800">EDAD</span>
+					</th>
 					<th>
 						<span class="text-gray-800">USERNAME</span>
 					</th>
@@ -46,6 +47,15 @@
 					<td>
 						<span>{{admin?.apellido}}</span>
 					</td>
+					<td>
+						<span>{{admin?.correoElectronico}}</span>
+					</td>
+					<td>
+						<span>{{admin?.edad}}</span>
+					</td>
+					<td>
+						<span>{{admin?.userName}}</span>
+					</td>
 					
 					<td class="text-right">
 						<button class="action_icon__btn" mat-icon-button [matMenuTriggerFor]="menu">
@@ -58,7 +68,7 @@
 							</button>
 							<button mat-menu-item>
 								<mat-icon>delete</mat-icon>
-								<span>Delete</span>
+								<span>Eliminar</span>
 							</button>
 						</mat-menu>
 					</td>

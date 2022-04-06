@@ -24,11 +24,12 @@
 					<th>
 						<span class="text-gray-800">APELLIDO</span>
 					</th>
-	
 					<th>
 						<span class="text-gray-800">EMAIL</span>
 					</th>
-	
+					<th>
+						<span class="text-gray-800">EDAD</span>
+					</th>
 					<th>
 						<span class="text-gray-800">USERNAME</span>
 					</th>
@@ -36,24 +37,26 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr *ngFor="let order of orders" class="border">
+				<tr *ngFor="let admin of admins" class="border">
 					<td>
-						<a class="text-primary" href="/">#{{order?.id}}</a>
+						<a class="text-primary" href="/">#{{admin?.id}}</a>
 					</td>
 					<td>
-						{{order?.orderBy | titlecase }}
+						{{admin?.nombre}}
 					</td>
 					<td>
-						<span>{{order?.price}}</span>
+						<span>{{admin?.apellido}}</span>
 					</td>
 					<td>
-						<span>{{order?.created}}</span>
+						<span>{{admin?.correoElectronico}}</span>
 					</td>
 					<td>
-						<div>
-							{{ order?.status | titlecase }}
-						</div>
+						<span>{{admin?.edad}}</span>
 					</td>
+					<td>
+						<span>{{admin?.userName}}</span>
+					</td>
+					
 					<td class="text-right">
 						<button class="action_icon__btn" mat-icon-button [matMenuTriggerFor]="menu">
 							<mat-icon>more_vert</mat-icon>
@@ -65,7 +68,7 @@
 							</button>
 							<button mat-menu-item>
 								<mat-icon>delete</mat-icon>
-								<span>Delete</span>
+								<span>Eliminar</span>
 							</button>
 						</mat-menu>
 					</td>

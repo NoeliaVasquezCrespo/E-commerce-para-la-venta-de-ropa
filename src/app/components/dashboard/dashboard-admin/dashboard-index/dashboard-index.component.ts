@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AdministradorRequest } from 'src/app/models/AdministradorRequest';
 import { AuthService } from 'src/app/service/auth.service';
+import { AdminlistService } from 'src/app/service/adminlist.service';
+import { admin } from 'src/app/models/Admin';
 
 @Component({
   selector: 'll-dashboard-index',
@@ -10,7 +12,9 @@ import { AuthService } from 'src/app/service/auth.service';
 export class DashboardIndexComponent implements OnInit {
   orders = [];
   administrator:AdministradorRequest;
-  constructor(private authService:AuthService) {}
+  admins:admin[] = [];
+  cad:string;
+  constructor(private authService:AuthService,private adminlistService:AdminlistService) {}
 
   async ngOnInit(): Promise<void> {
     
@@ -26,48 +30,17 @@ export class DashboardIndexComponent implements OnInit {
       },error=>{
         console.log("error");
       });
-
-    this.orders = [
-      {
-        id: 'e5dcdfsf',
-        orderBy: 'Dean Lynch',
-        productId: 'cdfsfe5d',
-        created: '25.05.2021, 10:00',
-        status: 'complated',
-        price: 2145.0
-      },
-      {
-        id: 'e5dcdfsf',
-        orderBy: 'Lynch Dean',
-        productId: 'cdfsfe5d',
-        created: '25.05.2021, 10:00',
-        status: 'pending',
-        price: 2145.0
-      },
-      {
-        id: 'e5dcdfsf',
-        orderBy: 'Lynch Dean',
-        productId: 'cdfsfe5d',
-        created: '25.05.2021, 10:00',
-        status: 'rejected',
-        price: 2145.0
-      },
-      {
-        id: 'e5dcdfsf',
-        orderBy: 'Dean Lynch',
-        productId: 'cdfsfe5d',
-        created: '25.05.2021, 10:00',
-        status: 'initialized',
-        price: 2145.0
-      },
-      {
-        id: 'e5dcdfsf',
-        orderBy: 'Dean Lynch',
-        productId: 'cdfsfe5d',
-        created: '25.05.2021, 10:00',
-        status: 'complated',
-        price: 2145.0
-      }
-    ];
+      this.admins = await this.getAdminData();
   }
+
+  async getAdminData(){
+    let respuesta;
+    console.log("PRIMER METODO");
+    await this.adminlistService.getListAdminSys().toPromise().then((response) => {
+      respuesta = response;
+    }).catch(e => console.error(e));
+
+    return respuesta;
+  }
+  
 }
