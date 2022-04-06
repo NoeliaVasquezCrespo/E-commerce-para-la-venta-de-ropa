@@ -4,7 +4,7 @@ export interface admin{
     apellido: string;
     edad: number;
     correoElectronico: string;
-    username: string;
+    userName: string;
     password: string;
     tipoAdministradorId: number;
     status: number;

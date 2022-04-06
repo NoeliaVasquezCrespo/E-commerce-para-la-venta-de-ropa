@@ -17,9 +17,8 @@ export class SignupComponent implements OnInit {
     apellido: new FormControl('', Validators.required),
     edad: new FormControl('', Validators.required),
     correoElectronico: new FormControl('', Validators.required),
-    username: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
-    tipoAdministradorId: new FormControl('', Validators.required)
+    userName: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required)
   });
 
   ngOnInit(): void {
@@ -28,7 +27,9 @@ export class SignupComponent implements OnInit {
   addNewAdmin(data: admin){
     var api = 'http://localhost:8080/administrators';
     data.status=1;
+    data.tipoAdministradorId=1;
     console.log('New Admmin: ', data);
+    axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('token');
     axios.post(api,data).then(function (result){
       console.log(result);
     })
