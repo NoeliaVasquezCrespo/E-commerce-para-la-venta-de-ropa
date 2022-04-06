@@ -5,16 +5,17 @@
     </div>
     <div class="login__content flex flex-col justify-center bg-accent" style="background-color: #2f6394;">
       <div class="login w-full max-w-xl rounded-md mx-auto border p-4 sm:p-8 xl:p-20">
-        <form>
+        <form [formGroup]="newProductForm" (ngSubmit)="addNewAdmin(newProductForm.value)">
           <h1 class="text-2xl font-bold">AGREGAR PRODUCTO</h1>
           <div class="mb-6 mt-6">
             <label class="block text-gray-700 text-sm font-semibold mb-2" for="codigo"> Código del producto </label>
               <input
-              class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
-              id="codigo"
-              type="number" min="1" step="any"
-              placeholder="Código"
-            />
+                class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
+                id="codigo"
+                type="text" min="1" step="any"
+                placeholder="Código"
+                formControlName="codigoProducto"
+              />
           </div>
           <div class="mb-4 mt-6">
             <label class="block text-gray-700 text-sm font-semibold mb-2" for="nombre"> Nombre del producto</label>
@@ -23,85 +24,77 @@
               id="nombre"
               type="text"
               placeholder="Nombre"
+              formControlName="nombreProducto"
             />
-            <div class="mb-4 mt-6">
-              <label class="block text-gray-700 text-sm font-semibold mb-2" for="descripcion"> Descripción del producto </label>
+          </div>
+          <div class="mb-4 mt-6">
+            <label class="block text-gray-700 text-sm font-semibold mb-2" for="descripcion"> Descripción del producto </label>
+            <input
+              class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
+              id="descripcion"
+              type="text"
+              placeholder="Descripción"
+              formControlName="descripcion"
+            />
+          </div>
+          <div class="mb-4 mt-6">
+            <label class="block text-gray-700 text-sm font-semibold mb-2" for="stock"> Stock </label>
               <input
                 class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
-                id="descripcion"
-                type="text"
-                placeholder="Descripción"
+                id="stock"
+                type="number" min="1" step="any"
+                placeholder="Stock"
+                formControlName="stock"
               />
-              <div class="mb-4 mt-6">
-                <label class="block text-gray-700 text-sm font-semibold mb-2" for="stock"> Stock </label>
-                <input
-                  class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
-                  id="stock"
-                  type="number" min="1" step="any"
-                  placeholder="Stock"
-                />
-
-            <div class="mb-4 mt-6">
-              <label class="block text-gray-700 text-sm font-semibold mb-2" for="precio"> Precio (Bs.) </label>
+          </div>    
+          <div class="mb-4 mt-6">
+            <label class="block text-gray-700 text-sm font-semibold mb-2" for="precio"> Precio (Bs.) </label>
               <input
                 class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
                 id="precio"
                 type="number" min="1" step="any"
                 placeholder="Precio"
+                formControlName="precio"
               />
-              <div class="mb-6 mt-6">
-                <label class="block text-gray-700 text-sm font-semibold mb-2" for="color"> Color </label>
-                  <input 
-                    type="text" 
-                    class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10" 
-                    list="browsers"
-                    placeholder="Color"/>
-                    <datalist id="browsers">
-                        <option>Color 1</option>
-                        <option>Color 2</option>
-                        <option>Color 3</option>
-                    </datalist>
-              </div>
-              <div class="mb-6 mt-6">
-                <label class="block text-gray-700 text-sm font-semibold mb-2" for="talla"> Talla </label>
-                  <input 
-                    type="text" 
-                    class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10" 
-                    list="browsers"
-                    placeholder="Talla"/>
-                    <datalist id="browsers">
-                        <option>Talla 1</option>
-                        <option>Talla 2</option>
-                        <option>Talla 3</option>
-                    </datalist>
-              </div>
-              <div class="mb-6 mt-6">
-                <label class="block text-gray-700 text-sm font-semibold mb-2" for="proveedor"> Nombre del proveedor </label>
-                  <input 
-                    type="text" 
-                    class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10" 
-                    list="browsers"
-                    placeholder="Nombre proveedor"/>
-                    <datalist id="browsers">
-                        <option>Proveedor 1</option>
-                        <option>Proveedor 2</option>
-                        <option>Proveedor 3</option>
-                    </datalist>
-              </div>   
-              <div class="mb-6 mt-6">
-                <label class="block text-gray-700 text-sm font-semibold mb-2" for="tipo"> Seleccione fotos </label>
-                <input type="file" name="fotos producto[]" multiple>
-              </div>         
-            <div class="flex w-full mt-6">
-              <button
-                class="w-full bg-gray-800 hover:bg-grey-900 text-white text-sm py-2 px-4 font-semibold rounded focus:outline-none focus:shadow-outline h-10"
-                type="button"
-                [routerLink]="['/providerdashboard']"
-              >
-               Agregar Producto
-              </button>
-            </div>
+          </div>
+          <div class="mb-6 mt-6">
+            <label class="block text-gray-700 text-sm font-semibold mb-2" for="color"> Color </label>
+              <select id="browsers"
+              class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10" 
+              formControlName="colorId">
+                  <option value="1" type="number">Color 1</option>
+                  <option value="2" type="number">Color 2</option>
+                  <option value="3" type="number">Color 3</option>
+              </select>
+          </div>
+          <div class="mb-6 mt-6">
+            <label class="block text-gray-700 text-sm font-semibold mb-2" for="talla"> Talla </label>
+              <select id="browsers"
+              class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10" 
+              formControlName="tallaId">
+                <option value="1" type="number">XS</option>
+                <option value="2" type="number">S</option>
+                <option value="3" type="number">M</option>
+                <option value="4" type="number">L</option>
+                <option value="5" type="number">XL</option>
+                <option value="6" type="number">XXL</option>
+              </select>
+          </div>  
+          <div class="mb-6 mt-6">
+            <label class="block text-gray-700 text-sm font-semibold mb-2" for="tipo"> Seleccione fotos </label>
+            <input type="file" name="fotos producto[]" multiple>
+          </div>         
+          <div class="flex w-full mt-6">
+            <button
+              class="w-full bg-gray-800 hover:bg-grey-900 text-white text-sm py-2 px-4 font-semibold rounded focus:outline-none focus:shadow-outline h-10"
+              type="submit"
+              [routerLink]="['/providerdashboard']"
+            >
+            Agregar Producto
+            </button>
+          </div>
+        </form>  
       </div>
     </div>
   </div>
-
+</div>
