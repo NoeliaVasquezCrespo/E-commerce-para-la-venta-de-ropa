@@ -11,6 +11,7 @@ import { BaseLayoutComponent } from './components/layouts/base-layout/base-layou
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -27,7 +28,8 @@ const commonModules = [
 
 @NgModule({
   declarations: [HeaderComponent,  FeatureComponent, BaseLayoutComponent, SidenavComponent],
-  imports: [CommonModule, RouterModule, ...commonModules],
+  imports: [CommonModule, RouterModule,FormsModule,
+    ReactiveFormsModule, ...commonModules],
   exports: [HeaderComponent,  BaseLayoutComponent, FeatureComponent, SidenavComponent, ...commonModules]
 })
 export class SharedModule {}
