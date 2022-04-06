@@ -11,7 +11,7 @@ import Swal from'sweetalert2';
 })
 
 export class SignupComponent implements OnInit {
-
+  hide = true;
   constructor() { }
 
   public newAdminForm = new FormGroup({

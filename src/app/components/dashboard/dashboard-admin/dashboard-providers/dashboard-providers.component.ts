@@ -1,40 +1,29 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatSort} from '@angular/material/sort';
-import {MatPaginator} from '@angular/material/paginator';
-import {admin} from '../../../../models/Admin'
-import axios from 'axios';
-
-export var ADMIN_DATA: admin[]=[];
+import { Component, OnInit } from '@angular/core';
+import { AdminlistService } from 'src/app/service/adminlist.service';
+import { admin } from 'src/app/models/Admin';
 @Component({
   selector: 'app-dashboard-providers',
   templateUrl: './dashboard-providers.component.html',
   styleUrls: ['./dashboard-providers.component.scss']
 })
-
 export class DashboardProvidersComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'nombre', 'apellido', 'edad', 'correoElectronico','userName'];
-  public dataSource = [];
-  stringJson: any;
-  stringObject: any;
+  admins:admin[] = [];
+  cad:string;
+  constructor(private adminlistService:AdminlistService) {}
 
-  @ViewChild(MatPaginator, {static:true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static:true}) sort: MatSort;
-  
-
-  constructor() {
+  async ngOnInit():Promise<void>{ 
+    this.admins = await this.getAdminData();
+    
+    
   }
 
-  async ngOnInit() {
-    axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('token');
-    var api = 'http://localhost:8080/administrators/type=1';
-    axios.get(api, {responseType: 'json'}).then(function (result){
-      console.log(result.data);
-      this.stringJson = JSON.stringify(result.data);
-      this.stringObject = JSON.parse(this.stringJson);
-    })
-   
+  async getAdminData(){
+    let respuesta;
+    console.log("PRIMER METODO");
+    await this.adminlistService.getListAdmin().toPromise().then((response) => {
+      respuesta = response;
+    }).catch(e => console.error(e));
+
+    return respuesta;
   }
-
-
 }

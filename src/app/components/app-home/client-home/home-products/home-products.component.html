@@ -7,13 +7,13 @@
     <div class="grid grid-cols-12 gap-6 xxl:gap-8">
       <div *ngFor="let product of products" class="col-span-12 md:col-span-6 xl:col-span-4">
         <mat-card class="ll-product">
-          <img mat-card-image [src]="product?.image" alt="{{ product.nombreProducto }}" style="width: 550px; height:250px; margin: 0 0 20px" />
+          <img mat-card-image [src]="product.image" alt="{{ product.nombreProducto }}" style="width: 550px; height:250px; margin: 0 0 20px" />
           <mat-card-content class="flex">
            
             <div class="flex-grow pl-3">
               <h4 class="ll-product__creator">{{ product?.marca }}</h4>
               <h2 class="ll-product__name">
-                <a [routerLink]="['/products', product.id]">{{ product.nombreProducto }}</a>
+                <a [routerLink]="['/products', product.idProducto]">{{ product.nombreProducto }}</a>
               </h2>
               <div class="flex justify-between mt-5">
                 <div class="ll-product__price-label">Precio:</div>

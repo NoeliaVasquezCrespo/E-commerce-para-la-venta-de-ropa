@@ -4,6 +4,7 @@ import { MatExpansionModule} from '@angular/material/expansion';
 import { NgParticlesModule } from 'ng-particles';
 import { ProductRoutingModule } from './product-routing.module';
 import { SharedModule } from '../../shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductHeroComponent } from './product-list/product-hero/product-hero.component';
@@ -17,7 +18,9 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     SharedModule,
     MatExpansionModule,
     NgParticlesModule,
-    NgxSkeletonLoaderModule
+    NgxSkeletonLoaderModule,
+    FormsModule, 
+    ReactiveFormsModule
   ]
 })
 export class ProductModule { }

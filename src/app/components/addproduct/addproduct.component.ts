@@ -42,6 +42,7 @@ export class AddproductComponent implements OnInit {
 
 
   async addNewProduct(data: product){
+    console.log(this.newProductForm.value);
     let self = this
     console.log("EJECUTANDO METODO PARA AGREGAR PRODUCTO");
     var api = 'http://localhost:8080/products';
