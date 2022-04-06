@@ -17,6 +17,7 @@ export class HomeProductsComponent implements OnInit {
     
   }
 
+
   async ngOnInit():Promise<void>{ 
     this.products = await this.getAllProductsData();
     
