@@ -9,6 +9,7 @@ import Swal from'sweetalert2';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
+
 export class SignupComponent implements OnInit {
   hide = true;
   constructor() { }
