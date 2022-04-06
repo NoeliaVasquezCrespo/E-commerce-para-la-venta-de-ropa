@@ -7,46 +7,40 @@
           <h4>Búsqueda</h4>
           <button (click)="advanceSearchExpanded = !advanceSearchExpanded" mat-button><mat-icon>tune</mat-icon> Filtros</button>
         </div>
-        <div class="mt-3 flex">
-          <input
-            type="text"
-            placeholder="Búsqueda"
-            class="flex-1 w-full sm:text-sm lg:text-xl border-gray-300 rounded-l-md py-3 px-6"
-            required
-          />
-          <button class="bg-primary w-24 rounded-r-md"><mat-icon class="leading-8">search</mat-icon></button>
-        </div>
       </div>
       <mat-expansion-panel [expanded]="advanceSearchExpanded">
-        <div class="grid grid-cols-6 gap-6 mt-4">
-          <div class="col-span-6 sm:col-span-3">
-            <select
-              name="categories"
-              class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            >
-              <option>Category</option>
-              <option>Microservices</option>
-              <option>Shipping Service</option>
-              <option>Consulting</option>
-            </select>
+        <form [formGroup]="userForm" (ngSubmit)="filtro()">
+          <div class="mt-3 flex">
+            <input
+              type="text"
+              name="pruductName" id="pruductName" formControlName="pruductName"
+              placeholder="Búsqueda por nombre"
+              class="flex-1 w-full sm:text-sm lg:text-xl border-gray-300 rounded-l-md py-3 px-6"
+              required
+            />
+            <button disabled="true" class="bg-primary w-24 rounded-r-md"><mat-icon class="leading-8">search</mat-icon></button>
           </div>
-          <div class="col-span-6 sm:col-span-3">
-            <select
-              name="tallas"
-              class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            >
-              <option>tallas</option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
+          <div class="grid grid-cols-6 gap-6 mt-4">
+            <div class="col-span-6 sm:col-span-3">
+              <select name="color" id="color" formControlName="color"
+                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <option value="0">COLORES</option>
+                <option [ngValue]="item.id" *ngFor="let item of listColores">{{item.descripcion}}</option>
+              </select>
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+              <select
+                name="tallas" id="talla" formControlName="talla"
+                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <option value="0">TALLAS</option>
+                <option [ngValue]="item.id" *ngFor="let item of listTallas">{{item.nombreTalla}}</option>
+              </select>
+            </div>
+            <div class="col-span-6">
+              <button mat-flat-button color="accent">Aplicar Filtro</button>
+            </div>
           </div>
-          <div class="col-span-6">
-            <button mat-flat-button color="accent">Aplicar Filtro</button>
-          </div>
-        </div>
+        </form>
       </mat-expansion-panel>
     </div>
   </div>
@@ -56,15 +50,15 @@
     <div class="grid grid-cols-12 gap-6 xxl:gap-8" *ngIf="isLoaded">
       <div *ngFor="let product of products" class="col-span-12 md:col-span-6 xl:col-span-4">
         <mat-card class="ll-product">
-          <img mat-card-image [src]="product?.images[0]" alt="{{ product.name }}" style="width: 550px; height:250px;; margin: 0 0 20px" />
+          <img mat-card-image [src]="product?.image" alt="{{ product.nombreProducto }}" style="width: 550px; height:250px;; margin: 0 0 20px" />
           <mat-card-content class="flex">
             <div class="flex-grow pl-3">
               <h2 class="ll-product__name">
-                <a [routerLink]="['/products', product.id]">{{ product.name }}</a>
+                <a [routerLink]="['/products', product.idProducto]">{{ product.nombreProducto }}</a>
               </h2>
               <div class="flex justify-between mt-5">
                 <div class="ll-product__price-label">Prices:</div>
-                <div class="ll-product__price text-accent font-bold">€{{ product.price }}</div>
+                <div class="ll-product__price text-accent font-bold">€{{ product.precio }}</div>
               </div>
             </div>
           </mat-card-content>
@@ -100,15 +94,15 @@
       <div class="grid grid-cols-12 gap-6 xxl:gap-8" *ngIf="isLoaded">
         <div *ngFor="let product of products" class="col-span-12 md:col-span-6 xl:col-span-4">
           <mat-card class="ll-product">
-            <img mat-card-image [src]="product?.images[0]" alt="{{ product.name }}" style="width: 550px; height:250px;; margin: 0 0 20px" />
+            <img mat-card-image [src]="product.image" alt="{{ product.nombreProducto }}" style="width: 550px; height:250px;; margin: 0 0 20px" />
             <mat-card-content class="flex">
               <div class="flex-grow pl-3">
                 <h2 class="ll-product__name">
-                  <a [routerLink]="['/products', product.id]">{{ product.name }}</a>
+                  <a [routerLink]="['/products', product.id]">{{ product.marca }}</a>
                 </h2>
                 <div class="flex justify-between mt-5">
                   <div class="ll-product__price-label">Prices:</div>
-                  <div class="ll-product__price text-accent font-bold">€{{ product.price }}</div>
+                  <div class="ll-product__price text-accent font-bold">€{{ product.precio }}</div>
                 </div>
               </div>
             </mat-card-content>
