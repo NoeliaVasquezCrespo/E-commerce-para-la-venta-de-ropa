@@ -10,7 +10,7 @@ import Swal from'sweetalert2';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
-
+  hide = true;
   constructor() { }
 
   public newAdminForm = new FormGroup({

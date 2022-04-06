@@ -7,7 +7,7 @@
 	<div class="flex justify-between flex-wrap">
 		<h2 class="mb-3 font-medium">LISTA PROVEEDORES</h2> 
 		<button class=" text-black text-sm py-2 px-4 rounded font-semi bold focus:outline-none focus:shadow-outline h-10" type="button" style="background-color: #a7a0d1;"
-		[routerLink]="['/auth/signups']" >
+		[routerLink]="['/authprovider/signup']" >
 			Agregar 
 		</button>
 	</div>	
@@ -36,24 +36,17 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr *ngFor="let order of orders" class="border">
+				<tr *ngFor="let admin of admins" class="border">
 					<td>
-						<a class="text-primary" href="/">#{{order?.id}}</a>
+						<a class="text-primary" href="/">#{{admin?.id}}</a>
 					</td>
 					<td>
-						{{order?.orderBy | titlecase }}
+						{{admin?.nombre}}
 					</td>
 					<td>
-						<span>{{order?.price}}</span>
+						<span>{{admin?.apellido}}</span>
 					</td>
-					<td>
-						<span>{{order?.created}}</span>
-					</td>
-					<td>
-						<div>
-							{{ order?.status | titlecase }}
-						</div>
-					</td>
+					
 					<td class="text-right">
 						<button class="action_icon__btn" mat-icon-button [matMenuTriggerFor]="menu">
 							<mat-icon>more_vert</mat-icon>

@@ -77,12 +77,14 @@
             <div class="mb-6 mt-6">
               <label class="block text-gray-700 text-sm font-semibold mb-2" for="password"> Password </label>
               <input
-                class="text-sm bg-gray-100 appearance-none rounded w-full py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline h-10"
-                id="password"
-                type="password"
-                placeholder="Password"
-                formControlName="password"
-              />
+              class="text-sm bg-gray-100 appearance-none rounded w-250 py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline h-10"
+              name="password" id="password" formControlName="password"
+              type="password" placeholder="password" style="font-size: 15px;"
+              [type]="hide ? 'password':'text'"
+              /> 
+              <i class="material-icons" matSuffix (click)="hide = !hide">
+                {{hide ? 'visibility': 'visibility_off'}} 
+               </i>
             </div>
             
             <div class="flex w-full mt-6">
