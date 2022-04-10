@@ -45,7 +45,13 @@
                       class="font-semibold text-gray-500 hover:text-primary"
                       ><mat-icon class="mr-2">article</mat-icon> Lista de proveedores</a
                     >
-                   
+                    <a
+                    mat-list-item
+                    routerLink="/admindashboard/products"
+                    routerLinkActive="bg-gray-200"
+                    class="font-semibold text-gray-500 hover:text-primary"
+                    ><mat-icon class="mr-2">list</mat-icon> Lista de productos</a
+                  >
                     
                     <a (click)="onLogout()" mat-list-item class="font-semibold text-gray-500 hover:text-primary"><mat-icon class="mr-2">logout</mat-icon> Cerrar sesión</a>
                     <a><img src="assets/logo_trendy.png" alt="Logo" /></a>

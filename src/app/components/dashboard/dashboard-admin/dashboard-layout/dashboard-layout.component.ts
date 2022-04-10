@@ -34,7 +34,7 @@ export class DashboardLayoutComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         console.log('admin home')
-        this.router.navigateByUrl('/adminhome');
+        
       }
     })
   } 

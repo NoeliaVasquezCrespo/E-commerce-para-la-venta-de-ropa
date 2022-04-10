@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminlistService } from 'src/app/service/adminlist.service';
 import { admin } from 'src/app/models/Admin';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-dashboard-providers',
   templateUrl: './dashboard-providers.component.html',
@@ -9,6 +10,7 @@ import { admin } from 'src/app/models/Admin';
 export class DashboardProvidersComponent implements OnInit {
   admins:admin[] = [];
   cad:string;
+  router: any;
   constructor(private adminlistService:AdminlistService) {}
 
   async ngOnInit():Promise<void>{ 
@@ -25,5 +27,40 @@ export class DashboardProvidersComponent implements OnInit {
     }).catch(e => console.error(e));
 
     return respuesta;
+  }
+
+  onDelete(): void {
+    this.successNotificationDelete()
+  }
+
+
+  successNotificationDelete(){
+    Swal.fire({
+      title: 'Eliminar Proveedor',
+      text: '¿Está seguro de eliminar el proveedor?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.value) {
+        console.log('Proveedor eliminado correctamente')
+        this.successNotificationDeleteCorrectly()
+      }
+    })
+  } 
+
+  successNotificationDeleteCorrectly(){
+    Swal.fire({
+      icon: 'success',
+      title: 'Proveedor Eliminado correctamente',
+      showConfirmButton: true,
+      confirmButtonText: 'Aceptar',
+    }).then((result) => {
+      if (result.value) {
+        console.log('admin home')
+        this.router.navigateByUrl('/adminhome');
+      }
+    })
   }
 }

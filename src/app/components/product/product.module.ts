@@ -9,9 +9,10 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductHeroComponent } from './product-list/product-hero/product-hero.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { CategoryproductComponent } from './categoryproduct/categoryproduct.component';
 
 @NgModule({
-  declarations: [ProductListComponent, ProductDetailsComponent, ProductHeroComponent],
+  declarations: [ProductListComponent, ProductDetailsComponent, ProductHeroComponent, CategoryproductComponent],
   imports: [
     CommonModule,
     ProductRoutingModule,
