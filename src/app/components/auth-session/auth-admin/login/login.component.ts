@@ -90,7 +90,7 @@ export class LoginComponent implements OnInit {
     }).then(async (result) => {
       if (result.value) {
         console.log('admin dashboard')
-        await this.router.navigateByUrl('/admindashboard');
+        await this.router.navigateByUrl('/admindashboard/admins');
         //window.location.href="http://localhost:4200"
       }
     })

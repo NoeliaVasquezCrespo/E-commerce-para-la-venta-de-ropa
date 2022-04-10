@@ -1,6 +1,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AdministradorRequest } from 'src/app/models/AdministradorRequest';
 import Swal from'sweetalert2';
 
 @Component({
@@ -10,7 +11,7 @@ import Swal from'sweetalert2';
 })
 export class DashboardLayoutComponent implements OnInit {
   isLessThenLargeDevice;
-
+  administrator:AdministradorRequest;
   constructor(private breakpointObserver: BreakpointObserver, private router: Router) {}
 
   ngOnInit(): void {
@@ -34,6 +35,7 @@ export class DashboardLayoutComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         console.log('admin home')
+        this.router.navigateByUrl('/adminhome');
         
       }
     })

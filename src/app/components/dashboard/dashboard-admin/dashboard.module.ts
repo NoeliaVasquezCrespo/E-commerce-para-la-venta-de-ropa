@@ -10,14 +10,18 @@ import { SharedModule } from '../../../shared/shared.module';
 import { DashboardProductsComponent } from './dashboard-products/dashboard-products.component';
 import { DashboardProvidersComponent } from './dashboard-providers/dashboard-providers.component';
 import { MaterialModule } from '../../../material.module';
-import { BrowserModule } from '@angular/platform-browser'
+import { BrowserModule } from '@angular/platform-browser';
+import { DashboardInactiveProvidersComponent } from './dashboard-inactive-providers/dashboard-inactive-providers.component';
+import { DashboardInactiveAdminComponent } from './dashboard-inactive-admin/dashboard-inactive-admin.component'
 
   @NgModule({
   declarations: [
     DashboardLayoutComponent,
     DashboardIndexComponent,
     DashboardProductsComponent,
-    DashboardProvidersComponent
+    DashboardProvidersComponent,
+    DashboardInactiveProvidersComponent,
+    DashboardInactiveAdminComponent
   ],
   imports: [CommonModule, DashboardRoutingModule, SharedModule, MatMenuModule,MatExpansionModule,MaterialModule]
 

@@ -13,8 +13,27 @@ export class AdminlistService {
   private baseUrl:string = environment.baseUrl; 
   constructor(private http:HttpClient){ }
 
-  getListAdmin():Observable<admin[]> {
-    const url = `${this.baseUrl}administrators/type=2`;
+  getListProvider():Observable<admin[]> {
+    const url = `${this.baseUrl}administrators/type=2/status=1`;
+    let jwt= localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({
+      'Authorization': `Bearer ${jwt}`
+    })
+    console.log(url);
+    return this.http.get<admin[]>(url, { headers: reqHeader });
+  }
+  getInactiveListProvider():Observable<admin[]> {
+    const url = `${this.baseUrl}administrators/type=2/status=0`;
+    let jwt= localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({
+      'Authorization': `Bearer ${jwt}`
+    })
+    console.log(url);
+    return this.http.get<admin[]>(url, { headers: reqHeader });
+  }
+
+  getListAdminSys():Observable<admin[]> {
+    const url = `${this.baseUrl}administrators/type=1/status=1`;
     let jwt= localStorage.getItem('token')
     const reqHeader = new HttpHeaders({
       'Authorization': `Bearer ${jwt}`
@@ -23,9 +42,8 @@ export class AdminlistService {
     return this.http.get<admin[]>(url, { headers: reqHeader });
     
   }
-
-  getListAdminSys():Observable<admin[]> {
-    const url = `${this.baseUrl}administrators/type=1`;
+  getInactiveListAdminSys():Observable<admin[]> {
+    const url = `${this.baseUrl}administrators/type=1/status=0`;
     let jwt= localStorage.getItem('token')
     const reqHeader = new HttpHeaders({
       'Authorization': `Bearer ${jwt}`

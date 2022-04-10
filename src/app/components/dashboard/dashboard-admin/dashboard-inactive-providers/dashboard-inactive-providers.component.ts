@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { AdminlistService } from 'src/app/service/adminlist.service';
 import { admin } from 'src/app/models/Admin';
 import Swal from 'sweetalert2';
+
 @Component({
-  selector: 'app-dashboard-providers',
-  templateUrl: './dashboard-providers.component.html',
-  styleUrls: ['./dashboard-providers.component.scss']
+  selector: 'app-dashboard-inactive-providers',
+  templateUrl: './dashboard-inactive-providers.component.html',
+  styleUrls: ['./dashboard-inactive-providers.component.scss']
 })
-export class DashboardProvidersComponent implements OnInit {
+export class DashboardInactiveProvidersComponent implements OnInit {
   admins:admin[] = [];
   cad:string;
   router: any;
@@ -22,7 +23,7 @@ export class DashboardProvidersComponent implements OnInit {
   async getAdminData(){
     let respuesta;
     console.log("PRIMER METODO");
-    await this.adminlistService. getListProvider().toPromise().then((response) => {
+    await this.adminlistService. getInactiveListProvider().toPromise().then((response) => {
       respuesta = response;
     }).catch(e => console.error(e));
 

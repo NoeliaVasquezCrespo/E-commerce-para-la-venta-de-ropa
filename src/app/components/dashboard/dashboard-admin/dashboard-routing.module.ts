@@ -6,10 +6,12 @@ import { DashboardProvidersComponent } from './dashboard-providers/dashboard-pro
 import { DashboardProductsComponent } from './dashboard-products/dashboard-products.component';
 import { DashboardCompanyComponent } from './dashboard-company/dashboard-company.component';
 import { ValidarTokenGuard } from '../../auth-session/auth-admin/guard/validar-token.guard';
+import { DashboardInactiveProvidersComponent } from './dashboard-inactive-providers/dashboard-inactive-providers.component';
+import { DashboardInactiveAdminComponent } from './dashboard-inactive-admin/dashboard-inactive-admin.component'
 
 const DashboardChildrenRoute: Routes = [
   {
-    path: '',
+    path: 'admins',
     pathMatch: 'full',
     component: DashboardIndexComponent,
     canLoad: [ ValidarTokenGuard ],
@@ -23,6 +25,14 @@ const DashboardChildrenRoute: Routes = [
   {
     path: 'providers',
     component: DashboardProvidersComponent
+  },
+  {
+    path: 'inactiveproviders',
+    component: DashboardInactiveProvidersComponent 
+  },
+  {
+    path: 'inactiveadmins',
+    component: DashboardInactiveAdminComponent
   },
   {
     path: 'company',
