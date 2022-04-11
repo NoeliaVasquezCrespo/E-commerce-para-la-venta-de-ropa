@@ -3,8 +3,8 @@
     <div class="grid grid-cols-12 gap-8">
       <div class="col-span-12 md:col-span-7 xl:col-span-8 border p-5">
         <h1 class="_title font-medium">Información del Producto</h1>
-        
-        <img class="w-full" src="assets/logo_trendy.png" alt="img not found" />
+
+        <img class="w-full" src="{{productDetail.image}}" alt="img not found" />
         <div class="ll-content mt-8">
           <h2>
             Nombre del Producto: {{productDetail.nombreProducto}}
@@ -19,7 +19,7 @@
           </p>
           <h2>Tallas Disponibles:</h2>
           <p>
-            {{productDetail.talla}}  
+            {{productDetail.talla}}
           </p>
         </div>
       </div>
@@ -32,7 +32,7 @@
           </div>
         </div>
       </div>
-     
+
     </div>
   </div>
 </div>
