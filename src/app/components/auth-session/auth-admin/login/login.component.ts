@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   hide = true;
   hideconfirm = true;
   private auth: AuthRequest = {
-    username: '',
+    correo: '',
     password: ''
   };
 
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     private fb:FormBuilder,
     private router: Router,){
     this.userForm = this.fb.group({
-      username: ['', Validators.required],
+      correo: ['', Validators.required],
       password: ['', Validators.required],
       confirmpassword: ['', Validators.required],
     });
@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
     if(this.userForm.valid){
       console.log("VALIDANDO DATOS");
       this.auth= {
-        username: this.userForm.value.username,
+        correo: this.userForm.value.correo,
         password: this.userForm.value.password,
         
       }
