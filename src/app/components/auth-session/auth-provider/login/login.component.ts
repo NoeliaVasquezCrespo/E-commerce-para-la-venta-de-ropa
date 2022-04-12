@@ -14,7 +14,7 @@ import Swal from'sweetalert2';
 export class LoginComponent implements OnInit {
   hide = true;
   private auth: AuthRequest = {
-    username: '',
+    correo: '',
     password: ''
   };
 
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
     if(this.userForm.valid){
       console.log("VALIDANDO DATOS");
       this.auth= {
-        username: this.userForm.value.username,
+        correo: this.userForm.value.correo,
         password: this.userForm.value.password,
       }
       this.authService.loginprovider(this.auth).subscribe(resp => {
