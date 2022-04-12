@@ -13,6 +13,7 @@ import Swal from'sweetalert2';
 })
 export class LoginComponent implements OnInit {
   hide = true;
+  hideconfirm = true;
   private auth: AuthRequest = {
     username: '',
     password: ''
@@ -25,58 +26,51 @@ export class LoginComponent implements OnInit {
   getparamid:any;
 
   ngOnInit(): void {
-   
-    
-        
-    
   }
+
+  
   constructor(private authService:AuthService,
     private fb:FormBuilder,
     private router: Router,){
     this.userForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
+      confirmpassword: ['', Validators.required],
     });
 
   }
 
 
-  //create nw user
-  userAuth(){
-    if(this.userForm.valid){
-      
-        this.successNotificationLogin()
-      
-    } else {
-      this.wrongNotificationLogin('Complete los espacios vacíos')
-    }
-    
 
-  }
-
+  
   login(){
+   
     if(this.userForm.valid){
       console.log("VALIDANDO DATOS");
       this.auth= {
         username: this.userForm.value.username,
         password: this.userForm.value.password,
+        
       }
-      this.authService.login(this.auth).subscribe(resp => {
-        console.log(resp);
-        if(resp.jwttoken!=null){
-          localStorage.setItem('token',resp.jwttoken);
-          localStorage.setItem('userId',resp.userId.toString())
-          this.successNotificationLogin();
-        }
-      },error=>{
-        this.wrongNotificationLogin('Usuario inexistente');
-      });
-    }else{
+      if(this.userForm.value.password ==  this.userForm.value.confirmpassword) {
+        console.log('Los valores son iguales');
+        this.authService.login(this.auth).subscribe(resp => {
+          console.log(resp);
+          if(resp.jwttoken!=null){
+            localStorage.setItem('token',resp.jwttoken);
+            localStorage.setItem('userId',resp.userId.toString())
+            this.successNotificationLogin();
+          }
+        },error=>{
+          this.wrongNotificationLogin('Usuario inexistente');
+        });
+      } else {
+        this.wrongNotificationLogin('Las contraseñas no coinciden, intente de nuevo');  
+      }
+    }
+    else{
       this.wrongNotificationLogin('Complete los espacios vacíos')
     }
-
-    
-
   }
 
   
@@ -95,6 +89,7 @@ export class LoginComponent implements OnInit {
       }
     })
   } 
+
     
   wrongNotificationLogin(mensaje:string){
     Swal.fire({
