@@ -27,6 +27,7 @@ export class SignupComponent implements OnInit {
   }
 
   addNewAdmin(data: admin){
+    if(this.newAdminForm.valid){
     var api = 'http://localhost:8080/administrators';
     data.status=1;
     data.tipoAdministradorId=2;
@@ -34,26 +35,37 @@ export class SignupComponent implements OnInit {
     axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('token');
     axios.post(api,data).then(function (result){
       console.log(result);
-      Swal.fire({
-        title: 'CORRECTO',
-        text: 'Se registró al administrador correctamente',
-        icon: 'success',
-        showCancelButton: false,
-        confirmButtonText: 'Ok',
-      }).then((result) => {
-        if (result.value) {
-          console.log('admin dashboard')
-          window.location.href="http://localhost:4200/admindashboard/providers"
-        }
-      })
-    }).catch(err=>{
-      this.wrongNotification();
-    })
+      this.successNotification();
+
+      },error=>{
+        this.wrongNotification('Usuario inexistente');
+      });
+    }else{
+      this.wrongNotification('Complete los espacios vacíos')
+    }
+  
   }
-  wrongNotification(){
+  successNotification(){
+    Swal.fire({
+      title: 'CORRECTO',
+      text: 'Se registró al administrador correctamente',
+      icon: 'success',
+      showCancelButton: false,
+      confirmButtonText: 'Ok',
+    }).then((result) => {
+      if (result.value) {
+        console.log('admin dashboard')
+        window.location.href="http://localhost:4200/admindashboard"
+      }
+    })
+  } 
+    
+  wrongNotification(mensaje:string){
     Swal.fire({
       icon: 'error',
       title: 'Error en el registro',
+      text: mensaje,
     })
   }
+
 }

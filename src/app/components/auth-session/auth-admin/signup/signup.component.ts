@@ -27,30 +27,25 @@ export class SignupComponent implements OnInit {
   }
 
   addNewAdmin(data: admin){
-    var api = 'http://localhost:8080/administrators';
-    data.status=1;
-    data.tipoAdministradorId=1;
-    console.log('New Admmin: ', data);
-    axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('token');
-    axios.post(api,data).then(function (result){
-      console.log(result);
-      Swal.fire({
-        title: 'CORRECTO',
-        text: 'Se registró al administrador correctamente',
-        icon: 'success',
-        showCancelButton: false,
-        confirmButtonText: 'Ok',
-      }).then((result) => {
-        if (result.value) {
-          console.log('admin dashboard')
-          window.location.href="http://localhost:4200/admindashboard"
-        }
-      })
-    }).catch(err=>{
-      this.wrongNotification();
-    })
-  }
+    if(this.newAdminForm.valid){
+      var api = 'http://localhost:8080/administrators';
+      data.status=1;
+      data.tipoAdministradorId=1;
+      console.log('New Admmin: ', data);
+      axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('token');
+      axios.post(api,data).then(function (result){
+        console.log(result);
+        this.successNotification();
+
+      },error=>{
+        this.wrongNotification('Usuario inexistente');
+      });
+    }else{
+      this.wrongNotification('Complete los espacios vacíos')
+    }
   
+  }
+
   successNotification(){
     Swal.fire({
       title: 'CORRECTO',
@@ -66,10 +61,11 @@ export class SignupComponent implements OnInit {
     })
   } 
     
-  wrongNotification(){
+  wrongNotification(mensaje:string){
     Swal.fire({
       icon: 'error',
       title: 'Error en el registro',
+      text: mensaje,
     })
   }
 
