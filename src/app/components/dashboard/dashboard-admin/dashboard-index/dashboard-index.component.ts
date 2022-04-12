@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdministradorRequest } from 'src/app/models/AdministradorRequest';
 import { AuthService } from 'src/app/service/auth.service';
 import { AdminlistService } from 'src/app/service/adminlist.service';
 import { admin } from 'src/app/models/Admin';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSort, Sort} from '@angular/material/sort';
+import {MatPaginator} from '@angular/material/paginator';
+import {LiveAnnouncer} from '@angular/cdk/a11y';
 
 @Component({
   selector: 'll-dashboard-index',
@@ -10,11 +14,23 @@ import { admin } from 'src/app/models/Admin';
   styleUrls: ['./dashboard-index.component.scss']
 })
 export class DashboardIndexComponent implements OnInit {
+
   orders = [];
+  displayedColumns: string[] = ['id', 'nombre', 'apellido', 'correo', 'edad'];
   administrator:AdministradorRequest;
   admins:admin[] = [];
   cad:string;
-  constructor(private authService:AuthService,private adminlistService:AdminlistService) {}
+  dataSource = new MatTableDataSource();
+
+  @ViewChild(MatPaginator, {static:true}) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  constructor(private _liveAnnouncer: LiveAnnouncer, private authService:AuthService,private adminlistService:AdminlistService) {}
 
   async ngOnInit(): Promise<void> {
     
@@ -31,6 +47,7 @@ export class DashboardIndexComponent implements OnInit {
         console.log("error");
       });
       this.admins = await this.getAdminData();
+      this.dataSource.data = this.admins;
   }
 
   async getAdminData(){
@@ -42,5 +59,17 @@ export class DashboardIndexComponent implements OnInit {
 
     return respuesta;
   }
-  
+
+  ngAfterViewInit(){
+    this.dataSource.paginator= this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  announceSortChange(sortState: Sort) {
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
+  }
 }
