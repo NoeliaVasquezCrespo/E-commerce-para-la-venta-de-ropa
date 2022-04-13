@@ -33,7 +33,7 @@ const routes: Routes = [
   },
   {
     path: 'addproduct',
-    loadChildren: () => import('./components/addproduct/addproduct.module').then(m => m.AddproductModule)
+    loadChildren: () => import('./components/product/addproduct/addproduct.module').then(m => m.AddproductModule)
   },
   {
     path: 'adminhome',

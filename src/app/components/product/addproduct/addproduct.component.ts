@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
-import { product } from '../../models/Product';
+import { product } from '../../../models/Product';
 import axios from 'axios';
 import { AddproductService } from 'src/app/service/addproduct.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
