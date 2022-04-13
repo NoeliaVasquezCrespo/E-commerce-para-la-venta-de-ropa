@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
     this.userForm = this.fb.group({
       correo: ['', Validators.required],
       password: ['', Validators.required],
-      confirmpassword: ['', Validators.required],
     });
 
   }
@@ -49,11 +48,8 @@ export class LoginComponent implements OnInit {
       console.log("VALIDANDO DATOS");
       this.auth= {
         correo: this.userForm.value.correo,
-        password: this.userForm.value.password,
-        
+        password: this.userForm.value.password,   
       }
-      if(this.userForm.value.password ==  this.userForm.value.confirmpassword) {
-        console.log('Los valores son iguales');
         this.authService.login(this.auth).subscribe(resp => {
           console.log(resp);
           if(resp.jwttoken!=null){
@@ -64,9 +60,6 @@ export class LoginComponent implements OnInit {
         },error=>{
           this.wrongNotificationLogin('Usuario inexistente');
         });
-      } else {
-        this.wrongNotificationLogin('Las contraseñas no coinciden, intente de nuevo');  
-      }
     }
     else{
       this.wrongNotificationLogin('Complete los espacios vacíos')

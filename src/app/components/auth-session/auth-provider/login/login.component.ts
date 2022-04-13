@@ -37,24 +37,10 @@ export class LoginComponent implements OnInit {
     this.userForm = this.fb.group({
       correo: ['', Validators.required],
       password: ['', Validators.required],
-      confirmpassword: ['', Validators.required],
     });
 
   }
 
-
-  //create nw user
-  userAuth(){
-    if(this.userForm.valid){
-      
-        this.successNotificationLogin()
-      
-    } else {
-      this.wrongNotificationLogin('Complete los espacios vacíos')
-    }
-    
-
-  }
 
   login(){
     if(this.userForm.valid){
@@ -63,9 +49,7 @@ export class LoginComponent implements OnInit {
         correo: this.userForm.value.correo,
         password: this.userForm.value.password,
       }
-      if(this.userForm.value.password ==  this.userForm.value.confirmpassword) {
-        console.log('Los valores son iguales');
-        this.authService.loginprovider(this.auth).subscribe(resp => {
+       this.authService.loginprovider(this.auth).subscribe(resp => {
           console.log(resp);
           if(resp.jwttoken!=null){
             localStorage.setItem('token',resp.jwttoken);
@@ -75,9 +59,6 @@ export class LoginComponent implements OnInit {
         },error=>{
           this.wrongNotificationLogin('Usuario inexistente');
       });
-      } else {
-        this.wrongNotificationLogin('Las contraseñas no coinciden, intente de nuevo');  
-      }
     }
     else{
       this.wrongNotificationLogin('Complete los espacios vacíos')
