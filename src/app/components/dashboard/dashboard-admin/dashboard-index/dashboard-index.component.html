@@ -13,7 +13,7 @@
 	</div>	
 	<div class="table-inside">
 		<mat-form-field>
-			<mat-label>Buscar por Nombre</mat-label>
+			<mat-label>Filtro</mat-label>
 			<input matInput (keyup)="applyFilter($event)"  #input>
 		</mat-form-field>
 		<table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"  class="mat-elevation-z8">
