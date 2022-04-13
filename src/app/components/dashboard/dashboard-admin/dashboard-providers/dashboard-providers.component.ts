@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdminlistService } from 'src/app/service/adminlist.service';
 import { admin } from 'src/app/models/Admin';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSort, Sort} from '@angular/material/sort';
+import {MatPaginator} from '@angular/material/paginator';
+import {LiveAnnouncer} from '@angular/cdk/a11y';
+
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-dashboard-providers',
@@ -9,13 +14,24 @@ import Swal from 'sweetalert2';
 })
 export class DashboardProvidersComponent implements OnInit {
   admins:admin[] = [];
+  displayedColumns: string[] = ['id', 'nombre', 'apellido', 'correo', 'edad'];
+  dataSource = new MatTableDataSource();
   cad:string;
   router: any;
-  constructor(private adminlistService:AdminlistService) {}
+
+  @ViewChild(MatPaginator, {static:true}) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  constructor(private _liveAnnouncer: LiveAnnouncer, private adminlistService:AdminlistService) {}
 
   async ngOnInit():Promise<void>{ 
     this.admins = await this.getAdminData();
-    
+    this.dataSource.data = this.admins;
     
   }
 
@@ -62,5 +78,18 @@ export class DashboardProvidersComponent implements OnInit {
         this.router.navigateByUrl('/adminhome');
       }
     })
+  }
+
+  ngAfterViewInit(){
+    this.dataSource.paginator= this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  announceSortChange(sortState: Sort) {
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
   }
 }
