@@ -20,7 +20,7 @@ export class AddcategoryComponent implements OnInit {
   currentFile?: File;
   message = '';
   errorMsg = '';
-  listCategoria:Category[]=[{id:0, categoria:"Categoria",status:1}];
+  listCategoria:Category[]=[{id:0, categoria:"Categoria"}];
   newProductoId:number=0;
   constructor(private addProductService:AddproductService,private categoryService:CategoryService,
     private router: Router) { }
