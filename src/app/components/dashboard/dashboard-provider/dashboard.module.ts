@@ -9,14 +9,16 @@ import { DashboardIndexComponent } from './dashboard-index/dashboard-index.compo
 import { SharedModule } from '../../../shared/shared.module';
 import { DashboardProductsComponent } from './dashboard-products/dashboard-products.component';
 import { DashboardProvidersComponent } from './dashboard-providers/dashboard-providers.component';
-
+import { ColorSizeRegisterComponent } from './color-size-register/color-size-register.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     DashboardLayoutComponent,
     DashboardIndexComponent,
     DashboardProductsComponent,
-    DashboardProvidersComponent
+    DashboardProvidersComponent,
+    ColorSizeRegisterComponent
   ],
-  imports: [CommonModule, DashboardRoutingModule, SharedModule, MatMenuModule]
+  imports: [CommonModule, DashboardRoutingModule, SharedModule, MatMenuModule,FormsModule, ReactiveFormsModule]
 })
 export class DashboardModule {}

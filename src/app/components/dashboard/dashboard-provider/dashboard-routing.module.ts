@@ -4,6 +4,7 @@ import { DashboardIndexComponent } from './dashboard-index/dashboard-index.compo
 import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.component';
 import { DashboardProvidersComponent } from './dashboard-providers/dashboard-providers.component';
 import { DashboardProductsComponent } from './dashboard-products/dashboard-products.component';
+import { ColorSizeRegisterComponent } from './color-size-register/color-size-register.component';
 
 const DashboardChildrenRoute: Routes = [
   {
@@ -18,6 +19,10 @@ const DashboardChildrenRoute: Routes = [
   {
     path: 'orders',
     component: DashboardProvidersComponent
+  },
+  {
+    path: 'color-size',
+    component: ColorSizeRegisterComponent
   }
 ];
 

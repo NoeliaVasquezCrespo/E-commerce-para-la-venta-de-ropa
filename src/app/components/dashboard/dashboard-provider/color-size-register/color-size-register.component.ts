@@ -1,38 +1,46 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
-import { product } from '../../../models/Product';
+import { product } from '../../../../models/Product';
 import axios from 'axios';
 import { AddproductService } from 'src/app/service/addproduct.service';
+import { Size } from 'src/app/models/Size';
+import { Color } from 'src/app/models/Color';
+
+import { ProductListService } from 'src/app/service/product-list.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import Swal from'sweetalert2';
+
+
 @Component({
-  selector: 'app-addproduct',
-  templateUrl: './addproduct.component.html',
-  styleUrls: ['./addproduct.component.scss']
+  selector: 'app-color-size-register',
+  templateUrl: './color-size-register.component.html',
+  styleUrls: ['./color-size-register.component.scss']
 })
-export class AddproductComponent implements OnInit {
+export class ColorSizeRegisterComponent implements OnInit {
   selectedFiles?: FileList;
   currentFile?: File;
   message = '';
   errorMsg = '';
+  listTallas:Size[]=[{id:0, nombreTalla:"TALLA"}];
+  listColores:Color[]=[{id:0, descripcion:"COLOR"}];
   newProductoId:number=0;
-  constructor(private addProductService:AddproductService,
+  constructor(private addProductService:AddproductService,private productListService:ProductListService,
     private router: Router) { }
 
   public newProductForm = new FormGroup({
-    codigoProducto: new FormControl('', Validators.required),
-    nombreProducto : new FormControl('', Validators.required),
-    descripcion : new FormControl('', Validators.required),
+    talla: new FormControl(this.listTallas[0]),
+    color: new FormControl(this.listColores[0]),
     stock : new FormControl('', Validators.required),
-    precio : new FormControl('', Validators.required),
-    administradorId : new FormControl(0, Validators.required)
+  
   });
 
   ngOnInit(): void {
     function setTwoNumberDecimal(event) {
       this.value = parseFloat(this.value).toFixed(2);
-  }
+    }
+    this.getSizesData();
+    this.getColoursData();
   }
   selectFile(event: any): void {
     this.selectedFiles = event.target.files;
@@ -68,6 +76,25 @@ export class AddproductComponent implements OnInit {
     }
 
     
+  }
+
+  getSizesData(){
+    this.productListService.getListTallas().toPromise().then((response) => {
+      console.log("LA RESPUESTA ES: ");
+      console.log(response);
+      this.listTallas=response;
+    }).catch(e => console.error(e));
+
+    console.log(this.listTallas);
+  }
+  getColoursData(){
+    this.productListService.getListColours().toPromise().then((response) => {
+      console.log("LA RESPUESTA ES: ");
+      console.log(response);
+      this.listColores=response;
+    }).catch(e => console.error(e));
+
+    console.log(this.listTallas);
   }
 
   upload(): void {

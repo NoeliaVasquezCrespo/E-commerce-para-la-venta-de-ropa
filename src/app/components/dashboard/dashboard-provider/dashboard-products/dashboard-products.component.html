@@ -14,24 +14,36 @@
       <div class="flex flex-col border ltLg:responsive">
         <div class="flex items-center p-4 border-b hover:bg-blue-100">
           <div class="w-6/12 font-medium"><div class="pl-16 ml-3">Producto</div></div>
-          <div class="w-2/12 font-medium">Marca</div>
-          <div class="w-2/12 font-medium text-center">Precio</div>
-          <div class="w-2/12 font-medium text-center">Stock</div>
+          <div class="w-5/12 font-medium text-center">Precio</div>
+          <div class="w-9/12 font-medium text-center">Stock</div>
           <div class="w-1/12"></div>
         </div>
         <div class="flex items-center p-4 border-b hover:bg-blue-100" *ngFor="let product of products | slice: 0:9">
           <div class="w-6/12">
-            <a href="" class="flex hover:text-primary">
-              <!-- <div class="max-h-16 w-16 flex-none mr-3 border" *ngIf="product?.images">
-                <img [src]="product?.images[0]" alt="img">
-              </div> -->
+            <a  class="flex hover:text-primary">
               <h3 class="flex-auto">{{ product.nombreProducto }}</h3>
             </a>
           </div>
-          <div class="w-2/12">{{product.marca}}</div>
-          <div class="w-2/12 text-center">${{product.precio}}</div>
-          <div class="w-2/12">
-            {{product.stock}}
+          <div class="w-5/12 text-center">Bs. {{product.precio}}</div>
+          <div class="w-2/12">{{product.stock}}</div>
+          <div class="text-right">
+            <button class="action_icon__btn" mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" xposition="before">
+              <button mat-menu-item [routerLink]="['/providerdashboard/color-size']">
+                <mat-icon>dialpad</mat-icon>
+                <span>Asignar Características</span>
+              </button>
+              <button mat-menu-item >
+                <mat-icon>edit</mat-icon>
+                <span>Editar</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>delete</mat-icon>
+                <span>Eliminar</span>
+              </button>
+            </mat-menu>
           </div>
         </div>
       </div>

@@ -12,7 +12,10 @@ import { DashboardProvidersComponent } from './dashboard-providers/dashboard-pro
 import { MaterialModule } from '../../../material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { DashboardInactiveProvidersComponent } from './dashboard-inactive-providers/dashboard-inactive-providers.component';
-import { DashboardInactiveAdminComponent } from './dashboard-inactive-admin/dashboard-inactive-admin.component'
+import { DashboardInactiveAdminComponent } from './dashboard-inactive-admin/dashboard-inactive-admin.component';
+import { AddcategoryComponent } from './addcategory/addcategory.component'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
   @NgModule({
   declarations: [
@@ -21,9 +24,10 @@ import { DashboardInactiveAdminComponent } from './dashboard-inactive-admin/dash
     DashboardProductsComponent,
     DashboardProvidersComponent,
     DashboardInactiveProvidersComponent,
-    DashboardInactiveAdminComponent
+    DashboardInactiveAdminComponent,
+    AddcategoryComponent
   ],
-  imports: [CommonModule, DashboardRoutingModule, SharedModule, MatMenuModule,MatExpansionModule,MaterialModule]
+  imports: [CommonModule, DashboardRoutingModule, SharedModule, MatMenuModule,MatExpansionModule,MaterialModule,FormsModule, ReactiveFormsModule, MatCheckboxModule]
 
 })
 export class DashboardModule {}

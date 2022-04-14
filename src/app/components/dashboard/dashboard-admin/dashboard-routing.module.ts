@@ -7,7 +7,8 @@ import { DashboardProductsComponent } from './dashboard-products/dashboard-produ
 import { DashboardCompanyComponent } from './dashboard-company/dashboard-company.component';
 import { ValidarTokenGuard } from '../../auth-session/auth-admin/guard/validar-token.guard';
 import { DashboardInactiveProvidersComponent } from './dashboard-inactive-providers/dashboard-inactive-providers.component';
-import { DashboardInactiveAdminComponent } from './dashboard-inactive-admin/dashboard-inactive-admin.component'
+import { DashboardInactiveAdminComponent } from './dashboard-inactive-admin/dashboard-inactive-admin.component';
+import { AddcategoryComponent } from './addcategory/addcategory.component'
 
 const DashboardChildrenRoute: Routes = [
   {
@@ -37,7 +38,12 @@ const DashboardChildrenRoute: Routes = [
   {
     path: 'company',
     component: DashboardCompanyComponent
-  }
+  },{
+
+    path: 'category',
+    component: AddcategoryComponent 
+  },
+
 ];
 
 const routes: Routes = [

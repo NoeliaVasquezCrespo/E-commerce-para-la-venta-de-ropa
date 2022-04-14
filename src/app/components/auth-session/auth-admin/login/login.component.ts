@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { ActivatedRoute, Router} from '@angular/router';
 import { AuthRequest } from 'src/app/models/AuthRequest';
-import { ApiserviceService } from 'src/app/service/apiservice.service';
 import { AuthService } from 'src/app/service/auth.service';
 import Swal from'sweetalert2';
 
