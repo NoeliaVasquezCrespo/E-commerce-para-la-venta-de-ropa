@@ -80,6 +80,21 @@ export class DashboardProvidersComponent implements OnInit {
     })
   }
 
+  deleteProviderNotification(){
+    Swal.fire({
+      icon: 'warning',
+      title: '¿Está seguro de eliminar al proveedor?',
+      showConfirmButton: true,
+      showCancelButton:true,
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.value) {
+        console.log('admin home')
+        this.router.navigateByUrl('/adminhome');
+      }
+    })
+  }
   ngAfterViewInit(){
     this.dataSource.paginator= this.paginator;
     this.dataSource.sort = this.sort;

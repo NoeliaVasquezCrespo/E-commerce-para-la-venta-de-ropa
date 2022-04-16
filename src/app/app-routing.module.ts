@@ -13,6 +13,7 @@ const baseLayoutRouting: Routes = [
     path: 'products',
     loadChildren: () => import('./components/product/product.module').then(m => m.ProductModule)
   },
+ 
   
 ];
 

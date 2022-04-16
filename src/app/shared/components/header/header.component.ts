@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
   menuList = [] as any;
   isLessThenLargeDevice: boolean;
   constructor(private breakpointObserver: BreakpointObserver) {}
+  public productos = [];
 
   ngOnInit(): void {
     this.menuList = staticMenuList;
@@ -25,5 +26,12 @@ export class HeaderComponent implements OnInit {
   @HostListener('window:scroll', ['$event'])
   checkScroll() {
     this.isScrolled = window.pageYOffset > 15;
+  }
+
+  public total() {
+  
+    let total = 0;
+    this.productos.forEach(p => total += p.precio);
+    return total;
   }
 }

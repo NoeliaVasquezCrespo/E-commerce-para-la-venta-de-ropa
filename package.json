@@ -26,6 +26,7 @@
     "axios": "^0.26.1",
     "ng-particles": "^2.7.3",
     "ngx-skeleton-loader": "^2.10.1",
+    "reactstrap": "^9.0.2",
     "rxjs": "~6.6.0",
     "sweetalert2": "^11.4.8",
     "tsparticles": "^1.24.3",

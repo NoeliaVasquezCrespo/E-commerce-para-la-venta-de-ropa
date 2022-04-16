@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { productsDB } from '../../../shared/data/products';
 import axios from 'axios';
 import { ProductListService } from 'src/app/service/product-list.service';
 import { Size } from 'src/app/models/Size';

@@ -7,11 +7,7 @@ export const menuList: Menu[] = [
   {
     path: '/products',
     name: 'Productos'
-  },
-  {
-    path: '/cart',
-    name: 'Carrito'
-  },
+  }
   
   
 ];

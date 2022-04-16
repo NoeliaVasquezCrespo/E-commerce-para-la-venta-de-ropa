@@ -10,7 +10,7 @@
             <li *ngFor="let menu of menuList">
               <a mat-button [routerLink]="[menu.path]" routerLinkActive="bg-gray-100" class="text-lg font-bold py-2 px-5">{{ menu.name }}</a>
             </li>
-          </ul>
+          </ul> 
         </div>
         <button
           *ngIf="isLessThenLargeDevice"
@@ -23,6 +23,23 @@
         <div class="hidden items-center md:flex ml-auto">  
           <a [routerLink]="['/authclient/login']" mat-raised-button color="warn" class="text-lg font-bold py-2 px-5">Iniciar Sesión</a>
           <a [routerLink]="['/authclient/signup']" mat-raised-button color="accent" class="text-lg font-bold py-2 px-5 ml-2">Registro</a>
+          <div class="navbar-nav ml-auto">
+          <mat-toolbar-row>
+            <button mat-button [matMenuTriggerFor]="menu">
+              <input type="button"  matBadgeOverlap="false"
+                    matBadgePosition="below after"  class="font-bold">Carrito<img src="https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/512x512/shopping_cart.png" width="30" height="30"/>      
+            </button>
+            <mat-menu #menu="matMenu">
+             
+              <button mat-menu-item>
+                <strong>Total: {{total() | currency}}</strong>
+              </button>
+              <a mat-menu-item routerLink="/cart">
+                <mat-icon>shopping_cart</mat-icon>
+                Terminar compra</a>
+            </mat-menu>
+          </mat-toolbar-row> 
+        </div>
         </div>
       </div>
     </div>

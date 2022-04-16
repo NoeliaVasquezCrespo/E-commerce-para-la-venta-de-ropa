@@ -14,7 +14,10 @@ import { MatListModule } from '@angular/material/list';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { MatMenuModule } from '@angular/material/menu';
+import {MatGridListModule} from "@angular/material/grid-list";
+import {MatChipsModule} from "@angular/material/chips";
+import {MatBadgeModule} from "@angular/material/badge";
 const commonModules = [
   HttpClientModule,
   MatToolbarModule,
@@ -28,7 +31,9 @@ const commonModules = [
 
 @NgModule({
   declarations: [HeaderComponent,  FeatureComponent, BaseLayoutComponent, SidenavComponent],
-  imports: [CommonModule, RouterModule,FormsModule,
+  imports: [CommonModule, RouterModule,FormsModule, MatMenuModule,MatGridListModule,
+    MatChipsModule,
+    MatBadgeModule,
     ReactiveFormsModule, ...commonModules],
   exports: [HeaderComponent,  BaseLayoutComponent, FeatureComponent, SidenavComponent, ...commonModules]
 })

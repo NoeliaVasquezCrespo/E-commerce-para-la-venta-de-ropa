@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductDetails } from 'src/app/models/ProductDetails';
 import { HomeProductService } from 'src/app/service/home-product.service';
-import { productsDB } from 'src/app/shared/data/products';
 @Component({
   selector: 'll-dashboard-products',
   templateUrl: './dashboard-products.component.html',
