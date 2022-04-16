@@ -11,7 +11,7 @@ import { ProductDetails } from '../models/ProductDetails';
   providedIn: 'root'
 })
 export class HomeProductService {
-  private baseUrl:string = environment.baseUrl; 
+  private baseUrl:string = environment.baseUrl;
 
   constructor(private http:HttpClient){ }
 
@@ -19,28 +19,34 @@ export class HomeProductService {
     const url = `${this.baseUrl}products/details`;
     return this.http.get<ProductDetails[]>(url).pipe(
       map(
-        response => response, error => error)); 
+        response => response, error => error));
   }
   getListProductsByProviderId(idProvider:number):Observable<ProductDetails[]> {
     const url = `${this.baseUrl}products/details/${idProvider}`;
     return this.http.get<ProductDetails[]>(url).pipe(
       map(
-        response => response, error => error)); 
+        response => response, error => error));
   }
   getFirstImageByProductId(idProducto:number):Observable<FotosProducto>{
     const url = `${this.baseUrl}products/image/${idProducto}`;
     return this.http.get<FotosProducto>(url).pipe(
       map(
-        response => response, error => error)); 
+        response => response, error => error));
   }
   getProductByProductId(idProducto:number):Observable<FotosProducto>{
     const url = `${this.baseUrl}products/${idProducto}`;
     return this.http.get<FotosProducto>(url).pipe(
       map(
-        response => response, error => error)); 
+        response => response, error => error));
+  }
+  getProductDetailsByName(name:string):Observable<ProductDetails>{
+    const url = `${this.baseUrl}products/details/productName=${name}`;
+    return this.http.get<ProductDetails>(url).pipe(
+      map(
+        response => response, error => error));
   }
   // getRouteImage(path:string, name:string){
   //   const url = `${this.baseUrl}products/image/${idProducto}`;
-    
+
   // }
 }
