@@ -33,6 +33,15 @@ export class AuthService {
 
   }
 
+  loginuser(auth:AuthRequest):Observable<JwtResponse>{
+    console.log("ACCEDIENDO A SERVICIO");
+    const url = `${this.baseUrl}login/user`;
+    console.log(url);
+     
+    return this.http.post<JwtResponse>(url,auth);
+
+  }
+
   validarToken(id:number, jwt:string):Observable<boolean>{
     return this.verificarSesion(id,jwt)
     .pipe(
