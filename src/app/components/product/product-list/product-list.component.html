@@ -69,10 +69,11 @@
           </mat-card-content>
           <mat-card-actions class="ll-product__action flex justify-between">
             <div class="flex-1 text-center flex items-center justify-center">
-              {{ product.tallas }}
-            </div>
+              <button class="btn" (click)=addtocart(item)><img src="https://indyme.com/wp-content/uploads/2020/11/shopping-cart-icon.png" height ="30px" width="30px" /></button>
+            </div> 
             <div class="flex-1 text-center">
               <a [routerLink]="['/products', product.id]" mat-raised-button color="warn" class="px-4">Información del producto</a>
+              
             </div>
           </mat-card-actions>
         </mat-card>

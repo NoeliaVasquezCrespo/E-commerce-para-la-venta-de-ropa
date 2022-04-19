@@ -10,6 +10,7 @@ import { HomeProductService } from 'src/app/service/home-product.service';
 import {Observable} from 'rxjs';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
+import { CartService } from 'src/app/service/cart.service';
 
 @Component({
   selector: 'll-product-list',
@@ -28,7 +29,8 @@ export class ProductListComponent implements OnInit {
   userForm:FormGroup;
   constructor(private productListService:ProductListService,
     private fb:FormBuilder,
-    private homeProductService:HomeProductService) {
+    private homeProductService:HomeProductService,
+    private cartService : CartService) {
     }
 
   async ngOnInit(): Promise<void> {
@@ -144,5 +146,8 @@ export class ProductListComponent implements OnInit {
       this.obsProducts = this.dataSource.connect();
     }
 
+  }
+  addtocart(product: any){
+    this.cartService.addtoCart(product);
   }
 }
