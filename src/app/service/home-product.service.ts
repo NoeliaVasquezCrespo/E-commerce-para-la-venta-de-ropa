@@ -39,9 +39,17 @@ export class HomeProductService {
       map(
         response => response, error => error));
   }
-  getProductDetailsByName(name:string):Observable<ProductDetails>{
-    const url = `${this.baseUrl}products/details/productName=${name}`;
-    return this.http.get<ProductDetails>(url).pipe(
+  getProductDetailsByNameAndMarca(name:string, marca:string):Observable<ProductDetails>{
+    let url = `${this.baseUrl}products/details/`;
+    let newUrl=``;
+    if(marca==''){
+      newUrl = `${url}productName=${name}`;
+      console.log(newUrl);
+    }else{
+      newUrl = `${url}productName=${name}/marca=${marca}`;
+      console.log(newUrl);
+    }
+    return this.http.get<ProductDetails>(newUrl).pipe(
       map(
         response => response, error => error));
   }

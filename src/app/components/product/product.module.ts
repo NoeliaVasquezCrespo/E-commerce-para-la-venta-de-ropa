@@ -10,18 +10,24 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { ProductHeroComponent } from './product-list/product-hero/product-hero.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
+
 @NgModule({
   declarations: [ProductListComponent, ProductDetailsComponent, ProductHeroComponent],
-  imports: [
-    CommonModule,
-    ProductRoutingModule,
-    SharedModule,
-    MatExpansionModule,
-    NgParticlesModule,
-    NgxSkeletonLoaderModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatPaginatorModule
-  ]
+    imports: [
+        CommonModule,
+        ProductRoutingModule,
+        SharedModule,
+        MatExpansionModule,
+        NgParticlesModule,
+        NgxSkeletonLoaderModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatPaginatorModule,
+      MatFormFieldModule,
+      MatInputModule
+    ]
 })
 export class ProductModule { }
