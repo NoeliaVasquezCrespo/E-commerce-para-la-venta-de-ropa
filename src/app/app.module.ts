@@ -8,9 +8,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material/input';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { SharedModule } from './shared/shared.module';
+import { CartComponent } from './components/cart/cart.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CartComponent
 
     
   ],

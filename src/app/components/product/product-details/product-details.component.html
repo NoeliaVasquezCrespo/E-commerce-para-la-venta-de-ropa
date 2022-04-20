@@ -4,29 +4,29 @@
       <div class="col-span-12 md:col-span-7 xl:col-span-8 border p-5">
         <h1 class="_title font-medium">Información del Producto</h1>
 
-        <img class="w-full" src="{{productDetail.image}}" alt="img not found" />
+        <img class="w-full" src="{{productDetail?.image}}" alt="img not found" />
         <div class="ll-content mt-8">
           <h2>
-            Nombre del Producto: {{productDetail.nombreProducto}}
+            Nombre del Producto: {{productDetail?.nombreProducto}}
           </h2>
           <h2>Descripción del Producto:</h2>
           <p>
-            {{productDetail.description}}
+            {{productDetail?.description}}
           </p>
           <h2>Colores disponibles:</h2>
           <p>
-            {{productDetail.color}}
+            {{productDetail?.color}}
           </p>
           <h2>Tallas Disponibles:</h2>
           <p>
-            {{productDetail.talla}}
+            {{productDetail?.talla}}
           </p>
         </div>
       </div>
       <div class="col-span-12 md:col-span-5 xl:col-span-4">
         <div class="border">
           <div class="border-b text-center pt-10 pb-10">
-            <div class="text-accent text-4xl font-semibold">Bs. {{productDetail.precio}}</div>
+            <div class="text-accent text-4xl font-semibold">Bs. {{productDetail?.precio}}</div>
             <div class="font-medium text-lg mt-3 text-gray-400 tracking-wider">Precio</div>
             <img class="center" src=" https://cdn-icons-png.flaticon.com/512/1424/1424818.png" style="width: 100px; height: 100px;" alt="img not found" />
           </div>

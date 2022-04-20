@@ -10,7 +10,11 @@ import { HomeProductService } from 'src/app/service/home-product.service';
 import {Observable} from 'rxjs';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
+
 import { CartService } from 'src/app/service/cart.service';
+
+import Swal from'sweetalert2';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'll-product-list',
@@ -27,12 +31,14 @@ export class ProductListComponent implements OnInit {
   listTallas:Size[]=[{id:0, nombreTalla:"TALLA"}];
   listColores:Color[]=[{id:0, descripcion:"COLOR"}];
   userForm:FormGroup;
+
   constructor(private productListService:ProductListService,
     private fb:FormBuilder,
     private homeProductService:HomeProductService,
-    private cartService : CartService) {
-    }
+    private cartService : CartService,
+    private router: Router,) {
 
+    }
   async ngOnInit(): Promise<void> {
      setTimeout(() => {
        //this.products = productsDB.Product;
@@ -42,12 +48,12 @@ export class ProductListComponent implements OnInit {
 
       this.userForm = this.fb.group({
         pruductName: ['', Validators.required],
-        talla: new FormControl(this.listTallas[0]),
-        color: new FormControl(this.listColores[0]),
+        productMarca: [''],
       });
     await this.getSizesData();
     await this.getColoursData();
     this.products = await this.getAllProductsDataDetails();
+    console.log(this.products);
     await this.getFotoImages();
     this.dataSource= new MatTableDataSource<ProductDetails>(this.products)
     this.dataSource.paginator = this.paginator;
@@ -78,10 +84,6 @@ export class ProductListComponent implements OnInit {
     }).catch(e => console.error(e));
 
     console.log(this.listTallas);
-  }
-  filtro():void{
-
-    console.log(this.userForm.value);
   }
   async getAllProductsDataDetails(){
     let respuesta;
@@ -117,19 +119,26 @@ export class ProductListComponent implements OnInit {
   }
 
   async aplicarFiltro() {
+    console.log("SE APLICARAN FILTROS");
     if(this.userForm.valid){
       this.products=[]
       this.products = await this.getProductsDataDetailsByName();
+      console.log(this.products);
       await this.getFotoImages();
       this.dataSource= new MatTableDataSource<ProductDetails>(this.products)
       this.dataSource.paginator = this.paginator;
       this.obsProducts = this.dataSource.connect();
+      if(this.products.length==0){
+        this.warningNotification();
+      }
     }
   }
   async getProductsDataDetailsByName(){
+
+    console.log(this.userForm.value);
     let respuesta;
     console.log("PRIMER METODO");
-    await this.homeProductService.getProductDetailsByName(this.userForm.value.pruductName).toPromise().then((response) => {
+    await this.homeProductService.getProductDetailsByNameAndMarca(this.userForm.value.pruductName,this.userForm.value.productMarca).toPromise().then((response) => {
       respuesta = response;
     }).catch(e => console.error(e));
 
@@ -137,7 +146,8 @@ export class ProductListComponent implements OnInit {
   }
 
   async changeInput() {
-    if(this.userForm.value.pruductName.length==0){
+    if(this.userForm.value.pruductName.length==0 && this.userForm.value.productMarca.length==0){
+      console.log("RESTAURANDO CONTENIDO");
       this.products=[]
       this.products = await this.getAllProductsDataDetails();
       await this.getFotoImages();
@@ -145,7 +155,19 @@ export class ProductListComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.obsProducts = this.dataSource.connect();
     }
+  }
+  warningNotification(){
+    Swal.fire({
+      icon: 'warning',
+      title: 'Advertencia',
+      text: 'No se encontraron coincidencias',
+    })
+  }
 
+  async irADetalleProducto(idProducto:number) {
+    console.log("ID PRODUCTO ES");
+    console.log(idProducto);
+    await this.router.navigateByUrl('/products/'+idProducto);
   }
   addtocart(product: any){
     this.cartService.addtoCart(product);

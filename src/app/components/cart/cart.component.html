@@ -1,1 +1,17 @@
-<p>cart works!</p>
+<ll-header></ll-header>
+<ng-container *ngIf="products.length ==0">
+    <div class="container">
+        <div class="card">
+            <h1 class="card-title">CARRITO DE COMPRAS</h1>
+        </div>
+        <div class="center">
+            <img src="https://www.letrasrecortadas.com/carritoVacio.png" alt="">
+            <h1>Su carrito de compras está vacío</h1>
+            <h2>Por favor retorne a la lista de productos</h2>
+            <button routerLink="/products" class="btn btn-primary">Volver a la lista de productos</button>
+        </div>
+    </div>
+</ng-container>
+
+
+<ll-feature></ll-feature>
