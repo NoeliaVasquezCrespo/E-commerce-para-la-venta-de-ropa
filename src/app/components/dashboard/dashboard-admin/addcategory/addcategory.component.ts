@@ -44,6 +44,7 @@ export class AddcategoryComponent implements OnInit {
   async submit(){
     console.log(this.form.value);
     var cont=0;
+    if(this.form.value.categorias.length>0){
     for(let i=0;i<this.form.value.categorias.length;i++){
       var json={
         "categoriaId":this.form.value.categorias[i],
@@ -56,15 +57,24 @@ export class AddcategoryComponent implements OnInit {
       await axios.post(api,json).then(function (result){
         console.log(result);
         cont++;
-      })
+      });
+      if(cont==this.form.value.categorias.length){
+        this.successNotification();
+      }else{
+        this.wrongNotification();
+      }
     }
-    if(cont==this.form.value.categorias.length){
-      this.successNotification();
     }else{
-      this.wrongNotification();
+      this.mensajeError();
     }
   }
-
+  mensajeError(){
+    Swal.fire({
+      icon: 'error',
+      title: 'Error en el registro',
+      text: 'Selecciona por lo menos una categoria',
+    })
+  }
   wrongNotification(){
     Swal.fire({
       icon: 'error',
