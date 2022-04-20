@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
@@ -6,6 +6,8 @@ import { environment } from 'src/environments/environment';
 import { Size } from 'tsparticles/dist/Options/Classes/Particles/Size/Size';
 import { FotosProducto } from '../models/FotosProducto';
 import { ProductDetails } from '../models/ProductDetails';
+import {ProductCharacteristic} from '../models/ProductCharacteristic';
+import {admin} from '../models/Admin';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +55,14 @@ export class HomeProductService {
     return this.http.get<ProductDetails>(newUrl).pipe(
       map(
         response => response, error => error));
+  }
+  postProductCharacteristic(productCharacteristic:ProductCharacteristic){
+    const url = `${this.baseUrl}products/characteristic`;
+    let jwt= localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({
+      'Authorization': `Bearer ${jwt}`
+    });
+    return this.http.post<ProductCharacteristic>(url,productCharacteristic, { headers: reqHeader })
   }
   // getRouteImage(path:string, name:string){
   //   const url = `${this.baseUrl}products/image/${idProducto}`;

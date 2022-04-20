@@ -37,16 +37,7 @@
               formControlName="descripcion"
             />
           </div>
-          <div class="mb-4 mt-6">
-            <label class="block text-gray-700 text-sm font-semibold mb-2" for="stock"> Stock </label>
-              <input
-                class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
-                id="stock"
-                type="number" min="1" step="any"
-                placeholder="Stock"
-                formControlName="stock"
-              />
-          </div>    
+
           <div class="mb-4 mt-6">
             <label class="block text-gray-700 text-sm font-semibold mb-2" for="precio"> Precio (Bs.) </label>
               <input
@@ -57,16 +48,48 @@
                 formControlName="precio"
               />
           </div>
+          <h1 class="text-2xl font-bold">AGREGAR CARACTERISTICAS INICIALES</h1>
+          <div class="mb-4 mt-6">
+            <label class="block text-gray-700 text-sm font-semibold mb-2" for="color"> Color </label>
+            <select name="color" id="color" formControlName="color"
+                    class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10">
+              <option value="0">Color</option>
+              <option [ngValue]="item.id" *ngFor="let item of listColores">{{item.descripcion}}</option>
+            </select>
+          </div>
+          <div class="mb-4 mt-6">
+            <label class="block text-gray-700 text-sm font-semibold mb-2" for="talla"> Talla </label>
+            <select
+              name="tallas" id="talla" formControlName="talla"
+              class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10">
+              <option value="0">Talla</option>
+              <option [ngValue]="item.id" *ngFor="let item of listTallas">{{item.nombreTalla}}</option>
+            </select>
+          </div>
+          <div class="mb-4 mt-6">
+            <label class="block text-gray-700 text-sm font-semibold mb-2" for="stock"> Stock </label>
+            <input
+              class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
+              id="stock"
+              type="number" min="1" step="any"
+              placeholder="Stock"
+              formControlName="stock"
+            />
+          </div>
+          <div class="mb-6 mt-6">
+            <label class="block text-gray-700 text-sm font-semibold mb-2" for="tipo"> Seleccione fotos </label>
+            <input type="file" (change)="selectFile($event)" name="fotos producto[]" multiple>
+          </div>
           <div class="flex w-full mt-6">
             <button
               class="w-full bg-gray-800 hover:bg-grey-900 text-white text-sm py-2 px-4 font-semibold rounded focus:outline-none focus:shadow-outline h-10"
               type="submit"
-              
+
             >
             Agregar Producto
             </button>
           </div>
-        </form>  
+        </form>
       </div>
     </div>
   </div>

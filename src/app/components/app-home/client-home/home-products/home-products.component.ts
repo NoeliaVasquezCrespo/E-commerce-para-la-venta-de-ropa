@@ -10,19 +10,19 @@ import { ProductDetails } from 'src/app/models/ProductDetails';
 export class HomeProductsComponent implements OnInit {
   products:ProductDetails[] = [];
   cad:string;
-  constructor(private homeProductService:HomeProductService) { 
+  constructor(private homeProductService:HomeProductService) {
     //this.products = productsDB.Product;
-    
-    
+
+
   }
 
 
-  async ngOnInit():Promise<void>{ 
+  async ngOnInit():Promise<void>{
     this.products = await this.getAllProductsData();
-    
+
     await this.getFotoImages();
 
-    
+
   }
   async getAllProductsData(){
     let respuesta;
@@ -33,17 +33,18 @@ export class HomeProductsComponent implements OnInit {
 
     return respuesta;
   }
-  
+
   async getFotoImages(){
     console.log(this.products);
     console.log("ACCESO")
     for(let i=0;i<this.products.length;i++){
-      
+
       let cad=await this.addImage(this.products[i].idProducto)
-      let arrCad:string[]=cad.split("/");
-      this.products[i].image=`http://localhost:8080/v2/products/image/${arrCad[0]}/${arrCad[1]}`
-      
-      console.log("la cadena es: "+this.products[i].image);
+      if(cad!=null){
+        let arrCad:string[]=cad.split("/");
+        this.products[i].image=`http://localhost:8080/v2/products/image/${arrCad[0]}/${arrCad[1]}`
+        console.log("la cadena es: "+this.products[i].image);
+      }
     }
     console.log(this.products);
   }
@@ -54,7 +55,7 @@ export class HomeProductsComponent implements OnInit {
         console.log(response.foto);
         cadena=response.foto
     }).catch(e => console.error(e));
-    
+
     return cadena;
   }
 }

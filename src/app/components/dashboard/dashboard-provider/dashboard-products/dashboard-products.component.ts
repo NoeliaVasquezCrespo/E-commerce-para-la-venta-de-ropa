@@ -25,7 +25,7 @@ export class DashboardProductsComponent implements OnInit {
     await this.homeProductService.getListProductsByProviderId(idProvider).toPromise().then((response) => {
       respuesta = response;
     }).catch(e => console.error(e));
-    
+
     return respuesta;
   }
 }

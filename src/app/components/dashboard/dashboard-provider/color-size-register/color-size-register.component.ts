@@ -32,7 +32,7 @@ export class ColorSizeRegisterComponent implements OnInit {
     talla: new FormControl(this.listTallas[0]),
     color: new FormControl(this.listColores[0]),
     stock : new FormControl('', Validators.required),
-  
+
   });
 
   ngOnInit(): void {
@@ -56,7 +56,7 @@ export class ColorSizeRegisterComponent implements OnInit {
       let self = this
       console.log("EJECUTANDO METODO PARA AGREGAR PRODUCTO");
       var api = 'http://localhost:8080/v2/products';
-      
+
       data.administradorId=parseInt(id);
       data.status=1;
       console.log('New Product : ', data);
@@ -75,7 +75,7 @@ export class ColorSizeRegisterComponent implements OnInit {
       this.wrongNotificationLogin('Complete los espacios vacíos')
     }
 
-    
+
   }
 
   getSizesData(){
@@ -153,6 +153,6 @@ export class ColorSizeRegisterComponent implements OnInit {
         //window.location.href="http://localhost:4200"
       }
     })
-  } 
-  
+  }
+
 }
