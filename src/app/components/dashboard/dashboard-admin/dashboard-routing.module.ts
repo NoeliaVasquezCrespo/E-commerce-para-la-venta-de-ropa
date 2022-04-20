@@ -58,7 +58,7 @@ const routes: Routes = [
     children: DashboardChildrenRoute
   },
   {
-    path: 'edit-provider',
+    path: 'edit-provider/:id',
     component: EditProviderComponent
   },
 ];

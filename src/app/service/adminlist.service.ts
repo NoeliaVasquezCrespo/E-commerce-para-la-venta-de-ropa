@@ -13,6 +13,15 @@ export class AdminlistService {
 
   private baseUrl:string = environment.baseUrl;
   constructor(private http:HttpClient){ }
+  getAdminById(id:number):Observable<admin>{
+    const url = `${this.baseUrl}administrators/${id}`;
+    let jwt= localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({
+      'Authorization': `Bearer ${jwt}`
+    })
+    console.log(url);
+    return this.http.get<admin>(url, { headers: reqHeader });
+  }
 
   getListProvider():Observable<admin[]> {
     const url = `${this.baseUrl}administrators/type=2/status=1`;
@@ -59,6 +68,14 @@ export class AdminlistService {
       'Authorization': `Bearer ${jwt}`
     });
     return this.http.delete<void>(url, { headers: reqHeader })
+  }
+  updateProvider(idProvider:number,provider:admin):Observable<admin>{
+    const url = `${this.baseUrl}administrators/${idProvider}`;
+    let jwt= localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({
+      'Authorization': `Bearer ${jwt}`
+    });
+    return this.http.put<admin>(url,provider, { headers: reqHeader })
   }
   deleteProduct(idProducto: number):Observable<void>{
     const url = `${this.baseUrl}products/${idProducto}`;
