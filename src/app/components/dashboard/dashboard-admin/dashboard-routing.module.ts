@@ -18,7 +18,7 @@ const DashboardChildrenRoute: Routes = [
     component: DashboardIndexComponent,
     canLoad: [ ValidarTokenGuard ],
     canActivate: [ ValidarTokenGuard ],
-    
+
   },
   {
     path: 'products',
@@ -30,7 +30,7 @@ const DashboardChildrenRoute: Routes = [
   },
   {
     path: 'inactiveproviders',
-    component: DashboardInactiveProvidersComponent 
+    component: DashboardInactiveProvidersComponent
   },
   {
     path: 'inactiveadmins',
@@ -39,17 +39,14 @@ const DashboardChildrenRoute: Routes = [
   {
     path: 'company',
     component: DashboardCompanyComponent
-<<<<<<< HEAD
   },{
     path: 'category/:id',
-=======
   },
   {
     path: 'category',
->>>>>>> 7f0d4edc87b2603894dcd5a11c6b77bb9a2ee53c
-    component: AddcategoryComponent 
+    component: AddcategoryComponent
   },
-  
+
 
 
 ];
@@ -62,7 +59,7 @@ const routes: Routes = [
   },
   {
     path: 'edit-provider',
-    component: EditProviderComponent 
+    component: EditProviderComponent
   },
 ];
 

@@ -4,44 +4,72 @@
 	</div>
 	<div>
 	  <div class="flex justify-between flex-wrap">
-		<h2 class="mb-3 font-medium">LISTA PRODUCTOS</h2> 
-	  </div>	
-	  <div *ngIf="view === 'list'" class="table-inside">
-		<div class="flex flex-col border ltLg:responsive">
-		  <div class="flex items-center p-4 border-b hover:bg-blue-100">
-			<div class="w-6/12 font-medium"><div class="pl-16 ml-3">Producto</div></div>
-			<div class="w-2/12 font-medium">Marca</div>
-			<div class="w-2/12 font-medium text-center">Precio</div>
-			<div class="w-2/12 font-medium text-center">Stock</div>
-			<div class="w-1/12"></div>
-		  </div>
-		  <div class="flex items-center p-4 border-b hover:bg-blue-100" *ngFor="let product of products | slice: 0:9">
-			<div class="w-6/12">
-			  <a href="" class="flex hover:text-primary">
-				
-				<h3 class="flex-auto">{{ product.nombreProducto }}</h3>
-			  </a>
-			</div>
-			<div class="w-2/12">{{product.marca}}</div>
-			<div class="w-2/12 text-center">${{product.precio}}</div>
-			<div class="w-2/12">
-			  {{product.stock}}
-			</div>
-			<div class="text-right">
-				<button class="action_icon__btn" mat-icon-button [matMenuTriggerFor]="menu">
-					<mat-icon>more_vert</mat-icon>
-				</button>
-				<mat-menu #menu="matMenu" xposition="before">
-					<button mat-menu-item [routerLink]="['/admindashboard/category/',product.idProducto]">
-						<mat-icon>dialpad</mat-icon>
-						<span>Asignar Categoría</span>
-					</button>
-					
-				</mat-menu>
-			</div>
-		  </div>
-		</div>
+		<h2 class="mb-3 font-medium">LISTA PRODUCTOS</h2>
 	  </div>
-	   
-	</div>
+    <mat-table #table [dataSource]="dataSource">
+      <ng-container matColumnDef="pruducto">
+        <mat-header-cell *matHeaderCellDef> Producto </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.nombreProducto}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="marca">
+        <mat-header-cell *matHeaderCellDef> Marca </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.marca}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="precio">
+        <mat-header-cell *matHeaderCellDef> Precio </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.precio}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="stock">
+        <mat-header-cell *matHeaderCellDef> Stock </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.stock}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="opciones">
+        <mat-header-cell *matHeaderCellDef> Opciones </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <button class="action_icon__btn" mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" xposition="before">
+              <button mat-menu-item [routerLink]="['/admindashboard/category/',element.idProducto]">
+                <mat-icon>dialpad</mat-icon>
+                <span>Asignar Categoría</span>
+              </button>
+            </mat-menu>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+
+
+		</div>
+      <mat-paginator [pageSizeOptions]="[3, 6, 12, 24]"></mat-paginator>
+	  </div>
+
+<div class="flex flex-col border ltLg:responsive">
+  <div class="flex items-center p-4 border-b hover:bg-blue-100">
+    <div class="w-6/12 font-medium"><div class="pl-16 ml-3">Producto</div></div>
+    <div class="w-2/12 font-medium">Marca</div>
+    <div class="w-2/12 font-medium text-center">Precio</div>
+    <div class="w-2/12 font-medium text-center">Stock</div>
+    <div class="w-1/12"></div>
   </div>
+  <div class="flex items-center p-4 border-b hover:bg-blue-100" *ngFor="let product of products | slice: 0:9">
+    <div class="w-6/12">
+      <a href="" class="flex hover:text-primary">
+        <h3 class="flex-auto">{{ product.nombreProducto }}</h3>
+      </a>
+    </div>
+    <div class="w-2/12">{{product.marca}}</div>
+    <div class="w-2/12 text-center">${{product.precio}}</div>
+    <div class="w-2/12">
+      {{product.stock}}
+    </div>
+  </div>
+</div>
+
