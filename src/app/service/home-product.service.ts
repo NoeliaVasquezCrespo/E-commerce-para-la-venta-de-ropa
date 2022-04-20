@@ -23,6 +23,7 @@ export class HomeProductService {
   }
   getListProductsByProviderId(idProvider:number):Observable<ProductDetails[]> {
     const url = `${this.baseUrl}products/details/${idProvider}`;
+    console.log(url);
     return this.http.get<ProductDetails[]>(url).pipe(
       map(
         response => response, error => error));

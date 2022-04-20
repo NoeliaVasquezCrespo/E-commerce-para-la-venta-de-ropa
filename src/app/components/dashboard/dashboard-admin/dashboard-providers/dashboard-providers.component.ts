@@ -19,8 +19,12 @@ import {product} from '../../../../models/Product';
 export class DashboardProvidersComponent implements OnInit {
   admins:admin[] = [];
   displayedColumns: string[] = ['id', 'nombre', 'apellido', 'correo', 'edad','opciones'];
+  displayedColumnsProducts:string[] = ['pruducto', 'marca', 'precio', 'stock'];
   dataSource = new MatTableDataSource();
   cad:string;
+
+  @ViewChild(MatPaginator) paginatorProducts!: MatPaginator;
+  dataSourceProducts!: MatTableDataSource<product>;
 
   @ViewChild(MatPaginator, {static:true}) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -84,11 +88,43 @@ export class DashboardProvidersComponent implements OnInit {
       }
     })
   }
+  htmlTable(data) {
+
+    return [
+      `<table class="table-inside">
+            <thead class=" border ltLg:responsive">
+                <tr>
+                    <th style="width: 380px" scope="col">Codigo</th>
+                    <th style="width: 280px" scope="col">Nombre</th>
+                    <th style="width: 280px" scope="col">Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                ${data.join('')}
+
+            </tbody>
+        </table>
+        <br>
+        <p>Se eliminaran estos productos, ¿Desea continuar?</p>`].join('');
+  }
   async warningProductsByProvider(id:number, respuesta: product[]){
+    console.log(respuesta);
+    let data=[];
+
+    for (let i = 0; i < respuesta.length; i++) {
+
+      data.push(`<tr>
+      <td style="width: 100px">${respuesta[i].codigoProducto}</td>
+      <td style="width: 100px">${respuesta[i].nombreProducto}</td>
+      <td style="width: 100px">${respuesta[i].precio}</td></tr>`)
+    }
+
+    console.log(this.htmlTable(data))
     Swal.fire({
       icon: 'warning',
       title: 'Productos encontrados',
-      text: 'El proveedor actualmente cuenta con productos registrados, para proseguir es necesario eliminar todos los productos, ¿Desea eliminar todos los productos?',
+      html: this.htmlTable(data),
       showConfirmButton: true,
       showCancelButton:true,
       confirmButtonText: 'Aceptar',
