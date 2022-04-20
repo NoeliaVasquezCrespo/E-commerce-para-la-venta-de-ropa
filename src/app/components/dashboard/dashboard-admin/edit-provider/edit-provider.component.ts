@@ -3,7 +3,7 @@ import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 import { admin } from '../../../../models/Admin'
 import axios from 'axios';
 import Swal from'sweetalert2';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AdminlistService} from '../../../../service/adminlist.service';
 import {CompanyService} from '../../../../service/company.service';
 import {company} from '../../../../models/Company';
@@ -19,6 +19,7 @@ export class EditProviderComponent implements OnInit {
 
   idParam:number;
   adminProvider:admin;
+  updateProviderAdmin:admin;
   companiesList:company[];
   newAdminForm:FormGroup;
 
@@ -26,7 +27,8 @@ export class EditProviderComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private adminListService:AdminlistService,
               private fb:FormBuilder,
-              private companyService:CompanyService) {
+              private companyService:CompanyService,
+              private router: Router,) {
     this.newAdminForm=this.fb.group({
       nombre: new FormControl('', Validators.required),
       apellido: new FormControl('', Validators.required),
@@ -48,11 +50,18 @@ export class EditProviderComponent implements OnInit {
       nombre: this.newAdminForm.value.nombre
     }
     await this.updateProvider(newProvider);
+
   }
   async updateProvider(provider:admin){
     let respuesta;
-    this.adminListService.updateProvider(this.idParam,provider).toPromise().then((response) => {
+    this.adminListService.updateProvider(this.idParam,provider).toPromise().then(async (response) => {
       respuesta = response;
+      console.log("LA RESPUESTA ES:")
+      console.log(respuesta)
+      console.log("FIN RESPUESTA")
+      if(respuesta!=null){
+          await this.successNotificationLogin();
+      }
     }).catch(e => console.error(e));
     return respuesta;
   }
@@ -91,6 +100,22 @@ export class EditProviderComponent implements OnInit {
       respuesta = response;
     }).catch(e => console.error(e));
     return respuesta;
+  }
+
+  successNotificationLogin(){
+    Swal.fire({
+      title: 'Exito',
+      text: 'Datos Actualizados correctamente',
+      icon: 'success',
+      showCancelButton: false,
+      confirmButtonText: 'Ok',
+    }).then(async (result) => {
+      if (result.value) {
+        console.log('admin dashboard')
+        await this.router.navigateByUrl('/admindashboard/providers');
+        //window.location.href="http://localhost:4200"
+      }
+    })
   }
 
 }
