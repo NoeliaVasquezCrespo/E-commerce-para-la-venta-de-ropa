@@ -32,7 +32,7 @@
 					<mat-icon>more_vert</mat-icon>
 				</button>
 				<mat-menu #menu="matMenu" xposition="before">
-					<button mat-menu-item [routerLink]="['/admindashboard/category']">
+					<button mat-menu-item [routerLink]="['/admindashboard/category/',product.idProducto]">
 						<mat-icon>dialpad</mat-icon>
 						<span>Asignar Categoría</span>
 					</button>

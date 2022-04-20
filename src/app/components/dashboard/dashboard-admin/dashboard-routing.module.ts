@@ -39,8 +39,7 @@ const DashboardChildrenRoute: Routes = [
     path: 'company',
     component: DashboardCompanyComponent
   },{
-
-    path: 'category',
+    path: 'category/:id',
     component: AddcategoryComponent 
   },
 

@@ -1,13 +1,13 @@
 
       <div class="login rounded-md mx-auto border p-4 sm:p-8 xl:p-20">
-        <form [formGroup]="newProductForm" >
+        <form [formGroup]="form" (ngSubmit)="submit()" >
           <h1 class="text-2xl font-bold">CATEGORIAS</h1>
          
           <div class="mb-4 mt-6">
             <label class="block text-gray-700 text-sm font-semibold mb-2" for="talla"> SELECCIONE LA CATEGORIA DEL PRODUCTO </label>
             
             <label [ngValue]="item.id" *ngFor="let item of listCategoria">
-                <input type="checkbox"  id="talla" />
+                <input type="checkbox"  id="talla" [value]="item.id" (change)="onCheckboxChange($event)"/>
                 {{item.categoria}} <br>
               </label>
               
@@ -16,7 +16,7 @@
           <div class="flex w-full mt-6">
             <button
               class="w-full hover:bg-grey-900 text-white text-sm py-2 px-4  rounded focus:outline-none focus:shadow-outline h-100"
-              type="submit"
+              type="submit" ng-click="agregar"
               style="background-color: #8a3c8a;"
             >
             Asignar categoria
