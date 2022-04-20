@@ -111,8 +111,8 @@
                 <button (click)="irADetalleProducto(product.idProducto)">{{ product.nombreProducto }}</button>
               </h2>
               <div class="flex justify-between mt-5">
-                <div class="ll-product__price-label">Prices:</div>
-                <div class="ll-product__price text-accent font-bold">€{{ product.precio }}</div>
+                <div class="ll-product__price-label">Precio:</div>
+                <div class="ll-product__price text-accent font-bold">Bs. {{ product.precio }}</div>
               </div>
             </div>
           </mat-card-content>
@@ -157,8 +157,8 @@
                   <a [routerLink]="['/products', product.idProducto]">{{ product.marca }}</a>
                 </h2>
                 <div class="flex justify-between mt-5">
-                  <div class="ll-product__price-label">Prices:</div>
-                  <div class="ll-product__price text-accent font-bold">€{{ product.precio }}</div>
+                  <div class="ll-product__price-label">Precio:</div>
+                  <div class="ll-product__price text-accent font-bold">Bs. {{ product.precio }}</div>
                 </div>
               </div>
             </mat-card-content>

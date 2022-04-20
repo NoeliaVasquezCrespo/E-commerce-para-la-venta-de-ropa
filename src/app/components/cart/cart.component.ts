@@ -9,7 +9,7 @@ import { CartService } from 'src/app/service/cart.service';
 export class CartComponent implements OnInit {
   public products : any = [];
   constructor(private cartService : CartService) { }
-
+  public cantidad: number;
   ngOnInit(): void {
     this.cartService.getProducts()
     .subscribe(res=>{
@@ -31,4 +31,10 @@ export class CartComponent implements OnInit {
     return total;
   }
 
+  public totalCantidad(){
+    let total = 0;
+    let p;
+    this.products.forEach((p: { precio: number; }) => total = p.precio*this.cantidad);
+
+  }
 }

@@ -6,35 +6,35 @@
                 <table class="table table-responsive">
                     <thead>
                         <tr>
-                            <th>Id</th>
-                            <th>Product Name</th>
-                            <th>Product Image</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
+                            <th>Nº</th>
+                            <th>Nombre del producto</th>
+                            <th>Imagen del Producto</th>
+                            <th>Descripción</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
                             <th>Total</th>
-                            <th>Action</th>
+                            <th>Acción</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of products; let i = index">
                             <td>{{i+1}}</td>
                             <td>{{item.nombreProducto}}</td>
-                            <td><img style="width: 120px;" src="{{item.imagen}}" alt=""></td>
-                            <td style="width: 25%;">{{item.descripcion}}</td>
-                            <th style="width: 12%;">{{item.precio}}</th>
-                            <td style="width: 12%;">{{item.quantity}}</td>
-                            <td style="width: 12%;">{{item.total}}</td>
+                            <td><img style="width: 80px;" src="{{item?.image}}" alt=""></td>
+                            <td style="width: 25%;">{{item.description}}</td>
+                            <th style="width: 12%;">Bs. {{item.precio}}</th>
+                            <td style="width: 12%;"><input  id="cantidad" type="number" min="1" style="width : 60px;"/></td>
+                            <td style="width: 12%;"></td>
                             <td>
                                 <button (click)="removeItem(item)" class="btn btn-danger"><mat-icon>delete_sweep</mat-icon></button>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="4"></td>
-                            <td><button (click)="emptycart()" class="btn btn-danger">Empty Cart</button></td>
-                            <td><button routerLink="/products" class="btn btn-primary">Shop More</button></td>
-                            <td><button class="btn btn-success">Checkout</button></td>
-                            <td><strong>Grand Total : ${{total()}}</strong></td>
+                            <td><button (click)="emptycart()" class="btn btn-danger">Vaciar Carrito</button></td>
+                            <td><button routerLink="/products" class="btn btn-primary">Ver productos</button></td>
+                            <td><button class="btn btn-success">Confirmar Productos</button></td>
+                            <td><h2>Total a pagar : Bs. {{total()}}</h2></td>
                         </tr>
                     </tbody>
                 </table>
@@ -42,6 +42,7 @@
         </div>
     </div>
 </ng-container>
+
 
 <ng-container *ngIf="products.length ==0">
     <div class="container">
