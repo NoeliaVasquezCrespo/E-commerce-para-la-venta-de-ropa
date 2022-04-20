@@ -81,7 +81,7 @@ export class AddcategoryComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         console.log('admin dashboard')
-        window.location.href="http://localhost:4200/admindashboard"
+        window.location.href="http://localhost:4200/admindashboard/products"
       }
     })
   } 
