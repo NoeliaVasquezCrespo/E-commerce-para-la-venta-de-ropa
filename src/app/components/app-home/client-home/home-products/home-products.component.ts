@@ -40,10 +40,12 @@ export class HomeProductsComponent implements OnInit {
     for(let i=0;i<this.products.length;i++){
 
       let cad=await this.addImage(this.products[i].idProducto)
-      if(cad!=null){
+      if(cad!=''){
         let arrCad:string[]=cad.split("/");
         this.products[i].image=`http://localhost:8080/v2/products/image/${arrCad[0]}/${arrCad[1]}`
         console.log("la cadena es: "+this.products[i].image);
+      }else{
+        this.products[i].image=`https://cdn.pixabay.com/photo/2016/09/28/02/14/user-1699635_640.png`
       }
     }
     console.log(this.products);
@@ -54,7 +56,10 @@ export class HomeProductsComponent implements OnInit {
       console.log("LA RESPUESTA ES: ");
         console.log(response.foto);
         cadena=response.foto
-    }).catch(e => console.error(e));
+    }).catch(e =>{
+      console.error(e);
+      cadena='';
+    } );
 
     return cadena;
   }

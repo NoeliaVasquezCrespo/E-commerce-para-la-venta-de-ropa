@@ -46,7 +46,7 @@ export class ProductListComponent implements OnInit {
         this.getAllProductsData();
         this.isLoaded = true
       }, 1000)
-      
+
       this.userForm = this.fb.group({
         pruductName: ['', Validators.required],
         productMarca: [''],
@@ -101,10 +101,13 @@ export class ProductListComponent implements OnInit {
     for(let i=0;i<this.products.length;i++){
 
       let cad=await this.addImage(this.products[i].idProducto)
-      let arrCad:string[]=cad.split("/");
-      this.products[i].image=`http://localhost:8080/v2/products/image/${arrCad[0]}/${arrCad[1]}`
-
-      console.log("la cadena es: "+this.products[i].image);
+      if(cad!=''){
+        let arrCad:string[]=cad.split("/");
+        this.products[i].image=`http://localhost:8080/v2/products/image/${arrCad[0]}/${arrCad[1]}`
+        console.log("la cadena es: "+this.products[i].image);
+      }else{
+        this.products[i].image=`https://cdn.pixabay.com/photo/2016/09/28/02/14/user-1699635_640.png`
+      }
     }
     console.log(this.products);
   }
@@ -112,9 +115,12 @@ export class ProductListComponent implements OnInit {
     let cadena;
     await this.homeProductService.getFirstImageByProductId(idProducto).toPromise().then((response) => {
       console.log("LA RESPUESTA ES: ");
-        console.log(response.foto);
-        cadena=response.foto
-    }).catch(e => console.error(e));
+      console.log(response.foto);
+      cadena=response.foto
+    }).catch(e =>{
+      console.error(e);
+      cadena='';
+    } );
 
     return cadena;
   }
