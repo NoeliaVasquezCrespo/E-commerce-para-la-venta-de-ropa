@@ -7,6 +7,10 @@ import {MatPaginator} from '@angular/material/paginator';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 
 import Swal from 'sweetalert2';
+import {ProductlistService} from '../../../../service/productlist.service';
+import {ProductDetails} from '../../../../models/ProductDetails';
+import {Router} from '@angular/router';
+import {product} from '../../../../models/Product';
 @Component({
   selector: 'app-dashboard-providers',
   templateUrl: './dashboard-providers.component.html',
@@ -14,10 +18,9 @@ import Swal from 'sweetalert2';
 })
 export class DashboardProvidersComponent implements OnInit {
   admins:admin[] = [];
-  displayedColumns: string[] = ['id', 'nombre', 'apellido', 'correo', 'edad'];
+  displayedColumns: string[] = ['id', 'nombre', 'apellido', 'correo', 'edad','opciones'];
   dataSource = new MatTableDataSource();
   cad:string;
-  router: any;
 
   @ViewChild(MatPaginator, {static:true}) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -27,12 +30,13 @@ export class DashboardProvidersComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  constructor(private _liveAnnouncer: LiveAnnouncer, private adminlistService:AdminlistService) {}
+  constructor(private _liveAnnouncer: LiveAnnouncer, private adminlistService:AdminlistService,
+              private productlistService:ProductlistService,private router : Router) {}
 
-  async ngOnInit():Promise<void>{ 
+  async ngOnInit():Promise<void>{
     this.admins = await this.getAdminData();
     this.dataSource.data = this.admins;
-    
+
   }
 
   async getAdminData(){
@@ -50,7 +54,7 @@ export class DashboardProvidersComponent implements OnInit {
   }
 
 
-  successNotificationDelete(){
+  async successNotificationDelete(){
     Swal.fire({
       title: 'Eliminar Proveedor',
       text: '¿Está seguro de eliminar el proveedor?',
@@ -58,29 +62,52 @@ export class DashboardProvidersComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: 'Aceptar',
       cancelButtonText: "Cancelar",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.value) {
         console.log('Proveedor eliminado correctamente')
-        this.successNotificationDeleteCorrectly()
+        await this.successNotificationDeleteCorrectly()
       }
     })
-  } 
+  }
 
-  successNotificationDeleteCorrectly(){
+  async successNotificationDeleteCorrectly(){
+    let self = this
     Swal.fire({
       icon: 'success',
       title: 'Proveedor Eliminado correctamente',
       showConfirmButton: true,
       confirmButtonText: 'Aceptar',
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.value) {
         console.log('admin home')
-        this.router.navigateByUrl('/adminhome');
+        await self.router.navigateByUrl('/admindashboard');
       }
     })
   }
+  async warningProductsByProvider(id:number, respuesta: product[]){
+    Swal.fire({
+      icon: 'warning',
+      title: 'Productos encontrados',
+      text: 'El proveedor actualmente cuenta con productos registrados, para proseguir es necesario eliminar todos los productos, ¿Desea eliminar todos los productos?',
+      showConfirmButton: true,
+      showCancelButton:true,
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar',
+    }).then(async(result) => {
+      if (result.value) {
+        console.log("LA RESPUESTA ES");
+        console.log(respuesta);
+        for(let i=0;i<respuesta.length;i++){
+          await this.deleteProductById(respuesta[i].id);
+        }
+        await this.deleteProviderById(id);
+        console.log("SE ELIMINO AL PROVEEDOR")
+        await this.successNotificationDeleteCorrectly();
+      }
+    });
+  }
 
-  deleteProviderNotification(){
+  async deleteProviderNotification(id:number){
     Swal.fire({
       icon: 'warning',
       title: '¿Está seguro de eliminar al proveedor?',
@@ -88,10 +115,19 @@ export class DashboardProvidersComponent implements OnInit {
       showCancelButton:true,
       confirmButtonText: 'Aceptar',
       cancelButtonText: 'Cancelar',
-    }).then((result) => {
+    }).then(async(result) => {
       if (result.value) {
-        console.log('admin home')
-        this.router.navigateByUrl('/adminhome');
+        console.log('SE  ELIMINARA PROVEEDOR')
+        console.log(`ID DE PROVEEDOR: ${id}`)
+        let respuesta = await this.getProductsByAdminId(id);
+        if(respuesta.length!=0){
+          console.log(respuesta);
+          await this.warningProductsByProvider(id,respuesta);
+        }else{
+          await this.deleteProviderById(id);
+          console.log("SE ELIMINO AL PROVEEDOR")
+          await this.successNotificationDeleteCorrectly();
+        }
       }
     })
   }
@@ -106,5 +142,22 @@ export class DashboardProvidersComponent implements OnInit {
     } else {
       this._liveAnnouncer.announce('Sorting cleared');
     }
+  }
+  async deleteProviderById(id:number){
+    this.adminlistService.deleteProvider(id).toPromise().then((response) => {
+    }).catch(e => console.error(e));
+  }
+  async deleteProductById(id:number){
+    this.adminlistService.deleteProduct(id).toPromise().then((response) => {
+    }).catch(e => console.error(e));
+  }
+  async getProductsByAdminId(id:number){
+    let respuesta: product[];
+    console.log("PRIMER METODO");
+    await this.productlistService.getListProductsByProviderId(id).toPromise().then((response) => {
+      respuesta = response;
+    }).catch(e => console.error(e));
+
+    return respuesta;
   }
 }
