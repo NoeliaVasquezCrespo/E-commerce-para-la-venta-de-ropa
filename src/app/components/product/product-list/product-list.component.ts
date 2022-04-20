@@ -10,8 +10,12 @@ import { HomeProductService } from 'src/app/service/home-product.service';
 import {Observable} from 'rxjs';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
+
+import { CartService } from 'src/app/service/cart.service';
+
 import Swal from'sweetalert2';
 import {Router} from '@angular/router';
+
 @Component({
   selector: 'll-product-list',
   templateUrl: './product-list.component.html',
@@ -27,18 +31,22 @@ export class ProductListComponent implements OnInit {
   listTallas:Size[]=[{id:0, nombreTalla:"TALLA"}];
   listColores:Color[]=[{id:0, descripcion:"COLOR"}];
   userForm:FormGroup;
-  constructor(private productListService:ProductListService, private fb:FormBuilder,
+  public productList : any ;
+  public filterCategory : any;
+  constructor(private productListService:ProductListService,
+    private fb:FormBuilder,
     private homeProductService:HomeProductService,
+    private cartService : CartService,
     private router: Router,) {
-    }
 
+    }
   async ngOnInit(): Promise<void> {
      setTimeout(() => {
        //this.products = productsDB.Product;
         this.getAllProductsData();
         this.isLoaded = true
       }, 1000)
-
+      
       this.userForm = this.fb.group({
         pruductName: ['', Validators.required],
         productMarca: [''],
@@ -161,6 +169,9 @@ export class ProductListComponent implements OnInit {
     console.log("ID PRODUCTO ES");
     console.log(idProducto);
     await this.router.navigateByUrl('/products/'+idProducto);
-    await this.router.navigateByUrl('/products/'+idProducto);
+  }
+  async addtocart(product: any){
+    console.log("Agregando al carrito");
+    await this.cartService.addtoCart(product);
   }
 }

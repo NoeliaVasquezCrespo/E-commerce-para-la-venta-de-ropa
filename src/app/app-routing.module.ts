@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import { BaseLayoutComponent } from './shared/components/layouts/base-layout/base-layout.component';
-
+import { CartComponent } from './components/cart/cart.component';
 const baseLayoutRouting: Routes = [
     
   {
@@ -13,6 +13,7 @@ const baseLayoutRouting: Routes = [
     path: 'products',
     loadChildren: () => import('./components/product/product.module').then(m => m.ProductModule)
   },
+  
  
   
 ];
@@ -58,6 +59,7 @@ const routes: Routes = [
     path: 'providerdashboard',
     loadChildren: () => import('./components/dashboard/dashboard-provider/dashboard.module').then(m => m.DashboardModule)
   },
+  { path: 'cart', component: CartComponent },
 
 
 

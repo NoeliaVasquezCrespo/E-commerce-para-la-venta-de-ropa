@@ -16,6 +16,7 @@ import { DashboardInactiveAdminComponent } from './dashboard-inactive-admin/dash
 import { AddcategoryComponent } from './addcategory/addcategory.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { EditProviderComponent } from './edit-provider/edit-provider.component';
 
   @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     DashboardProvidersComponent,
     DashboardInactiveProvidersComponent,
     DashboardInactiveAdminComponent,
-    AddcategoryComponent
+    AddcategoryComponent,
+    EditProviderComponent
   ],
   imports: [CommonModule, DashboardRoutingModule, SharedModule, MatMenuModule,MatExpansionModule,MaterialModule,FormsModule, ReactiveFormsModule, MatCheckboxModule]
 

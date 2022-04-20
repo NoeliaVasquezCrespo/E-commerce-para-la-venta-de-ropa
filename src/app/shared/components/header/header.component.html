@@ -25,14 +25,15 @@
           <a [routerLink]="['/authclient/signup']" mat-raised-button color="accent" class="text-lg font-bold py-2 px-5 ml-2">Registro</a>
           <div class="navbar-nav ml-auto">
           <mat-toolbar-row>
+          
             <button mat-button [matMenuTriggerFor]="menu">
-              <input type="button"  matBadgeOverlap="false"
-                    matBadgePosition="below after"  class="font-bold">Carrito<img src="https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/512x512/shopping_cart.png" width="30" height="30"/>      
+              <span style="margin-right: 15px; " matBadge="{{totalItem}}" matBadgeOverlap="false"
+              matBadgePosition="below after" matBadgeColor="accent" >Carrito <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/512x512/shopping_cart.png" width="30" height="30"/></span>      
             </button>
             <mat-menu #menu="matMenu">
-             
+              <button mat-menu-item *ngFor="let item of products;" [routerLink]="['/products', item.idProducto]">{{item.nombreProducto}} - {{item.precio}} Bs.</button>
               <button mat-menu-item>
-                <strong>Total: {{total() | currency}}</strong>
+                <strong>Total: Bs. {{total()}}</strong>
               </button>
               <a mat-menu-item routerLink="/cart">
                 <mat-icon>shopping_cart</mat-icon>
@@ -44,4 +45,6 @@
       </div>
     </div>
   </header>
+
+
   

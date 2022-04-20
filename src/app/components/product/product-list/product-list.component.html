@@ -111,17 +111,16 @@
                 <button (click)="irADetalleProducto(product.idProducto)">{{ product.nombreProducto }}</button>
               </h2>
               <div class="flex justify-between mt-5">
-                <div class="ll-product__price-label">Prices:</div>
-                <div class="ll-product__price text-accent font-bold">€{{ product.precio }}</div>
+                <div class="ll-product__price-label">Precio:</div>
+                <div class="ll-product__price text-accent font-bold">Bs. {{ product.precio }}</div>
               </div>
             </div>
           </mat-card-content>
           <mat-card-actions class="ll-product__action flex justify-between">
             <div class="flex-1 text-center flex items-center justify-center">
-              {{ product.tallas }}
-            </div>
+              <button class="btn" (click)=addtocart(product)><img src="https://indyme.com/wp-content/uploads/2020/11/shopping-cart-icon.png" height ="30px" width="30px" /></button>
+            </div> 
             <div class="flex-1 text-center">
-
               <button [routerLink]="['/products', product.idProducto]" mat-raised-button color="warn" class="px-4">Información del producto</button>
             </div>
           </mat-card-actions>
@@ -158,8 +157,8 @@
                   <a [routerLink]="['/products', product.idProducto]">{{ product.marca }}</a>
                 </h2>
                 <div class="flex justify-between mt-5">
-                  <div class="ll-product__price-label">Prices:</div>
-                  <div class="ll-product__price text-accent font-bold">€{{ product.precio }}</div>
+                  <div class="ll-product__price-label">Precio:</div>
+                  <div class="ll-product__price text-accent font-bold">Bs. {{ product.precio }}</div>
                 </div>
               </div>
             </mat-card-content>

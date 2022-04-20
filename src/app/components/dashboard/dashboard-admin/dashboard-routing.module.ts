@@ -9,6 +9,7 @@ import { ValidarTokenGuard } from '../../auth-session/auth-admin/guard/validar-t
 import { DashboardInactiveProvidersComponent } from './dashboard-inactive-providers/dashboard-inactive-providers.component';
 import { DashboardInactiveAdminComponent } from './dashboard-inactive-admin/dashboard-inactive-admin.component';
 import { AddcategoryComponent } from './addcategory/addcategory.component'
+import { EditProviderComponent } from './edit-provider/edit-provider.component';
 
 const DashboardChildrenRoute: Routes = [
   {
@@ -38,10 +39,18 @@ const DashboardChildrenRoute: Routes = [
   {
     path: 'company',
     component: DashboardCompanyComponent
+<<<<<<< HEAD
   },{
     path: 'category/:id',
+=======
+  },
+  {
+    path: 'category',
+>>>>>>> 7f0d4edc87b2603894dcd5a11c6b77bb9a2ee53c
     component: AddcategoryComponent 
   },
+  
+
 
 ];
 
@@ -50,7 +59,11 @@ const routes: Routes = [
     path: '',
     component: DashboardLayoutComponent,
     children: DashboardChildrenRoute
-  }
+  },
+  {
+    path: 'edit-provider',
+    component: EditProviderComponent 
+  },
 ];
 
 @NgModule({
