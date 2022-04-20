@@ -6,7 +6,7 @@
       </div>
       <div class="login__content flex flex-col justify-center bg-accent" style="background-color: #A4A9A7;">
         <div class="login w-full max-w-xl rounded-md mx-auto border p-4 sm:p-8 xl:p-20">
-          <form [formGroup]="newAdminForm" (ngSubmit)="editProvider(newAdminForm.value)">
+          <form [formGroup]="newAdminForm" (ngSubmit)="editProvider()">
             <h1 class="text-2xl font-bold">EDITAR INFORMACIÓN - PROVEEDOR</h1>
             <div class="mb-4 mt-6">
               <label class="block text-gray-700 text-sm font-semibold mb-2" for="nombre"> Nombre </label>
@@ -27,7 +27,7 @@
                 placeholder="Apellido"
                 formControlName="apellido"
               />
-            </div>  
+            </div>
             <div class="mb-4 mt-6">
               <label class="block text-gray-700 text-sm font-semibold mb-2" for="edad"> Edad </label>
               <input
@@ -38,32 +38,33 @@
                 formControlName="edad"
                />
             </div>
-                  
+
             <div class="mb-4 mt-6">
               <label class="block text-gray-700 text-sm font-semibold mb-2" for="email"> Correo Electrónico </label>
               <input
                 class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
                 id="email"
+                disabled
                 type="text"
                 placeholder="Email "
                 formControlName="correoElectronico"
               />
-            </div>  
+            </div>
             <div class="mb-6 mt-6">
               <label class="block text-gray-700 text-sm font-semibold mb-2" for="empresa"> Empresa </label>
-              <select class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10" 
+              <select class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
                   id="browsers"
                   formControlName="empresaId">
-                  <option value="1" type="number">Empresa 1</option>
-                  <option value="2" type="number">Empresa 2</option>
+                <option value="" selected>Seleccione una opcion</option>
+                <option [value]="item.id" *ngFor="let item of companiesList">{{item.nombre}}</option>
               </select>
             </div>
-            
+
             <div class="flex w-full mt-6">
               <button
                 class="w-full bg-gray-800 hover:bg-grey-900 text-white text-sm py-2 px-4 font-semibold rounded focus:outline-none focus:shadow-outline h-10"
                 type="submit"
-                
+
               >
                 Actualizar Información
               </button>
@@ -72,5 +73,4 @@
         </div>
       </div>
     </div>
-  
-  
+

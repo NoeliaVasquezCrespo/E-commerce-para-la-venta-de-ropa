@@ -53,8 +53,13 @@
                   <mat-icon>delete</mat-icon>
                   <span>Eliminar proveedor</span>
                 </button>
-
+                <button mat-menu-item (click)="irAInterfazEditar(element?.id)">
+                  <mat-icon>update</mat-icon>
+                  <span>Editar informacion proveedor</span>
+                </button>
               </mat-menu>
+
+
             </div>
           </td>
         </ng-container>

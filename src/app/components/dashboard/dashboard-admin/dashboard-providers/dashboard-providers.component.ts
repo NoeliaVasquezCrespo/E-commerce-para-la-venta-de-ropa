@@ -196,4 +196,9 @@ export class DashboardProvidersComponent implements OnInit {
 
     return respuesta;
   }
+
+  async irAInterfazEditar(id: number) {
+    await this.router.navigateByUrl(`/admindashboard/edit-provider/${id}`);
+
+  }
 }
