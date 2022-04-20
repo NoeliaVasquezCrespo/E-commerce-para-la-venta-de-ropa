@@ -31,7 +31,8 @@ export class ProductListComponent implements OnInit {
   listTallas:Size[]=[{id:0, nombreTalla:"TALLA"}];
   listColores:Color[]=[{id:0, descripcion:"COLOR"}];
   userForm:FormGroup;
-
+  public productList : any ;
+  public filterCategory : any;
   constructor(private productListService:ProductListService,
     private fb:FormBuilder,
     private homeProductService:HomeProductService,
@@ -45,7 +46,7 @@ export class ProductListComponent implements OnInit {
         this.getAllProductsData();
         this.isLoaded = true
       }, 1000)
-
+      
       this.userForm = this.fb.group({
         pruductName: ['', Validators.required],
         productMarca: [''],
@@ -62,7 +63,7 @@ export class ProductListComponent implements OnInit {
   }
 
   getAllProductsData(){
-    var api = 'http://localhost:8080/products';
+    var api = 'http://localhost:8080/v2/products';
     axios.get(api).then(function (result){
       console.log(result);
     })
@@ -101,7 +102,7 @@ export class ProductListComponent implements OnInit {
 
       let cad=await this.addImage(this.products[i].idProducto)
       let arrCad:string[]=cad.split("/");
-      this.products[i].image=`http://localhost:8080/products/image/${arrCad[0]}/${arrCad[1]}`
+      this.products[i].image=`http://localhost:8080/v2/products/image/${arrCad[0]}/${arrCad[1]}`
 
       console.log("la cadena es: "+this.products[i].image);
     }
@@ -169,7 +170,8 @@ export class ProductListComponent implements OnInit {
     console.log(idProducto);
     await this.router.navigateByUrl('/products/'+idProducto);
   }
-  addtocart(product: any){
-    this.cartService.addtoCart(product);
+  async addtocart(product: any){
+    console.log("Agregando al carrito");
+    await this.cartService.addtoCart(product);
   }
 }

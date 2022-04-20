@@ -14,8 +14,8 @@ export class HeaderComponent implements OnInit {
   menuList = [] as any;
   isLessThenLargeDevice: boolean;
   constructor(private breakpointObserver: BreakpointObserver, private cartService : CartService) {}
-  public productos = [];
-
+  public products = [];
+  public totalItem : number = 0;
   ngOnInit(): void {
     this.menuList = staticMenuList;
     this.breakpointObserver.observe(['(max-width: 1199px)']).subscribe(({ matches }) => {
@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit {
     this.cartService.getProducts()
     .subscribe(res=>{
       this.totalItem = res.length;
+      this.products = res;
     })
   }
 
@@ -33,14 +34,12 @@ export class HeaderComponent implements OnInit {
   }
 
   public total() {
-  
-    let total = 0;
-    this.productos.forEach(p => total += p.precio);
+  let total = 0;
+    let p;
+    this.products.forEach((p: { precio: number; }) => total += p.precio);
     return total;
   }
 
-  public totalItem : number = 0;
-  public searchTerm !: string;
   
 
 }

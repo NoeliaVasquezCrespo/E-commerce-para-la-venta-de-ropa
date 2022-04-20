@@ -31,9 +31,9 @@
               matBadgePosition="below after" matBadgeColor="accent" >Carrito <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/512x512/shopping_cart.png" width="30" height="30"/></span>      
             </button>
             <mat-menu #menu="matMenu">
-             
+              <button mat-menu-item *ngFor="let item of products;">{{item.nombreProducto}}  {{item.precio}}</button>
               <button mat-menu-item>
-                <strong>Total: {{total() | currency}}</strong>
+                <strong>Total: Bs. {{total()}}</strong>
               </button>
               <a mat-menu-item routerLink="/cart">
                 <mat-icon>shopping_cart</mat-icon>
