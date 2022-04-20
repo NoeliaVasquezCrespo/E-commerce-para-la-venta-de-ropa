@@ -29,7 +29,7 @@ export class SignupComponent implements OnInit {
 
   addNewAdmin(data: admin){
     if(this.newAdminForm.valid){
-      var api = 'http://localhost:8080/administrators';
+      var api = 'http://localhost:8080/v2/administrators';
       data.status=1;
       data.tipoAdministradorId=1;
       console.log('New Admmin: ', data);

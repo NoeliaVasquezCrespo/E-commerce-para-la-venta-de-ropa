@@ -29,7 +29,7 @@ export class SignupComponent implements OnInit {
 
   addNewAdmin(data: user){
     if(this.newUserForm.valid){
-    var api = 'http://localhost:8080/users';
+    var api = 'http://localhost:8080/v2/users';
     data.status=1;
     console.log('Nuevo Usuario: ', data);
     if(this.newUserForm.value.password ==  this.newUserForm.value.confirmpassword) {

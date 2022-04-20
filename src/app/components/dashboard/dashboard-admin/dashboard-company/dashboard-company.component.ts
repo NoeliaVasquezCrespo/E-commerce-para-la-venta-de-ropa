@@ -23,7 +23,7 @@ export class DashboardCompanyComponent implements OnInit {
   }
 
   addNewCompany(data: company){
-    var api = 'http://localhost:8080/company';
+    var api = 'http://localhost:8080/v2/company';
     console.log('New Company: ', data);
     axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('token');
     axios.post(api,data).then(function (result){

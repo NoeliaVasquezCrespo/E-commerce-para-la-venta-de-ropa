@@ -55,7 +55,7 @@ export class ColorSizeRegisterComponent implements OnInit {
     if(this.newProductForm.valid){
       let self = this
       console.log("EJECUTANDO METODO PARA AGREGAR PRODUCTO");
-      var api = 'http://localhost:8080/products';
+      var api = 'http://localhost:8080/v2/products';
       
       data.administradorId=parseInt(id);
       data.status=1;

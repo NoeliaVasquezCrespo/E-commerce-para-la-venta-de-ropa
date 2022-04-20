@@ -34,7 +34,7 @@ export class ProductDetailsComponent implements OnInit {
     console.log("ACCESO A METODO DE IMAGEN")
     let cad=await this.addImage(this.productDetail.idProducto)
     let arrCad:string[]=cad.split("/");
-    this.productDetail.image=`http://localhost:8080/products/image/${arrCad[0]}/${arrCad[1]}`
+    this.productDetail.image=`http://localhost:8080/v2/products/image/${arrCad[0]}/${arrCad[1]}`
     console.log("la cadena es: "+this.productDetail.image);
     console.log(this.productDetail);
   }

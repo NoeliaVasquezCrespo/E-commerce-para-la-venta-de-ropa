@@ -54,7 +54,7 @@ export class ProductListComponent implements OnInit {
   }
 
   getAllProductsData(){
-    var api = 'http://localhost:8080/products';
+    var api = 'http://localhost:8080/v2/products';
     axios.get(api).then(function (result){
       console.log(result);
     })
@@ -97,7 +97,7 @@ export class ProductListComponent implements OnInit {
 
       let cad=await this.addImage(this.products[i].idProducto)
       let arrCad:string[]=cad.split("/");
-      this.products[i].image=`http://localhost:8080/products/image/${arrCad[0]}/${arrCad[1]}`
+      this.products[i].image=`http://localhost:8080/v2/products/image/${arrCad[0]}/${arrCad[1]}`
 
       console.log("la cadena es: "+this.products[i].image);
     }
