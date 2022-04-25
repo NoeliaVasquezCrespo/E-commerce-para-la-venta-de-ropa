@@ -11,15 +11,17 @@ import { JwtResponse } from '../models/JwtResponse';
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl:string = environment.baseUrl; 
-
+  private baseUrl:string = environment.baseUrl;
+  /****
+  private status:boolean=false;
+   */
   constructor(private http:HttpClient) { }
-  
+
   login(auth:AuthRequest):Observable<JwtResponse>{
     console.log("ACCEDIENDO A SERVICIO");
     const url = `${this.baseUrl}administrador/login`;
     console.log(url);
-     
+
     return this.http.post<JwtResponse>(url,auth);
 
   }
@@ -28,7 +30,7 @@ export class AuthService {
     console.log("ACCEDIENDO A SERVICIO");
     const url = `${this.baseUrl}administrador/login/proveedor`;
     console.log(url);
-     
+
     return this.http.post<JwtResponse>(url,auth);
 
   }
@@ -37,7 +39,7 @@ export class AuthService {
     console.log("ACCEDIENDO A SERVICIO");
     const url = `${this.baseUrl}login/user`;
     console.log(url);
-     
+
     return this.http.post<JwtResponse>(url,auth);
 
   }
@@ -50,7 +52,7 @@ export class AuthService {
       }),
       catchError(err =>of(false))
     );
-  
+
   }
 
   verificarSesion(id:number, jwt:string):Observable<AdministradorRequest>{
@@ -61,5 +63,5 @@ export class AuthService {
     console.log(url);
     return this.http.get<AdministradorRequest>(url, { headers: reqHeader });
   }
-  
+
 }
