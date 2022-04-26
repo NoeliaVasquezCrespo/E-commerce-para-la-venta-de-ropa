@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import { BaseLayoutComponent } from './shared/components/layouts/base-layout/base-layout.component';
 import { CartComponent } from './components/cart/cart.component';
+import { PaymentComponent } from './components/payment/payment.component';
 const baseLayoutRouting: Routes = [
     
   {
@@ -60,7 +61,7 @@ const routes: Routes = [
     loadChildren: () => import('./components/dashboard/dashboard-provider/dashboard.module').then(m => m.DashboardModule)
   },
   { path: 'cart', component: CartComponent },
-
+  { path: 'payment', component: PaymentComponent},
 
 
 

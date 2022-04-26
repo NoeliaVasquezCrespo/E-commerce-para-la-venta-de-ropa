@@ -33,7 +33,7 @@
                             <td colspan="4"></td>
                             <td><button (click)="emptycart()" class="btn btn-danger">Vaciar Carrito</button></td>
                             <td><button routerLink="/products" class="btn btn-primary">Ver productos</button></td>
-                            <td><button class="btn btn-success">Confirmar Productos</button></td>
+                            <td><button (click)="confirmListProductsNotification()" class="btn btn-success">Confirmar Productos</button></td>
                             <td><h2>Total a pagar : Bs. {{total()}}</h2></td>
                         </tr>
                     </tbody>

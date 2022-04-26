@@ -10,10 +10,12 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { SharedModule } from './shared/shared.module';
 
 import { CartComponent } from './components/cart/cart.component';
+import { PaymentComponent } from './components/payment/payment.component';
 @NgModule({
   declarations: [
     AppComponent,
-    CartComponent
+    CartComponent,
+    PaymentComponent
 
     
   ],
