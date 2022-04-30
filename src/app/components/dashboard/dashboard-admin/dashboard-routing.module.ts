@@ -8,6 +8,7 @@ import { DashboardCompanyComponent } from './dashboard-company/dashboard-company
 import { ValidarTokenGuard } from '../../auth-session/auth-admin/guard/validar-token.guard';
 import { DashboardInactiveProvidersComponent } from './dashboard-inactive-providers/dashboard-inactive-providers.component';
 import { DashboardInactiveAdminComponent } from './dashboard-inactive-admin/dashboard-inactive-admin.component';
+import { DashboardOrdersComponent } from './dashboard-orders/dashboard-orders.component';
 import { AddcategoryComponent } from './addcategory/addcategory.component'
 import { EditProviderComponent } from './edit-provider/edit-provider.component';
 
@@ -47,6 +48,10 @@ const DashboardChildrenRoute: Routes = [
   {
     path: 'category',
     component: AddcategoryComponent 
+  },
+  {
+    path: 'orders',
+    component: DashboardOrdersComponent 
   }
 
 
