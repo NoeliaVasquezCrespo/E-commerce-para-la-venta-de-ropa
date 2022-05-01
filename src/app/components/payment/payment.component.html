@@ -8,141 +8,194 @@
   <link rel="stylesheet" href="payment.component.scss">
 </head>
 
-<div class="container-fluid">
+<ll-header></ll-header>
 
-  <div class="container">
-    <!-- Title -->
-    <div class="d-flex justify-content-between align-items-center py-3">
-      <h2 class="h5 mb-0"><a href="#" class="text-muted"></a> Order #16123222</h2>
+<section class="py-5">
+  <div class="container px-4 px-lg-5 my-5">
+  <div class="row">
+    <div class="col-md-4 order-md-2 mb-4">
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted">Your cart</span>
+        <span class="badge badge-secondary badge-pill">3</span>
+      </h4>
+      <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">Product name</h6>
+            <small class="text-muted">Brief description</small>
+          </div>
+          <span class="text-muted">$12</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">Second product</h6>
+            <small class="text-muted">Brief description</small>
+          </div>
+          <span class="text-muted">$8</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">Third item</h6>
+            <small class="text-muted">Brief description</small>
+          </div>
+          <span class="text-muted">$5</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between bg-light">
+          <div class="text-success">
+            <h6 class="my-0">Promo code</h6>
+            <small>EXAMPLECODE</small>
+          </div>
+          <span class="text-success">-$5</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <span>Total (USD)</span>
+          <strong>$20</strong>
+        </li>
+      </ul>
     </div>
-  
-    <!-- Main content -->
-    <div class="row">
-      <div class="col-lg-8">
-        <!-- Details -->
-        <div class="card mb-4">
-          <div class="card-body">
-            <div class="mb-3 d-flex justify-content-between">
-              <div>
-                <span class="me-3">22-11-2021</span>
-                <span class="me-3">#16123222</span>
-                <span class="me-3">Visa -1234</span>
-                <span class="badge rounded-pill bg-info">SHIPPING</span>
+    <div class="col-md-8 order-md-1">
+      <h1 class="mb-3">Completar Transacción</h1>
+      <form class="needs-validation" novalidate>
+        <div class="row">
+          <div class="col-md-6 mb-2">
+            <label for="firstName" class="form-label" style="font-size: 18px;">Nombre</label>
+            <input type="text" class="form-control" id="firstName" placeholder="" value="" required />
+            <div class="invalid-feedback">
+              Se requiere un nombre válido
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="lastName" class="form-label" style="font-size: 18px;">Apellido</label>
+            <input type="text" class="form-control" id="lastName" placeholder="" value="" required />
+            <div class="invalid-feedback">
+              Se requiere un apellido válido
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="username" class="form-label" style="font-size: 18px;">Correo Electrónico</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">@</span>
+            </div>
+            <input type="email" class="form-control" id="email" placeholder="correo electrónico" required />
+            <div class="invalid-feedback">
+              Se requiere de un correo electrónico válido
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="number" class="form-label" style="font-size: 18px;">Edad </label>
+          <input type="number" class="form-control" id="age" placeholder="edad" min="21" max="65"/>
+          <div class="invalid-feedback">
+            Se requiere de una edad válida
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="username" class="form-label" style="font-size: 18px;">Dirección de Envío</label>
+          <div class="input-group">
+            
+            <input type="text" class="form-control" id="address" placeholder="Dirección" required />
+            <div class="invalid-feedback">
+              Se requiere de una dirección válida
+            </div>
+            <div class="input-group-prepend">
+              <span class="input-group-btn">
+                <button (click)="advanceSearchExpanded = !advanceSearchExpanded" mat-button style="background-color:#cc9751;"><mat-icon>edit</mat-icon> Modificar</button>
+              </span>
+            </div>
+          </div>
+          <mat-expansion-panel [expanded]="advanceSearchExpanded">
+            <div class="mb-3">
+              <br>
+              <label for="address2" class="form-label">Dirección Nueva </label>
+              <input type="text" class="form-control" id="address2" placeholder="Nueva dirección" />
+            </div>
+            <div class="row">
+              <div class="col-md-5 mb-3">
+                <label for="country" class="form-label">Ciudad</label>
+                <select class="form-select d-block w-100" id="city" required>
+                  <option value="">Seleccionar...</option>
+                  <option>United States</option>
+                </select>
+                <div class="invalid-feedback">
+                  Seleccione una ciudad
+                </div>
               </div>
-              <div class="d-flex">
-                <button class="btn btn-link p-0 me-3 d-none d-lg-block btn-icon-text"><i class="bi bi-download"></i> <span class="text">Invoice</span></button>
-                <div class="dropdown">
-                  <button class="btn btn-link p-0 text-muted" type="button" data-bs-toggle="dropdown">
-                    <i class="bi bi-three-dots-vertical"></i>
-                  </button>
-                  <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-pencil"></i> Edit</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-printer"></i> Print</a></li>
-                  </ul>
+              <div class="col-md-4 mb-3">
+                <label for="number" class="form-label">Teléfono</label>
+                <input type="text" class="form-control" id="code" placeholder="" required />
+                <div class="invalid-feedback">
+                  Teléfono requerido
+                </div>
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="zip" class="form-label">Código postal</label>
+                <input type="text" class="form-control" id="code" placeholder="" required />
+                <div class="invalid-feedback">
+                  Código postal requerido
                 </div>
               </div>
             </div>
-            <table class="table table-borderless">
-              <tbody>
-                <tr>
-                  <td>
-                    <div class="d-flex mb-2">
-                      <div class="flex-shrink-0">
-                        <img src="https://via.placeholder.com/280x280/87CEFA/000000" alt="" width="35" class="img-fluid">
-                      </div>
-                      <div class="flex-lg-grow-1 ms-3">
-                        <h6 class="small mb-0"><a href="#" class="text-reset">Wireless Headphones with Noise Cancellation Tru Bass Bluetooth HiFi</a></h6>
-                        <span class="small">Color: Black</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td>1</td>
-                  <td class="text-end">$79.99</td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="d-flex mb-2">
-                      <div class="flex-shrink-0">
-                        <img src="https://via.placeholder.com/280x280/FF69B4/000000" alt="" width="35" class="img-fluid">
-                      </div>
-                      <div class="flex-lg-grow-1 ms-3">
-                        <h6 class="small mb-0"><a href="#" class="text-reset">Smartwatch IP68 Waterproof GPS and Bluetooth Support</a></h6>
-                        <span class="small">Color: White</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td>1</td>
-                  <td class="text-end">$79.99</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td colspan="2">Subtotal</td>
-                  <td class="text-end">$159,98</td>
-                </tr>
-                <tr>
-                  <td colspan="2">Shipping</td>
-                  <td class="text-end">$20.00</td>
-                </tr>
-                <tr>
-                  <td colspan="2">Discount (Code: NEWYEAR)</td>
-                  <td class="text-danger text-end">-$10.00</td>
-                </tr>
-                <tr class="fw-bold">
-                  <td colspan="2">TOTAL</td>
-                  <td class="text-end">$169,98</td>
-                </tr>
-              </tfoot>
-            </table>
+
+          </mat-expansion-panel>
+        </div>
+       
+        <hr class="mb-4" />
+        <h4 class="mb-3">Método de pagos</h4>
+        <div class="d-block my-3">
+          <div class="form-check">
+            <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required />
+            <label class="form-check-label" for="credit">Master Card</label>
+          </div>
+          <div class="form-check">
+            <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required />
+            <label class="form-check-label" for="debit">Debit card</label>
+          </div>
+          <div class="form-check">
+            <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required />
+            <label class="form-check-label" for="paypal">Paypal</label>
           </div>
         </div>
-        <!-- Payment -->
-        <div class="card mb-4">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-lg-6">
-                <h3 class="h6">Payment Method</h3>
-                <p>Visa -1234 <br>
-                Total: $169,98 <span class="badge bg-success rounded-pill">PAID</span></p>
-              </div>
-              <div class="col-lg-6">
-                <h3 class="h6">Billing address</h3>
-                <address>
-                  <strong>John Doe</strong><br>
-                  1355 Market St, Suite 900<br>
-                  San Francisco, CA 94103<br>
-                  <abbr title="Phone">P:</abbr> (123) 456-7890
-                </address>
-              </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="cc-name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="cc-name" placeholder="" required />
+            <small class="text-muted">Nombre completo como se muestra en la tarjeta</small>
+            <div class="invalid-feedback">
+              Nombre en la tarjeta es requerido
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="cc-number" class="form-label">Número de Tarjeta de Crédito</label>
+            <input type="text" class="form-control" id="cc-number" placeholder="" required />
+            <div class="invalid-feedback">
+              Número de Tarjeta de Crédito es requerido
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-lg-4">
-        <!-- Customer Notes -->
-        <div class="card mb-4">
-          <div class="card-body">
-            <h3 class="h6">Customer Notes</h3>
-            <p>Sed enim, faucibus litora velit vestibulum habitasse. Cras lobortis cum sem aliquet mauris rutrum. Sollicitudin. Morbi, sem tellus vestibulum porttitor.</p>
+        <div class="row">
+          <div class="col-md-3 mb-3">
+            <label for="cc-expiration" class="form-label">Fecha de expiración</label>
+            <input type="text" class="form-control" id="cc-expiration" placeholder="" required />
+            <div class="invalid-feedback">
+              Fecha de expiración es requerida
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="cc-expiration" class="form-label">CVV</label>
+            <input type="text" class="form-control" id="cc-cvv" placeholder="" required />
+            <div class="invalid-feedback">
+              Código de seguridad es requerido
+            </div>
           </div>
         </div>
-        <div class="card mb-4">
-          <!-- Shipping information -->
-          <div class="card-body">
-            <h3 class="h6">Shipping Information</h3>
-            <strong>FedEx</strong>
-            <span><a href="#" class="text-decoration-underline" target="_blank">FF1234567890</a> <i class="bi bi-box-arrow-up-right"></i> </span>
-            <hr>
-            <h3 class="h6">Address</h3>
-            <address>
-              <strong>John Doe</strong><br>
-              1355 Market St, Suite 900<br>
-              San Francisco, CA 94103<br>
-              <abbr title="Phone">P:</abbr> (123) 456-7890
-            </address>
-          </div>
-        </div>
-      </div>
+        <hr class="mb-4" />
+        <button class="btn btn-dark px-4 rounded-pill" type="button">Realizar pedido</button>
+      </form>
     </div>
   </div>
-    </div>
+</div>
+</section>
+
+<ll-feature></ll-feature>

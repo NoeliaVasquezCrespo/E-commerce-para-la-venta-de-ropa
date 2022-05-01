@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./payment.component.scss']
 })
 export class PaymentComponent implements OnInit {
-
+  advanceSearchExpanded: boolean = false;
   constructor() { }
 
   ngOnInit(): void {

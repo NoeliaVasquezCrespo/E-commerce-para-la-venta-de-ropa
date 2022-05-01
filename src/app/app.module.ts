@@ -9,6 +9,7 @@ import {MatInputModule} from '@angular/material/input';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { SharedModule } from './shared/shared.module';
 
+import { MatExpansionModule} from '@angular/material/expansion';
 import { CartComponent } from './components/cart/cart.component';
 import { PaymentComponent } from './components/payment/payment.component';
 @NgModule({
@@ -25,7 +26,7 @@ import { PaymentComponent } from './components/payment/payment.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    BrowserAnimationsModule,  SharedModule, NgxSkeletonLoaderModule,MatInputModule
+    BrowserAnimationsModule,  SharedModule, NgxSkeletonLoaderModule,MatInputModule, MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]
