@@ -11,9 +11,9 @@
       <mat-expansion-panel [expanded]="advanceSearchExpanded">
         <form [formGroup]="userForm" (ngSubmit)="aplicarFiltro()">
 
-          <table class=" mt-12 example-full-width" cellspacing="0"><tr>
-            <td>
-              <mat-form-field class="ml-2" [style.width.px]=350  class="example-full-width" appearance="fill">
+          <div class=" mt-12 example-full-widt row">
+            <div class="col">
+              <mat-form-field  [style.width.px]=250  class="example-full-width" appearance="fill">
                 <mat-label>Nombre de producto</mat-label>
                 <input matInput placeholder="Ingrese el nombre de producto" name="pruductName"
                        id="pruductName"
@@ -21,9 +21,9 @@
                        formControlName="pruductName">
                 <mat-icon matSuffix>search</mat-icon>
               </mat-form-field>
-            </td>
-            <td>
-              <mat-form-field class="ml-4 example-full-width" [style.width.px]=350 appearance="fill">
+            </div>
+            <div class="col">
+              <mat-form-field [style.width.px]=250 appearance="fill">
                 <mat-label>Marca</mat-label>
                 <input matInput placeholder="Ingrese la marca de producto"
                        name="productMarca"
@@ -32,13 +32,23 @@
                        formControlName="productMarca">
                 <mat-icon matSuffix>search</mat-icon>
               </mat-form-field>
-            </td>
-            <td>
+            </div>
+            <div class="col">
+              <mat-form-field appearance="fill">
+                <mat-label>Categorias</mat-label>
+                <mat-select matNativeControl  formControlName="categoria">
+                  <mat-option *ngFor="let item of listCategories" [value]="item.id">{{item.categoria}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            </div>
+            <div class="col">
               <div class="ml-4 col-span-6 mb-3">
                 <button type="submit"  mat-flat-button color="accent">Aplicar Filtro</button>
               </div>
-            </td>
-          </tr></table>
+            </div>
+          </div>
+
           <!--
           <div class="mt-5 flex">
 
@@ -119,7 +129,7 @@
           <mat-card-actions class="ll-product__action flex justify-between">
             <div class="flex-1 text-center flex items-center justify-center">
               <button class="btn" (click)=addtocart(product)><img src="https://indyme.com/wp-content/uploads/2020/11/shopping-cart-icon.png" height ="30px" width="30px" /></button>
-            </div> 
+            </div>
             <div class="flex-1 text-center">
               <button [routerLink]="['/products', product.idProducto]" mat-raised-button color="warn" class="px-4">Información del producto</button>
             </div>
@@ -167,7 +177,7 @@
                 {{ product.tallas }}
               </div>
               <div class="flex-1 text-center">
-                <a [routerLink]="['/products', product.id]" mat-raised-button color="warn" class="px-4">Información del producto</a>
+                <a [routerLink]="['/products', product.idProducto]" mat-raised-button color="warn" class="px-4">Información del producto</a>
               </div>
             </mat-card-actions>
           </mat-card>

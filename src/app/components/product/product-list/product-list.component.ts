@@ -15,7 +15,12 @@ import { CartService } from 'src/app/service/cart.service';
 
 import Swal from'sweetalert2';
 import {Router} from '@angular/router';
-
+import {CategoryService} from '../../../service/category.service';
+import {Category} from '../../../models/Category';
+interface Items{
+  id:number,
+  value:string,
+}
 @Component({
   selector: 'll-product-list',
   templateUrl: './product-list.component.html',
@@ -30,6 +35,9 @@ export class ProductListComponent implements OnInit {
   obsProducts!: Observable<any>;
   listTallas:Size[]=[{id:0, nombreTalla:"TALLA"}];
   listColores:Color[]=[{id:0, descripcion:"COLOR"}];
+  listCategories:Category[]=[{id: 0,categoria: "CATEGORIA"}];
+
+  toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
   userForm:FormGroup;
   public productList : any ;
   public filterCategory : any;
@@ -37,7 +45,8 @@ export class ProductListComponent implements OnInit {
     private fb:FormBuilder,
     private homeProductService:HomeProductService,
     private cartService : CartService,
-    private router: Router,) {
+    private router: Router,
+    private categoryService:CategoryService) {
 
     }
   async ngOnInit(): Promise<void> {
@@ -50,8 +59,12 @@ export class ProductListComponent implements OnInit {
       this.userForm = this.fb.group({
         pruductName: ['', Validators.required],
         productMarca: [''],
+        categoria: [0],
       });
     await this.getSizesData();
+    await this.getAllCategories();
+    console.log("LAS CATEGORIAS SON: ");
+    console.log(this.listCategories);
     await this.getColoursData();
     this.products = await this.getAllProductsDataDetails();
     console.log(this.products);
@@ -60,6 +73,14 @@ export class ProductListComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.obsProducts = this.dataSource.connect();
 
+  }
+  async getAllCategories(){
+    let respuesta = [];
+    await this.categoryService.getListTallas().toPromise().then((response) => {
+      respuesta = response;
+      this.listCategories=response;
+    }).catch(e => console.error(e));
+    return respuesta;
   }
 
   getAllProductsData(){
