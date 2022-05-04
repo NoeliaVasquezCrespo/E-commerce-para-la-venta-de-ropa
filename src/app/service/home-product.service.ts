@@ -56,6 +56,11 @@ export class HomeProductService {
       map(
         response => response, error => error));
   }
+  getProductDetailsByCategoriaId(categoriaId:number):Observable<ProductDetails>{
+    let url = `${this.baseUrl}products/details/categoria=${categoriaId}`;
+    return this.http.get<ProductDetails>(url);
+
+  }
   postProductCharacteristic(productCharacteristic:ProductCharacteristic){
     const url = `${this.baseUrl}products/characteristic`;
     let jwt= localStorage.getItem('token')

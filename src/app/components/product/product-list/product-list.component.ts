@@ -29,6 +29,9 @@ interface Items{
 export class ProductListComponent implements OnInit {
   isLoaded: boolean;
   advanceSearchExpanded: boolean = false;
+  advanceFilterExpanded: boolean = false;
+  hintColor = '#ff0000';
+  validHint: boolean=false;
   products:ProductDetails[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataSource!: MatTableDataSource<ProductDetails>;
@@ -39,6 +42,7 @@ export class ProductListComponent implements OnInit {
 
   toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
   userForm:FormGroup;
+  filterForm:FormGroup;
   public productList : any ;
   public filterCategory : any;
   constructor(private productListService:ProductListService,
@@ -59,10 +63,13 @@ export class ProductListComponent implements OnInit {
       this.userForm = this.fb.group({
         pruductName: ['', Validators.required],
         productMarca: [''],
-        categoria: [0],
+
       });
+     this.filterForm = this.fb.group({
+       categoria: [0, Validators.required],
+     });
     await this.getSizesData();
-    await this.getAllCategories();
+    this.listCategories = await this.getAllCategories();
     console.log("LAS CATEGORIAS SON: ");
     console.log(this.listCategories);
     await this.getColoursData();
@@ -75,10 +82,11 @@ export class ProductListComponent implements OnInit {
 
   }
   async getAllCategories(){
-    let respuesta = [];
+    let respuesta: Category[] = [{id: 0, categoria: "--SELECCIONE UN CATEGORIA"}];
     await this.categoryService.getListTallas().toPromise().then((response) => {
-      respuesta = response;
-      this.listCategories=response;
+      for(let i=0;i<response.length;i++){
+        respuesta.push(response[i]);
+      }
     }).catch(e => console.error(e));
     return respuesta;
   }
@@ -146,8 +154,9 @@ export class ProductListComponent implements OnInit {
     return cadena;
   }
 
-  async aplicarFiltro() {
-    console.log("SE APLICARAN FILTROS");
+  async aplicarBusqueda() {
+    console.log(this.userForm.value);
+    console.log("SE BUSCARAN DATOS EN BASE A LOS FILTROS");
     if(this.userForm.valid){
       this.products=[]
       this.products = await this.getProductsDataDetailsByName();
@@ -200,5 +209,39 @@ export class ProductListComponent implements OnInit {
   async addtocart(product: any){
     console.log("Agregando al carrito");
     await this.cartService.addtoCart(product);
+  }
+
+  async aplicarFiltro() {
+    console.log(this.filterForm.value);
+    if(this.filterForm.value.categoria==0){
+      this.validHint=true;
+      this.products=[]
+      this.products = await this.getAllProductsDataDetails();
+      console.log(this.products);
+      await this.getFotoImages();
+      this.dataSource= new MatTableDataSource<ProductDetails>(this.products)
+      this.dataSource.paginator = this.paginator;
+      this.obsProducts = this.dataSource.connect();
+    }else{
+      this.validHint= false;
+      this.products=[]
+      this.products = await this.getProductsDataDetailsByCategoriaId();
+      await this.getFotoImages();
+      this.dataSource= new MatTableDataSource<ProductDetails>(this.products)
+      this.dataSource.paginator = this.paginator;
+      this.obsProducts = this.dataSource.connect();
+
+    }
+  }
+
+  async getProductsDataDetailsByCategoriaId(){
+
+    let respuesta;
+    console.log("PRIMER METODO");
+    await this.homeProductService.getProductDetailsByCategoriaId(this.filterForm.value.categoria).toPromise().then((response) => {
+      respuesta = response;
+    }).catch(e => console.error(e));
+
+    return respuesta;
   }
 }

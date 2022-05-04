@@ -5,15 +5,15 @@
       <div class="mb-3">
         <div class="flex justify-between flex-wrap">
           <h4>Búsqueda</h4>
-          <button (click)="advanceSearchExpanded = !advanceSearchExpanded" mat-button><mat-icon>tune</mat-icon> Filtros</button>
+          <button (click)="advanceSearchExpanded = !advanceSearchExpanded" mat-button><mat-icon>tune</mat-icon> Busquedas</button>
         </div>
       </div>
       <mat-expansion-panel [expanded]="advanceSearchExpanded">
-        <form [formGroup]="userForm" (ngSubmit)="aplicarFiltro()">
+        <form [formGroup]="userForm" (ngSubmit)="aplicarBusqueda()">
 
           <div class=" mt-12 example-full-widt row">
             <div class="col">
-              <mat-form-field  [style.width.px]=250  class="example-full-width" appearance="fill">
+              <mat-form-field  [style.width.px]=350  class="example-full-width" appearance="fill">
                 <mat-label>Nombre de producto</mat-label>
                 <input matInput placeholder="Ingrese el nombre de producto" name="pruductName"
                        id="pruductName"
@@ -23,7 +23,7 @@
               </mat-form-field>
             </div>
             <div class="col">
-              <mat-form-field [style.width.px]=250 appearance="fill">
+              <mat-form-field [style.width.px]=350 appearance="fill">
                 <mat-label>Marca</mat-label>
                 <input matInput placeholder="Ingrese la marca de producto"
                        name="productMarca"
@@ -33,78 +33,56 @@
                 <mat-icon matSuffix>search</mat-icon>
               </mat-form-field>
             </div>
+
             <div class="col">
-              <mat-form-field appearance="fill">
+              <div class="ml-4 mt-2 col-span-6 mb-3">
+                <button type="submit"  mat-flat-button color="accent"><mat-icon>search</mat-icon>Realizar Busquedas</button>
+              </div>
+            </div>
+          </div>
+          <div class="grid grid-cols-6 gap-6 mt-4">
+          </div>
+        </form>
+      </mat-expansion-panel>
+
+      <div class="mb-3">
+        <div class="flex justify-between flex-wrap">
+          <h4></h4>
+          <button (click)="advanceFilterExpanded = !advanceFilterExpanded" mat-button><mat-icon>tune</mat-icon> Filtros</button>
+        </div>
+      </div>
+      <mat-expansion-panel [expanded]="advanceFilterExpanded">
+        <form [formGroup]="filterForm" (ngSubmit)="aplicarFiltro()">
+
+          <div class="ml-12 mt-12 example-full-widt row">
+            <div class="col">
+              <mat-form-field [style.width.px]=350 appearance="fill">
                 <mat-label>Categorias</mat-label>
                 <mat-select matNativeControl  formControlName="categoria">
                   <mat-option *ngFor="let item of listCategories" [value]="item.id">{{item.categoria}}</mat-option>
                 </mat-select>
+                <mat-hint [ngStyle]="{color: hintColor}">
+                  <div *ngIf="validHint">*Debe llenar este campo</div>
+                </mat-hint>
               </mat-form-field>
 
             </div>
             <div class="col">
-              <div class="ml-4 col-span-6 mb-3">
-                <button type="submit"  mat-flat-button color="accent">Aplicar Filtro</button>
+              <div class="ml-4 mt-2 col-span-6 mb-3">
+                <button type="submit"  mat-flat-button color="accent"><mat-icon>search</mat-icon>Aplicar Filtros</button>
               </div>
             </div>
           </div>
 
-          <!--
-          <div class="mt-5 flex">
-
-            <input
-              type="text"
-              name="pruductName"
-              id="pruductName"
-              (input)="changeInput()"
-              formControlName="pruductName"
-              placeholder="Ingrese nombre de producto"
-              class="flex-1 w-full sm:text-sm lg:text-xl border-gray-300 rounded-l-md py-3 px-6"
-              required
-            />
-            <button disabled class="bg-primary w-24 rounded-r-md"><mat-icon class="leading-8">search</mat-icon></button>
-          </div>
-
-          <div class="mt-4 flex">
-            <input
-              type="text"
-              name="productMarca"
-              id="productMarca"
-              (input)="changeInput()"
-              formControlName="productMarca"
-              placeholder="Ingrese marca de producto"
-              class="flex-1 w-full sm:text-sm lg:text-xl border-gray-300 rounded-l-md py-3 px-6"
-              required
-            />
-            <button disabled class="bg-primary w-24 rounded-r-md"><mat-icon class="leading-8">search</mat-icon></button>
-          </div>-->
-
 
           <div class="grid grid-cols-6 gap-6 mt-4">
-            <!--
-            <div class="col-span-6 sm:col-span-3">
-              <select name="color" id="color" formControlName="color"
-                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                <option value="0">COLORES</option>
-                <option [ngValue]="item.id" *ngFor="let item of listColores">{{item.descripcion}}</option>
-              </select>
-            </div>
-            <div class="col-span-6 sm:col-span-3">
-              <select
-                name="tallas" id="talla" formControlName="talla"
-                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                <option value="0">TALLAS</option>
-                <option [ngValue]="item.id" *ngFor="let item of listTallas">{{item.nombreTalla}}</option>
-              </select>
-            </div>
 
-            <div class="col-span-6">
-              <button (click)="aplicarFiltro()"  mat-flat-button color="accent">Aplicar Filtro</button>
-            </div>-->
 
           </div>
         </form>
       </mat-expansion-panel>
+
+
     </div>
   </div>
 </div>
