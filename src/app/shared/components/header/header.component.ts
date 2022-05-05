@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
   @Output() toggleSidenav = new EventEmitter();
   isScrolled: boolean;
   menuList = [] as any;
+  opened: boolean;
   isLessThenLargeDevice: boolean;
   constructor(private breakpointObserver: BreakpointObserver, private cartService : CartService) {}
   public products = [];
