@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AdministradorRequest } from '../models/AdministradorRequest';
+import { user } from '../models/User';
 import { AuthRequest } from '../models/AuthRequest';
 import { JwtResponse } from '../models/JwtResponse';
 
@@ -62,6 +63,15 @@ export class AuthService {
     })
     console.log(url);
     return this.http.get<AdministradorRequest>(url, { headers: reqHeader });
+  }
+  
+  verificarSesionCliente(id:number, jwt:string):Observable<user>{
+    const url = `${this.baseUrl}users/${id}/${jwt}`;
+    const reqHeader = new HttpHeaders({
+      'Authorization': `Bearer ${jwt}`
+    })
+    console.log(url);
+    return this.http.get<user>(url, { headers: reqHeader });
   }
 
 }
