@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { CartService } from 'src/app/service/cart.service';
 import Swal from 'sweetalert2';
 @Component({
@@ -9,6 +9,13 @@ import Swal from 'sweetalert2';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
+  public newAdminForm = new FormGroup({
+  
+    cantidad: new FormControl('', Validators.required)
+    
+  });
+
+
   public products : any = [];
   constructor(private cartService : CartService, private router: Router) { }
   public cantidad: number;
@@ -16,6 +23,7 @@ export class CartComponent implements OnInit {
     this.cartService.getProducts()
     .subscribe(res=>{
       this.products = res;
+      console.log(this.newAdminForm.value.cantidad);
     })
   }
   removeItem(item: any){
@@ -78,7 +86,9 @@ export class CartComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then(async (result) => {
       if (result.value) {
+        
         console.log('admin dashboard')
+        
         await this.router.navigateByUrl('/payment');
       }
     })
@@ -95,8 +105,8 @@ export class CartComponent implements OnInit {
   public totalCantidad(){
     let total = 0;
     let p;
-    this.products.forEach((p: { precio: number; }) => total = p.precio*this.cantidad);
-
+    this.products.forEach((p: { precio: number; }) => total = p.precio*this.newAdminForm.value.cantidad);
+    return total;
   }
 }
 function item(item: any) {

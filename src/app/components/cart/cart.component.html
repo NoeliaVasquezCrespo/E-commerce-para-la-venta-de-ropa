@@ -17,11 +17,17 @@
                         </div>
                     </div>
                     <div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left" style="max-width: 10rem;">
-                        <div class="form-group mb-2">
-                            <label for="quantity1">Cantidad</label>
-                            <input class="form-control form-control-sm" type="number" id="quantity1" value="1" min="1">
-                        </div>
-                        
+                        <form [formGroup]="newAdminForm">
+          
+                            <div class="form-group mb-2">
+                                <label for="cantidad">Cantidad</label>
+                                <input class="form-control form-control-sm" type="number" id="cantidad" value="1" min="1" max="1" formControlName="cantidad" placeholder="1">
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="cantidad-precio">Total por producto:  Bs. {{item.precio}}</label>
+                            </div>    
+                            
+                        </form>
                         <button class="btn btn-outline-danger btn-sm btn-block mb-2" type="button" (click)="confirmDeleteItemNotification()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 mr-1">
                                 <polyline points="3 6 5 6 21 6"></polyline>
