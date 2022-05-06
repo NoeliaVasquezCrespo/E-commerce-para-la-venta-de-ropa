@@ -1,6 +1,6 @@
 
       <div class="login rounded-md mx-auto border p-4 sm:p-8 xl:p-20">
-        <form [formGroup]="newProductForm" (ngSubmit)="addNewProduct(newProductForm.value)" >
+        <form [formGroup]="newOfferForm" (ngSubmit)="addNewOffer(newOfferForm.value)" >
           <h1 class="text-2xl font-bold">OFERTAS</h1>
          
           <div class="mb-4 mt-6">
@@ -13,7 +13,7 @@
                     type="date"
                     placeholder="Fecha de Inicio"
                     min="2022-05-06" 
-                    formControlName="fechainicio"
+                    formControlName="fechaInicio"
                   />
               </div>
               <div class="mb-4 mt-6">
@@ -24,7 +24,7 @@
                     type="date"
                     placeholder="Fecha Final"
                     min="2022-05-06" 
-                    formControlName="fechafin"
+                    formControlName="fechaFin"
                   />
               </div>
               <div class="mb-6 mt-6">
@@ -34,7 +34,7 @@
                     id="descuento"
                     type="number" min="1" step="any"
                     placeholder="Descuento"
-                    formControlName="descuento"
+                    formControlName="montoDescuento"
                   />
               </div>
           </div>

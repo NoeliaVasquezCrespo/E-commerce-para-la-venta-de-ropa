@@ -22,9 +22,10 @@ const DashboardChildrenRoute: Routes = [
     component: DashboardProvidersComponent
   },
   {
-    path: 'offers',
+    path: 'offers/:id',
     component: AddoffersComponent
   },
+  
   {
     path: 'color-size',
     component: ColorSizeRegisterComponent

@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators} from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 import { product } from '../../../../models/Product';
 import axios from 'axios';
-import { AddproductService } from 'src/app/service/addproduct.service';
-import { Size } from 'src/app/models/Size';
-import { Color } from 'src/app/models/Color';
+import { AddofferService } from 'src/app/service/addoffer.service';
 
 import { ProductListService } from 'src/app/service/product-list.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from'sweetalert2';
+import { Offer } from 'src/app/models/Offer';
 
 @Component({
   selector: 'app-addoffers',
@@ -22,107 +21,56 @@ export class AddoffersComponent implements OnInit {
   currentFile?: File;
   message = '';
   errorMsg = '';
-  newProductoId:number=0;
-  constructor(private addProductService:AddproductService,private productListService:ProductListService,
-    private router: Router) { }
+  newOfferId:number=0;
+  id:number=0;
+  newOfferForm:FormGroup;
 
-  public newProductForm = new FormGroup({
-    fechainicio: new FormControl('', Validators.required),
-    fechafin : new FormControl('', Validators.required),
-    descuento : new FormControl('', Validators.required),
+  constructor(private addofferService:AddofferService,private activatedRoute: ActivatedRoute, private router: Router,  private fb:FormBuilder,) { 
+      this.newOfferForm = this.fb.group({
+        fechaInicio: new FormControl('', Validators.required),
+        fechaFin : new FormControl('', Validators.required),
+        montoDescuento : new FormControl('', Validators.required)
+      })
+  }
 
-  });
+ 
 
   ngOnInit(): void {
-    function setTwoNumberDecimal(event) {
-      this.value = parseFloat(this.value).toFixed(2);
-    }
-    
+   
   }
-  selectFile(event: any): void {
-    this.selectedFiles = event.target.files;
-  }
+  
 
-
-  async addNewProduct(data: product){
-    var id = localStorage.getItem('userId');
-    console.log(this.newProductForm.value);
-    this.newProductForm.value.administradorId = id;
-
-    if(this.newProductForm.valid){
-      let self = this
-      console.log("EJECUTANDO METODO PARA AGREGAR PRODUCTO");
-      var api = 'http://localhost:8080/v2/products';
-
-      data.administradorId=parseInt(id);
-      data.status=1;
-      console.log('New Product : ', data);
-      axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('token');
-      await axios.post(api,data).then(function (result){
-      console.log(result.data);
-      console.log(result.data.id);
-      let value:number=result.data.id || 0;
-      self.newProductoId=value;
-
-      });
-      this.upload();
-      this.successNotificationLogin();
-    }else{
-
+  async addNewOffer(data: Offer){
+    if(this.newOfferForm.valid){
+      const id = this.activatedRoute.snapshot.params.id;
+      let newOffer;
+      console.log(this.newOfferForm.value);
+      await this.addofferService.newOffer(data).toPromise().then(async (response) => {
+        newOffer=response;
+      }).catch(e => console.error(e));
+      console.log(newOffer)
+      await this.addofferService.newOfferProduct(id,newOffer.id).toPromise().then(async (response) => {
+        newOffer=response;
+        this.successNotificationLogin();
+      }).catch(e => console.error(e),);
+    }  
+    else{
       this.wrongNotificationLogin('Complete los espacios vacíos')
     }
-
-
   }
 
 
 
-  upload(): void {
-    this.errorMsg = '';
-
-    if (this.selectedFiles) {
-      const file: File | null = this.selectedFiles.item(0);
-
-      if (file) {
-        this.currentFile = file;
-        console.log("ARCHIVO");
-        console.log(this.currentFile);
-        this.addProductService.uploadImageProduct(this.currentFile,this.newProductoId).subscribe(
-          (event: any) => {
-            if (event.type === HttpEventType.UploadProgress) {
-              console.log(Math.round(100 * event.loaded / event.total));
-
-            } else if (event instanceof HttpResponse) {
-              this.message = event.body.responseMessage;
-            }
-          },
-          (err: any) => {
-            console.log(err);
-
-            if (err.error && err.error.responseMessage) {
-              this.errorMsg = err.error.responseMessage;
-            } else {
-              this.errorMsg = 'Error occurred while uploading a file!';
-            }
-
-            this.currentFile = undefined;
-          });
-      }
-
-      this.selectedFiles = undefined;
-    }
-    this.router.navigateByUrl('/providerdashboard');
-  }
   wrongNotificationLogin(mensaje:string){
     Swal.fire({
       icon: 'error',
-      title: 'No se pudo registrar producto',
+      title: 'No se pudo registrar oferta',
       text: mensaje,
     })
   }
   successNotificationLogin(){
     Swal.fire({
-      title: 'REGISTRO EXITOSO',
+      title: 'OFERTA EXITOSA',
       text: 'La operacion se ha realizado completamente',
       icon: 'success',
       showCancelButton: false,
