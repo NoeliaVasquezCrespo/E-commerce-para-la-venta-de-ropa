@@ -1,0 +1,57 @@
+
+      <div class="login rounded-md mx-auto border p-4 sm:p-8 xl:p-20">
+        <form [formGroup]="newProductForm" (ngSubmit)="addNewProduct(newProductForm.value)" >
+          <h1 class="text-2xl font-bold">OFERTAS</h1>
+         
+          <div class="mb-4 mt-6">
+            <label class="block text-gray-700 text-sm font-semibold mb-2" for="talla"> Complete el formulario para agregar la oferta al producto </label>
+            <div class="mb-6 mt-6">
+                <label class="block text-gray-700 text-sm font-semibold mb-2" for="inicio"> Fecha Inicio </label>
+                  <input
+                    class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
+                    id="fechainicio"
+                    type="date"
+                    placeholder="Fecha de Inicio"
+                    min="2022-05-06" 
+                    formControlName="fechainicio"
+                  />
+              </div>
+              <div class="mb-4 mt-6">
+                <label class="block text-gray-700 text-sm font-semibold mb-2" for="fin"> Fecha Fin</label>
+                <input
+                    class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
+                    id="fechafin"
+                    type="date"
+                    placeholder="Fecha Final"
+                    min="2022-05-06" 
+                    formControlName="fechafin"
+                  />
+              </div>
+              <div class="mb-6 mt-6">
+                <label class="block text-gray-700 text-sm font-semibold mb-2" for="descuento"> Monto de descuento </label>
+                  <input
+                    class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
+                    id="descuento"
+                    type="number" min="1" step="any"
+                    placeholder="Descuento"
+                    formControlName="descuento"
+                  />
+              </div>
+          </div>
+             
+          <div class="flex w-full mt-6">
+            <button
+              class="w-full hover:bg-grey-900 text-white text-sm py-2 px-4  rounded focus:outline-none focus:shadow-outline h-100"
+              type="submit" ng-click="agregar"
+              style="background-color: #8a3c8a;"
+            >
+            Asignar oferta
+            </button>
+            
+          </div>
+          <div class="container-img mt-6" >
+            <a class="logo" ><img src="https://www.ocu.org/-/media/ocu/images/home/salud/bienestar/toxicos-ropa.png?rev=c2de303f-8383-4503-a9f7-e9ed6c955fa0&mw=480&hash=293450C25E79B53148445CA2AB6D40EC"  style="height: 250px; width: 300px;"/></a>
+          </div>
+        </form>  
+      </div>
+    

@@ -11,13 +11,15 @@ import { DashboardProductsComponent } from './dashboard-products/dashboard-produ
 import { DashboardProvidersComponent } from './dashboard-providers/dashboard-providers.component';
 import { ColorSizeRegisterComponent } from './color-size-register/color-size-register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddoffersComponent } from './addoffers/addoffers.component';
 @NgModule({
   declarations: [
     DashboardLayoutComponent,
     DashboardIndexComponent,
     DashboardProductsComponent,
     DashboardProvidersComponent,
-    ColorSizeRegisterComponent
+    ColorSizeRegisterComponent,
+    AddoffersComponent
   ],
   imports: [CommonModule, DashboardRoutingModule, SharedModule, MatMenuModule,FormsModule, ReactiveFormsModule]
 })
