@@ -38,6 +38,26 @@ export class CartComponent implements OnInit {
     
   }
 
+  
+
+
+  confirmDeleteItemNotification(){
+    Swal.fire({
+      text: 'Se eliminará el item del carrito',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonText: 'Confirmar',
+      cancelButtonText:'Cancelar',
+    }).then(async (result) => {
+      if (result.value) {
+        console.log('Eliminando ítem del carrito')
+        this.removeItem(item);
+        this.confirmDeleteNotification();
+      }
+    })
+    
+  }
+
   confirmDeleteNotification(){
     Swal.fire({
       imageUrl: 'https://cdn3.iconfinder.com/data/icons/shopping-and-ecommerce-29/90/empty_cart-512.png',
@@ -79,3 +99,7 @@ export class CartComponent implements OnInit {
 
   }
 }
+function item(item: any) {
+  throw new Error('Function not implemented.');
+}
+

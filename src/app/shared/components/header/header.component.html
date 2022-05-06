@@ -35,7 +35,7 @@
                 <button mat-menu-item>
                   <strong>Total: Bs. {{total()}}</strong>
                 </button>
-                <a mat-menu-item (click)="sidenav.toggle()" >
+                <a mat-menu-item [routerLink]="['/cart']" >
                   <mat-icon>shopping_cart</mat-icon>
                   Terminar compra</a>
               </mat-menu>
