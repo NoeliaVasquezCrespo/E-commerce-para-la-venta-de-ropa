@@ -131,11 +131,13 @@
         </div>
        
         <form novalidate (ngSubmit)="createToken()" [formGroup]="stripeTest">
-          <h4 class="mb-3">Método de pagos</h4>
-          <ngx-stripe-card
+          <h4 class="mb-3">Informacion de pago</h4>
+          <div class="mb-3">
+            <ngx-stripe-card
             [options]="cardOptions"
             [elementsOptions]="elementsOptions"
-          ></ngx-stripe-card>
+            ></ngx-stripe-card>
+          </div>
           <button class="btn btn-dark px-4 rounded-pill"type="submit">CREATE TOKEN</button>
         </form>
     </div>
