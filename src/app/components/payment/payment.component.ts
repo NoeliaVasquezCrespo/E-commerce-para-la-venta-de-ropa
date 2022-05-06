@@ -13,6 +13,7 @@ import {
   StripeCardElementOptions,
   StripeElementsOptions
 } from '@stripe/stripe-js';
+import { CartService } from 'src/app/service/cart.service';
 
 @Component({
   selector: 'app-payment',
@@ -29,6 +30,7 @@ export class PaymentComponent implements OnInit {
   datosDireccion:FormGroup;
   direccionA: FormGroup;
   stripeTest: FormGroup;
+  public products : any = [];
 
   cardOptions: StripeCardElementOptions = {
     style: {
@@ -48,7 +50,8 @@ export class PaymentComponent implements OnInit {
   elementsOptions: StripeElementsOptions = {
     locale: 'es'
   };
-  constructor(private authService:AuthService,private addressService:AddressService,private fb:FormBuilder,
+  constructor(private cartService : CartService,private authService:AuthService,private addressService:AddressService,private fb:FormBuilder,
+    
     private stripeService: StripeService ,private router: Router,) {
     this.datosUsuario=this.fb.group({
       nombre: new FormControl('', Validators.required),
@@ -67,7 +70,12 @@ export class PaymentComponent implements OnInit {
     })
    }
 
-  async ngOnInit():  Promise<void> {
+
+   ngOnInit():  void{
+    this.cartService.getProducts()
+    .subscribe(res=>{
+      this.products = res;
+    });
     this.stripeTest = this.fb.group({
       name: ['', [Validators.required]]
     });
@@ -183,6 +191,13 @@ export class PaymentComponent implements OnInit {
         location.reload(); 
       }
     })
+  }
+
+  public total() {
+  
+    let total = 0;
+    this.products.forEach((p: { precio: number; }) => total += p.precio);
+    return total;
   }
 
 }
