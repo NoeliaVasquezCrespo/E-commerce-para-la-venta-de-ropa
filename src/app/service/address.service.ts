@@ -13,9 +13,13 @@ export class AddressService {
 
     constructor(private http:HttpClient){ }
 
-    getProductByProductId(id:number):Observable<Address>{
+    getAddressById(id:number):Observable<Address>{
         const url = `${this.baseUrl}addresses/${id}`;
-        return this.http.get<Address>(url).pipe(
+        let jwt= localStorage.getItem('tokenCli')
+            const reqHeader = new HttpHeaders({
+            'Authorization': `Bearer ${jwt}`
+        })
+        return this.http.get<Address>(url, { headers: reqHeader }).pipe(
           map(
             response => response, error => error));
     }
