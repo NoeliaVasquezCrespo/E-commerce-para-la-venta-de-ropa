@@ -87,44 +87,47 @@
         <div class="mb-3">
           <label for="username" class="form-label" style="font-size: 18px;">Dirección de Envío</label>
           <div class="input-group">
-            <input type="text" class="form-control" id="address" placeholder="Dirección" disabled/>
-            <div class="input-group-prepend">
-              <span class="input-group-btn">
-                <button (click)="advanceSearchExpanded = !advanceSearchExpanded" mat-button style="background-color:#cc9751;"><mat-icon>edit</mat-icon> Modificar</button>
-              </span>
-            </div>
+            <form [formGroup]="direccionA">
+              <input type="text" class="form-control" id="address" placeholder="Dirección" formControlName="direccionA" disabled/>
+            </form>
+              <div class="input-group-prepend">
+                <span class="input-group-btn">
+                  <button (click)="advanceSearchExpanded = !advanceSearchExpanded" mat-button style="background-color:#cc9751;"><mat-icon>edit</mat-icon> Modificar</button>
+                </span>
+              </div>
           </div>
 
           <mat-expansion-panel [expanded]="advanceSearchExpanded">
-          <form [formGroup]="datosDireccion">
+          <form [formGroup]="datosDireccion" (ngSubmit)="editAddress()">
             <div class="mb-3">
               <br>
               <label for="address2" class="form-label">Dirección Nueva </label>
-              <input type="text" class="form-control" id="address2" placeholder="Nueva dirección" />
+              <input type="text" class="form-control" id="address2" placeholder="Nueva dirección" formControlName="nombreDireccion"/>
             </div>
             <div class="row">
               <div class="col-md-5 mb-3">
                 <label for="country" class="form-label">Ciudad</label>
-                <select class="form-select d-block w-100" id="city">
-                  <option value="1">La Paz</option>
-                  <option value="2">Santa Cruz</option>
-                  <option value="3">Cochabamba</option>
-                  <option value="4">Sucre</option>
-                  <option value="5">Oruro</option>
-                  <option value="6">Tarija</option>
-                  <option value="7">Potosí</option>
-                  <option value="8">Beni</option>
-                  <option value="9">Pando</option>
+                <select class="form-select d-block w-100" id="city" formControlName="ciudadId">
+                  <option value="1" type="number">La Paz</option>
+                  <option value="2" type="number">Santa Cruz</option>
+                  <option value="3" type="number">Cochabamba</option>
+                  <option value="4" type="number">Sucre</option>
+                  <option value="5" type="number">Oruro</option>
+                  <option value="6" type="number">Tarija</option>
+                  <option value="7" type="number">Potosí</option>
+                  <option value="8" type="number">Beni</option>
+                  <option value="9" type="number">Pando</option>
                 </select>
               </div>
               <div class="col-md-4 mb-3">
                 <label for="number" class="form-label">Teléfono</label>
-                <input type="text" class="form-control" id="code" placeholder="" />
+                <input type="text" class="form-control" id="code" placeholder="" formControlName="telefono"/>
               </div>
               <div class="col-md-3 mb-3">
                 <label for="zip" class="form-label">Código postal</label>
-                <input type="text" class="form-control" id="code" placeholder="" />
+                <input type="text" class="form-control" id="code" placeholder="" formControlName="codigoPostal"/>
               </div>
+              <button class="btn btn-dark px-4 rounded-pill"type="submit">Actualizar Direccion</button>
             </div>
           </form>
           </mat-expansion-panel>
@@ -138,7 +141,7 @@
             [elementsOptions]="elementsOptions"
             ></ngx-stripe-card>
           </div>
-          <button class="btn btn-dark px-4 rounded-pill"type="submit">CREATE TOKEN</button>
+          <button class="btn btn-dark px-4 rounded-pill"type="submit">Terminar Pedido</button>
         </form>
     </div>
   </div>
