@@ -4,12 +4,63 @@
   </div>
   <div>
     <div class="flex justify-between flex-wrap">
-      <h2 class="mb-3 font-medium">LISTA PRODUCTOS</h2> 
+      <h2 class="mb-3 font-medium">LISTA PRODUCTOS</h2>
       <button class=" text-black text-sm py-2 px-4 rounded font-semi bold focus:outline-none focus:shadow-outline h-10" type="button" style="background-color: #a096ce;"
       [routerLink]="['/addproduct']" >
         Agregar Producto
       </button>
-    </div>	
+    </div>
+
+    <mat-table #table [dataSource]="dataSource">
+      <ng-container matColumnDef="Producto">
+        <mat-header-cell *matHeaderCellDef> Producto </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.nombreProducto}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Precio">
+        <mat-header-cell *matHeaderCellDef> Precio </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.precio}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Stock">
+        <mat-header-cell *matHeaderCellDef> Stock</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.stock}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Opciones">
+        <mat-header-cell *matHeaderCellDef> Opciones</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div class="text-right">
+            <button class="action_icon__btn" mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" xposition="before">
+              <button mat-menu-item [routerLink]="['/providerdashboard/color-size']">
+                <mat-icon>dialpad</mat-icon>
+                <span>Asignar Características</span>
+              </button>
+              <button mat-menu-item [routerLink]="['/providerdashboard/offers']">
+                <mat-icon>stars</mat-icon>
+                <span>Asignar Oferta</span>
+              </button>
+              <button mat-menu-item >
+                <mat-icon>edit</mat-icon>
+                <span>Editar</span>
+              </button>
+              <button mat-menu-item (click)="mensajeEliminarProducto(element.idProducto)">
+                <mat-icon>delete</mat-icon>
+                <span>Eliminar</span>
+              </button>
+            </mat-menu>
+          </div>
+
+        </mat-cell>
+      </ng-container>
+
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20, 40]"></mat-paginator>
+
+    <!--
     <div *ngIf="view === 'list'" class="table-inside">
       <div class="flex flex-col border ltLg:responsive">
         <div class="flex items-center p-4 border-b hover:bg-blue-100">
@@ -43,7 +94,7 @@
                 <mat-icon>edit</mat-icon>
                 <span>Editar</span>
               </button>
-              <button mat-menu-item>
+              <button mat-menu-item (click)="mensajeEliminarProducto(product.idProducto)">
                 <mat-icon>delete</mat-icon>
                 <span>Eliminar</span>
               </button>
@@ -52,6 +103,6 @@
         </div>
       </div>
     </div>
-     
+-->
   </div>
 </div>

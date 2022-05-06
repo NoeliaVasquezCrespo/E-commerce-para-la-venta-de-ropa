@@ -12,6 +12,8 @@ import { DashboardProvidersComponent } from './dashboard-providers/dashboard-pro
 import { ColorSizeRegisterComponent } from './color-size-register/color-size-register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddoffersComponent } from './addoffers/addoffers.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 @NgModule({
   declarations: [
     DashboardLayoutComponent,
@@ -21,6 +23,6 @@ import { AddoffersComponent } from './addoffers/addoffers.component';
     ColorSizeRegisterComponent,
     AddoffersComponent
   ],
-  imports: [CommonModule, DashboardRoutingModule, SharedModule, MatMenuModule,FormsModule, ReactiveFormsModule]
+  imports: [CommonModule, DashboardRoutingModule, SharedModule, MatMenuModule, FormsModule, ReactiveFormsModule, MatTableModule, MatPaginatorModule]
 })
 export class DashboardModule {}
