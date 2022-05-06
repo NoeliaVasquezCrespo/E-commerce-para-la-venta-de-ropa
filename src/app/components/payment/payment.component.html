@@ -130,59 +130,14 @@
           </mat-expansion-panel>
         </div>
        
-        <form class="needs-validation" novalidate>
-        <hr class="mb-4" />
-        <h4 class="mb-3">Método de pagos</h4>
-        <div class="d-block my-3">
-          <div class="form-check">
-            <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required />
-            <label class="form-check-label" for="credit">Master Card</label>
-          </div>
-          <div class="form-check">
-            <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required />
-            <label class="form-check-label" for="debit">Debit card</label>
-          </div>
-          <div class="form-check">
-            <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required />
-            <label class="form-check-label" for="paypal">Paypal</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label for="cc-name" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="cc-name" placeholder="" required />
-            <small class="text-muted">Nombre completo como se muestra en la tarjeta</small>
-            <div class="invalid-feedback">
-              Nombre en la tarjeta es requerido
-            </div>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="cc-number" class="form-label">Número de Tarjeta de Crédito</label>
-            <input type="text" class="form-control" id="cc-number" placeholder="" required />
-            <div class="invalid-feedback">
-              Número de Tarjeta de Crédito es requerido
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-3 mb-3">
-            <label for="cc-expiration" class="form-label">Fecha de expiración</label>
-            <input type="text" class="form-control" id="cc-expiration" placeholder="" required />
-            <div class="invalid-feedback">
-              Fecha de expiración es requerida
-            </div>
-          </div>
-          <div class="col-md-3 mb-3">
-            <label for="cc-expiration" class="form-label">CVV</label>
-            <input type="text" class="form-control" id="cc-cvv" placeholder="" required />
-            <div class="invalid-feedback">
-              Código de seguridad es requerido
-            </div>
-          </div>
-        </div>
-        <hr class="mb-4" />
-        <button class="btn btn-dark px-4 rounded-pill" type="button">Realizar pedido</button>
-      </form>
+        <form novalidate (ngSubmit)="createToken()" [formGroup]="stripeTest">
+          <h4 class="mb-3">Método de pagos</h4>
+          <ngx-stripe-card
+            [options]="cardOptions"
+            [elementsOptions]="elementsOptions"
+          ></ngx-stripe-card>
+          <button class="btn btn-dark px-4 rounded-pill"type="submit">CREATE TOKEN</button>
+        </form>
     </div>
   </div>
 </div>
