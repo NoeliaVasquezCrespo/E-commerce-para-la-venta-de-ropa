@@ -37,6 +37,20 @@
                       class="font-semibold text-gray-500 hover:text-primary"
                       ><mat-icon class="mr-2">list</mat-icon> Lista de productos</a
                     >
+                    <a
+                      mat-list-item
+                      routerLink="/providerdashboard/offers-list"
+                      routerLinkActive="bg-gray-200"
+                      class="font-semibold text-gray-500 hover:text-primary"
+                      ><mat-icon class="mr-2">stars</mat-icon> Lista de ofertas activas</a
+                    >
+                    <a
+                      mat-list-item
+                      routerLink="/providerdashboard/inactive-offers-list"
+                      routerLinkActive="bg-gray-200"
+                      class="font-semibold text-gray-500 hover:text-primary"
+                      ><mat-icon class="mr-2">album</mat-icon> Lista de ofertas inactivas</a
+                    >
                     
                     <a (click)="onLogout()" mat-list-item class="font-semibold text-gray-500 hover:text-primary"><mat-icon class="mr-2">logout</mat-icon> Cerrar sesión</a>
                     <a><img src="assets/logo_trendy.png" alt="Logo" /></a>

@@ -6,7 +6,8 @@ import { DashboardProvidersComponent } from './dashboard-providers/dashboard-pro
 import { DashboardProductsComponent } from './dashboard-products/dashboard-products.component';
 import { ColorSizeRegisterComponent } from './color-size-register/color-size-register.component';
 import { AddoffersComponent } from './addoffers/addoffers.component';
-
+import { DashboardOffersComponent } from './dashboard-offers/dashboard-offers.component';
+import { DashboardInactiveOffersComponent } from './dashboard-inactive-offers/dashboard-inactive-offers.component';
 const DashboardChildrenRoute: Routes = [
   {
     path: '',
@@ -24,6 +25,14 @@ const DashboardChildrenRoute: Routes = [
   {
     path: 'offers/:id',
     component: AddoffersComponent
+  },
+  {
+    path: 'offers-list',
+    component: DashboardOffersComponent
+  },
+  {
+    path: 'inactive-offers-list',
+    component: DashboardInactiveOffersComponent
   },
   
   {
