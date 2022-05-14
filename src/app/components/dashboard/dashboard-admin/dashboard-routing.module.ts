@@ -11,6 +11,7 @@ import { DashboardInactiveAdminComponent } from './dashboard-inactive-admin/dash
 import { DashboardOrdersComponent } from './dashboard-orders/dashboard-orders.component';
 import { AddcategoryComponent } from './addcategory/addcategory.component'
 import { EditProviderComponent } from './edit-provider/edit-provider.component';
+import { DashboardProductsReportComponent } from './dashboard-products-report/dashboard-products-report.component';
 
 const DashboardChildrenRoute: Routes = [
   {
@@ -28,6 +29,10 @@ const DashboardChildrenRoute: Routes = [
   {
     path: 'providers',
     component: DashboardProvidersComponent
+  },
+  {
+    path: 'products-report',
+    component: DashboardProductsReportComponent
   },
   {
     path: 'inactiveproviders',

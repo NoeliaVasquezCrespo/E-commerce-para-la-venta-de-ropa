@@ -16,6 +16,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { DashboardOffersComponent } from './dashboard-offers/dashboard-offers.component';
 import { DashboardInactiveOffersComponent } from './dashboard-inactive-offers/dashboard-inactive-offers.component';
+import { DashboardChartByCityComponent } from './dashboard-chart-by-city/dashboard-chart-by-city.component';
 @NgModule({
   declarations: [
     DashboardLayoutComponent,
@@ -25,7 +26,8 @@ import { DashboardInactiveOffersComponent } from './dashboard-inactive-offers/da
     ColorSizeRegisterComponent,
     AddoffersComponent,
     DashboardOffersComponent,
-    DashboardInactiveOffersComponent
+    DashboardInactiveOffersComponent,
+    DashboardChartByCityComponent
   ],
   imports: [CommonModule, DashboardRoutingModule, SharedModule, MatMenuModule, FormsModule, ReactiveFormsModule, MatTableModule, MatPaginatorModule]
 })
