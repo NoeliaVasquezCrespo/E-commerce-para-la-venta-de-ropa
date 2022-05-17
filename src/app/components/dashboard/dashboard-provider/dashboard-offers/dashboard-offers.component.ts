@@ -43,7 +43,7 @@ export class DashboardOffersComponent implements OnInit {
   async getAdminData(){
     let respuesta;
     console.log("PRIMER METODO");
-    await this.offerlistService. getListProvider().toPromise().then((response) => {
+    await this.offerlistService. getListOfferProduct().toPromise().then((response) => {
       respuesta = response;
     }).catch(e => console.error(e));
 
@@ -111,7 +111,6 @@ export class DashboardOffersComponent implements OnInit {
   }
   */
   
-
   async irAInterfazEditar(id: number) {
     await this.router.navigateByUrl(`/admindashboard/edit-provider/${id}`);
 

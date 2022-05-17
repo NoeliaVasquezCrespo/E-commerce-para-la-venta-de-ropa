@@ -40,8 +40,8 @@ export class AddofferService {
     return this.http.post<Offer>(url,compraoferta, { headers: reqHeader })
   }
 
-  getListProvider():Observable<OfferProduct[]> {
-    const url = `${this.baseUrl}/oferta/producto`;
+  getListOfferProduct():Observable<OfferProduct[]> {
+    const url = `${this.baseUrl}oferta/producto`;
     let jwt= localStorage.getItem('token')
     const reqHeader = new HttpHeaders({
       'Authorization': `Bearer ${jwt}`
