@@ -25,7 +25,6 @@
           <a [routerLink]="['/authclient/signup']" mat-raised-button color="accent" class="text-lg font-bold py-2 px-5 ml-2">Registro</a>
           <div class="navbar-nav ml-auto">
             <mat-toolbar-row>
-            
               <button mat-button [matMenuTriggerFor]="menu">
                 <span style="margin-right: 15px; " matBadge="{{totalItem}}" matBadgeOverlap="false"
                 matBadgePosition="below after" matBadgeColor="warn" >Carrito <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/512x512/shopping_cart.png" width="30" height="30"/></span>      
@@ -41,7 +40,28 @@
               </mat-menu>
             </mat-toolbar-row> 
           </div>
-        </div>
+          <mat-toolbar-row>
+            <button mat-button [matMenuTriggerFor]="options">
+              <a class="text-lg font-bold py-2 px-5"><img src="https://cdn-icons-png.flaticon.com/512/318/318225.png" alt="Logo" style="max-width: 20px;" ></a>
+            </button>
+            <mat-menu #options="matMenu">
+              <label for="name"> Bienvenido .... </label>
+              <a mat-menu-item [routerLink]="['/authclient/signup']" >
+                <mat-icon>perm_identity</mat-icon>
+                Editar Perfil
+              </a>
+              <a mat-menu-item [routerLink]="['/']" >
+                <mat-icon>delete</mat-icon>
+                Eliminar cuenta
+              </a>
+              <a mat-menu-item [routerLink]="['/']" >
+                <mat-icon>exit_to_app</mat-icon>
+                Cerrar Sesión</a>
+            </mat-menu>
+          </mat-toolbar-row> 
+          
+          
+        </div>  
       </div>
     </div>
 </header>
