@@ -39,10 +39,14 @@ const DashboardChildrenRoute: Routes = [
     path: 'inactive-offers-list',
     component: DashboardInactiveOffersComponent
   },
-  
+
   {
     path: 'color-size',
     component: ColorSizeRegisterComponent
+  },
+  {
+    path: 'chart-by-city',
+    component: DashboardChartByCityComponent,
   }
 ];
 
