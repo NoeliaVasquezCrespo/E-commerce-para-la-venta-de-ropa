@@ -15,7 +15,6 @@ export class CartComponent implements OnInit {
     
   });
 
-
   public products : any = [];
   constructor(private cartService : CartService, private router: Router) { }
   public cantidad: number;
@@ -42,12 +41,8 @@ export class CartComponent implements OnInit {
         this.cartService.removeAllCart();
         this.confirmDeleteNotification();
       }
-    })
-    
+    }) 
   }
-
-  
-
 
   confirmDeleteItemNotification(){
     Swal.fire({
@@ -62,8 +57,7 @@ export class CartComponent implements OnInit {
         this.removeItem(item);
         this.confirmDeleteNotification();
       }
-    })
-    
+    })   
   }
 
   confirmDeleteNotification(){
@@ -97,14 +91,12 @@ export class CartComponent implements OnInit {
   public total() {
   
     let total = 0;
-    let p;
     this.products.forEach((p: { precio: number; }) => total += p.precio);
     return total;
   }
 
   public totalCantidad(){
     let total = 0;
-    let p;
     this.products.forEach((p: { precio: number; }) => total = p.precio*this.newAdminForm.value.cantidad);
     return total;
   }
