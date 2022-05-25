@@ -2,6 +2,9 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { menuList as staticMenuList } from '../../data/menus';
 import { CartService } from 'src/app/service/cart.service';
+
+import {Router} from '@angular/router';
+
 @Component({
   selector: 'll-header',
   templateUrl: './header.component.html',
@@ -16,7 +19,8 @@ export class HeaderComponent implements OnInit {
   clientId = null;
   opened: boolean;
   isLessThenLargeDevice: boolean;
-  constructor(private breakpointObserver: BreakpointObserver, private cartService : CartService) {}
+  constructor(private breakpointObserver: BreakpointObserver, private cartService : CartService,
+    private router : Router) {}
   public products = [];
   public totalItem : number = 0;
   ngOnInit(): void {
@@ -44,6 +48,11 @@ export class HeaderComponent implements OnInit {
     this.clientId = null;
     location.reload();
   }
+
+  irAInterfazEditar() {
+    this.router.navigateByUrl(`/authclient/edit-client/`+ this.clientId);
+  }
+  
   public total() {
   let total = 0;
     let p;

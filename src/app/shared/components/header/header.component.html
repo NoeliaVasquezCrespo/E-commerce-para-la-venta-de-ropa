@@ -23,7 +23,7 @@
         </button>
         <div class="hidden items-center md:flex ml-auto"> 
           <div *ngIf="tokenCli!=''">
-            <a [routerLink]="['/authclient/edit-client/:id']" mat-raised-button color="warn" class="text-lg font-bold py-2 px-5">Editar Datos</a>
+            <a (click)="irAInterfazEditar()" mat-raised-button color="warn" class="text-lg font-bold py-2 px-5">Editar Datos</a>
             <a (click)="logout()" mat-raised-button color="accent" class="text-lg font-bold py-2 px-5 ml-2">Cerrar Sesion</a>
           </div>
           <div *ngIf="tokenCli==''">
