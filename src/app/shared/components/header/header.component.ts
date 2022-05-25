@@ -12,12 +12,16 @@ export class HeaderComponent implements OnInit {
   @Output() toggleSidenav = new EventEmitter();
   isScrolled: boolean;
   menuList = [] as any;
+  tokenCli = null;
+  clientId = null;
   opened: boolean;
   isLessThenLargeDevice: boolean;
   constructor(private breakpointObserver: BreakpointObserver, private cartService : CartService) {}
   public products = [];
   public totalItem : number = 0;
   ngOnInit(): void {
+    this.tokenCli = localStorage.getItem('tokenCli');
+    this.clientId = localStorage.getItem('clientId');
     this.menuList = staticMenuList;
     this.breakpointObserver.observe(['(max-width: 1199px)']).subscribe(({ matches }) => {
       this.isLessThenLargeDevice = matches;
@@ -29,6 +33,14 @@ export class HeaderComponent implements OnInit {
     })
   }
 
+  logout(){
+    localStorage.setItem('tokenCli', '');
+    localStorage.setItem('clientId', '');
+    this.tokenCli = null;
+    this.clientId = null;
+    location.reload();
+  }
+  
   @HostListener('window:scroll', ['$event'])
   checkScroll() {
     this.isScrolled = window.pageYOffset > 15;
