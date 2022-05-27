@@ -101,25 +101,6 @@ export class EditClientComponent implements OnInit {
     }else {
       this.wrongNotification('Las contraseñas no coinciden, intente de nuevo');  
     }
-    /*if(this.newUserForm.valid){
-    var api = 'http://localhost:8080/v2/users';
-    data.status=1;
-    console.log('Nuevo Usuario: ', data);
-    if(this.newUserForm.value.password ==  this.newUserForm.value.confirmpassword) {
-      this.successNotification('Se registró al usuario correctamente');
-      axios.post(api,data).then(function (result){
-        console.log(result);
-        this.successNotification();
-
-        },error=>{
-          this.wrongNotification('Usuario inexistente');
-      });
-      } else {
-        this.wrongNotification('Las contraseñas no coinciden, intente de nuevo');  
-      }
-    }else{
-      this.wrongNotification('Complete los espacios vacíos')
-    }*/
   }
 
   async confirmationUserUpdate(user: user){
@@ -183,7 +164,7 @@ export class EditClientComponent implements OnInit {
       confirmButtonText: 'Ok',
     }).then(async (result) => {
       if (result.value) {
-        location.reload(); 
+        window.location.href="http://localhost:4200/";
       }
     })
   }
