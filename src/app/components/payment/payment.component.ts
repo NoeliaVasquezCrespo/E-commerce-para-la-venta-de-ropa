@@ -50,8 +50,8 @@ export class PaymentComponent implements OnInit {
   elementsOptions: StripeElementsOptions = {
     locale: 'es'
   };
-  constructor(private cartService : CartService,private authService:AuthService,private addressService:AddressService,private fb:FormBuilder,
-    
+  constructor(private cartService : CartService,private authService:AuthService,
+    private addressService:AddressService,private fb:FormBuilder,
     private stripeService: StripeService ,private router: Router,) {
     this.datosUsuario=this.fb.group({
       nombre: new FormControl('', Validators.required),
