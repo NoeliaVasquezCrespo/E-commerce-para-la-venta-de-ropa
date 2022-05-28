@@ -7,3 +7,38 @@
     routerLink="/providerdashboard/chart-by-city"
   >Exportar a PDF</button>
 </div>
+
+<!--The content below is only a placeholder and can be replaced.-->
+<div id="chart">
+  <apx-chart
+    [series]="chartOptions.series"
+    [chart]="chartOptions.chart"
+    [labels]="chartOptions.labels"
+    [responsive]="chartOptions.responsive">
+  </apx-chart>
+</div>
+<div>
+  <mat-table #table [dataSource]="dataSource">
+    <ng-container matColumnDef="Id">
+      <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.ciudadId}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Ciudad">
+      <mat-header-cell *matHeaderCellDef> Ciudad </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.nombreCiudad}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="CantidadProductos">
+      <mat-header-cell *matHeaderCellDef> Cantidad de Productos </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.cantidadVendidos}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="MontoTotal">
+      <mat-header-cell *matHeaderCellDef> Monto Total </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.sumTotal}} </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
