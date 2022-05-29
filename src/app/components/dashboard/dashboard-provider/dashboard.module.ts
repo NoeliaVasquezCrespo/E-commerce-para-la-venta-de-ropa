@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule} from '@angular/material/expansion';
 import { DashboardRoutingModule } from './dashboard-routing.module';
@@ -19,6 +20,8 @@ import { DashboardOffersComponent } from './dashboard-offers/dashboard-offers.co
 import { DashboardInactiveOffersComponent } from './dashboard-inactive-offers/dashboard-inactive-offers.component';
 import { DashboardChartByCityComponent } from './dashboard-chart-by-city/dashboard-chart-by-city.component';
 import { NgApexchartsModule } from "ng-apexcharts";
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,6 @@ import { NgApexchartsModule } from "ng-apexcharts";
     DashboardInactiveOffersComponent,
     DashboardChartByCityComponent
   ],
-  imports: [NgApexchartsModule,CommonModule, DashboardRoutingModule,MatExpansionModule, MaterialModule, SharedModule, MatMenuModule, FormsModule, ReactiveFormsModule, MatTableModule, MatPaginatorModule]
+  imports: [MatInputModule, MatNativeDateModule, NgApexchartsModule, CommonModule, DashboardRoutingModule, MatExpansionModule, MaterialModule, SharedModule, MatMenuModule, FormsModule, ReactiveFormsModule, MatTableModule, MatPaginatorModule, MatDatepickerModule, MatGridListModule]
 })
 export class DashboardModule {}

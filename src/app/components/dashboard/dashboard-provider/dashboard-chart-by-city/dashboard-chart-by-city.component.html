@@ -9,14 +9,53 @@
 </div>
 
 <!--The content below is only a placeholder and can be replaced.-->
-<div id="chart">
+<div id="chart" class="d-flex justify-center">
   <apx-chart
     [series]="chartOptions.series"
     [chart]="chartOptions.chart"
     [labels]="chartOptions.labels"
     [responsive]="chartOptions.responsive">
   </apx-chart>
+
 </div>
+
+
+
+  <form [formGroup]="filterForm" (ngSubmit)="aplicarFiltro()">
+
+    <mat-grid-list cols="3" rowHeight="3:1">
+      <mat-grid-tile>
+        <mat-form-field appearance="fill">
+          <mat-label>Choose a date</mat-label>
+          <input matInput [matDatepicker]="picker"
+                 (dateChange)="cambioFecha()"
+                 formControlName="startDate">
+          <!--<mat-hint>MM/DD/YYYY</mat-hint>-->
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field appearance="fill">
+          <mat-label>Choose a date</mat-label>
+          <input matInput [matDatepicker]="picker2"
+                 (dateChange)="cambioFecha()"
+                 formControlName="endDate">
+          <!--<mat-hint>MM/DD/YYYY</mat-hint>-->
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div class="ml-4 mt-2 col-span-6 mb-3">
+          <button type="submit" [style.margin-bottom.px]="10"  mat-flat-button color="accent"><mat-icon>search</mat-icon>Realizar Busquedas</button>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+  </form>
+
+
 <div>
   <mat-table #table [dataSource]="dataSource">
     <ng-container matColumnDef="Id">
