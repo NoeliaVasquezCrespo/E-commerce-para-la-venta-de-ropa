@@ -1,83 +1,91 @@
-<div>
-  <div style="text-align: center;">
-    <h1>PRODUCTOS MAS VENDIDOS POR CIUDADES</h1>
+<div id="content-print">
+  <div>
+    <div style="text-align: center;">
+      <h1>PRODUCTOS MAS VENDIDOS POR CIUDADES</h1>
+    </div>
+    <div data-html2canvas-ignore="true">
+      <button
+              mat-flat-button color="accent"
+              (click)="generarReporte()"
+      >Exportar a PDF</button>
+    </div>
   </div>
-  <button
-    mat-flat-button color="accent"
-    routerLink="/providerdashboard/chart-by-city"
-  >Exportar a PDF</button>
-</div>
 
-<!--The content below is only a placeholder and can be replaced.-->
-<div id="chart" class="d-flex justify-center">
-  <apx-chart
-    [series]="chartOptions.series"
-    [chart]="chartOptions.chart"
-    [labels]="chartOptions.labels"
-    [responsive]="chartOptions.responsive">
-  </apx-chart>
+  <!--The content below is only a placeholder and can be replaced.-->
+  <div id="chart" class="center-content d-flex justify-center">
 
-</div>
+    <apx-chart
+            [series]="chartOptions.series"
+            [chart]="chartOptions.chart"
+            [labels]="chartOptions.labels"
+            [responsive]="chartOptions.responsive">
+    </apx-chart>
 
 
 
-  <form [formGroup]="filterForm" (ngSubmit)="aplicarFiltro()">
+  </div>
+  <div data-html2canvas-ignore="true">
+    <form [formGroup]="filterForm" (ngSubmit)="aplicarFiltro()">
 
-    <mat-grid-list cols="3" rowHeight="3:1">
-      <mat-grid-tile>
-        <mat-form-field appearance="fill">
-          <mat-label>Choose a date</mat-label>
-          <input matInput [matDatepicker]="picker"
-                 (dateChange)="cambioFecha()"
-                 formControlName="startDate">
-          <!--<mat-hint>MM/DD/YYYY</mat-hint>-->
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <mat-form-field appearance="fill">
-          <mat-label>Choose a date</mat-label>
-          <input matInput [matDatepicker]="picker2"
-                 (dateChange)="cambioFecha()"
-                 formControlName="endDate">
-          <!--<mat-hint>MM/DD/YYYY</mat-hint>-->
-          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-          <mat-datepicker #picker2></mat-datepicker>
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <div class="ml-4 mt-2 col-span-6 mb-3">
-          <button type="submit" [style.margin-bottom.px]="10"  mat-flat-button color="accent"><mat-icon>search</mat-icon>Realizar Busquedas</button>
-        </div>
-      </mat-grid-tile>
-    </mat-grid-list>
+      <mat-grid-list cols="3" rowHeight="3:1">
+        <mat-grid-tile>
+          <mat-form-field appearance="fill">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker"
+                   (dateChange)="cambioFecha()"
+                   formControlName="startDate">
+            <!--<mat-hint>MM/DD/YYYY</mat-hint>-->
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="fill">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker2"
+                   (dateChange)="cambioFecha()"
+                   formControlName="endDate">
+            <!--<mat-hint>MM/DD/YYYY</mat-hint>-->
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <div class="ml-4 mt-2 col-span-6 mb-3">
+            <button type="submit" [style.margin-bottom.px]="10"  mat-flat-button color="accent"><mat-icon>search</mat-icon>Realizar Busquedas</button>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
 
-  </form>
-
-
-<div>
-  <mat-table #table [dataSource]="dataSource">
-    <ng-container matColumnDef="Id">
-      <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.ciudadId}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="Ciudad">
-      <mat-header-cell *matHeaderCellDef> Ciudad </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.nombreCiudad}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="CantidadProductos">
-      <mat-header-cell *matHeaderCellDef> Cantidad de Productos </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.cantidadVendidos}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="MontoTotal">
-      <mat-header-cell *matHeaderCellDef> Monto Total </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.sumTotal}} </mat-cell>
-    </ng-container>
+    </form>
+  </div>
 
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
+
+  <div id="table-container">
+    <mat-table #table [dataSource]="dataSource">
+      <ng-container matColumnDef="Id">
+        <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.ciudadId}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Ciudad">
+        <mat-header-cell *matHeaderCellDef> Ciudad </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.nombreCiudad}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="CantidadProductos">
+        <mat-header-cell *matHeaderCellDef> Cantidad de Productos </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.cantidadVendidos}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="MontoTotal">
+        <mat-header-cell *matHeaderCellDef> Monto Total </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.sumTotal}} </mat-cell>
+      </ng-container>
+
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+
 </div>

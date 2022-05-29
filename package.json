@@ -27,6 +27,7 @@
     "@stripe/stripe-js": "^1.29.0",
     "@types/stripe-v3": "^3.1.26",
     "axios": "^0.26.1",
+    "html2pdf.js": "^0.10.1",
     "ng-apexcharts": "^1.7.1",
     "ng-particles": "^2.7.3",
     "ngx-skeleton-loader": "^2.10.1",
