@@ -1,0 +1,96 @@
+<div class="login__page"  >
+  <div class="login__row min-h-screen">
+    <div class="login__hero flex flex-col justify-center items-center py-10 px-4 sm:px-8 xl:px-20 text-white"[style.background-image]="'url(https://img.freepik.com/foto-gratis/ropa-moda-tienda-boutique_1150-14701.jpg?w=2000)'">
+      <a class="w-48 inline-block"><img src="assets/logo_trendy.png" style="width: 500px; height: 150px;" alt="Trendy" /></a>
+    </div>
+    <div class="login__content flex flex-col justify-center bg-accent" style="background-color: #2f6394;">
+      <div class="login w-full max-w-xl rounded-md mx-auto border p-4 sm:p-8 xl:p-20">
+        <form [formGroup]="newProductForm" (ngSubmit)="addNewProduct(newProductForm.value)">
+          <h1 class="text-2xl font-bold">AGREGAR PRODUCTO</h1>
+          <div class="mb-6 mt-6">
+            <label class="block text-gray-700 text-sm font-semibold mb-2" for="codigo"> Código del producto </label>
+              <input
+                class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
+                id="codigo"
+                type="text" min="1" step="any"
+                placeholder="Código"
+                formControlName="codigoProducto"
+              />
+          </div>
+          <div class="mb-4 mt-6">
+            <label class="block text-gray-700 text-sm font-semibold mb-2" for="nombre"> Nombre del producto</label>
+            <input
+              class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
+              id="nombre"
+              type="text"
+              placeholder="Nombre"
+              formControlName="nombreProducto"
+            />
+          </div>
+          <div class="mb-4 mt-6">
+            <label class="block text-gray-700 text-sm font-semibold mb-2" for="descripcion"> Descripción del producto </label>
+            <input
+              class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
+              id="descripcion"
+              type="text"
+              placeholder="Descripción"
+              formControlName="descripcion"
+            />
+          </div>
+
+          <div class="mb-4 mt-6">
+            <label class="block text-gray-700 text-sm font-semibold mb-2" for="precio"> Precio (Bs.) </label>
+              <input
+                class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
+                id="precio"
+                type="number" min="1" step="any"
+                placeholder="Precio"
+                formControlName="precio"
+              />
+          </div>
+          <h1 class="text-2xl font-bold">AGREGAR CARACTERISTICAS INICIALES</h1>
+          <div class="mb-4 mt-6">
+            <label class="block text-gray-700 text-sm font-semibold mb-2" for="color"> Color </label>
+            <select name="color" id="color" formControlName="color"
+                    class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10">
+              <option value="0">Color</option>
+              <option [ngValue]="item.id" *ngFor="let item of listColores">{{item.descripcion}}</option>
+            </select>
+          </div>
+          <div class="mb-4 mt-6">
+            <label class="block text-gray-700 text-sm font-semibold mb-2" for="talla"> Talla </label>
+            <select
+              name="tallas" id="talla" formControlName="talla"
+              class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10">
+              <option value="0">Talla</option>
+              <option [ngValue]="item.id" *ngFor="let item of listTallas">{{item.nombreTalla}}</option>
+            </select>
+          </div>
+          <div class="mb-4 mt-6">
+            <label class="block text-gray-700 text-sm font-semibold mb-2" for="stock"> Stock </label>
+            <input
+              class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
+              id="stock"
+              type="number" min="1" step="any"
+              placeholder="Stock"
+              formControlName="stock"
+            />
+          </div>
+          <div class="mb-6 mt-6">
+            <label class="block text-gray-700 text-sm font-semibold mb-2" for="tipo"> Seleccione fotos </label>
+            <input type="file" (change)="selectFile($event)" name="fotos producto[]" multiple>
+          </div>
+          <div class="flex w-full mt-6">
+            <button
+              class="w-full bg-gray-800 hover:bg-grey-900 text-white text-sm py-2 px-4 font-semibold rounded focus:outline-none focus:shadow-outline h-10"
+              type="submit"
+
+            >
+            Agregar Producto
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
