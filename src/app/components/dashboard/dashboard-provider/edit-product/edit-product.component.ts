@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators} from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 import { product } from '../../../../models/Product';
 import axios from 'axios';
 import { AddproductService } from 'src/app/service/addproduct.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from'sweetalert2';
 import {Size} from '../../../../models/Size';
 import {Color} from '../../../../models/Color';
@@ -18,44 +18,103 @@ import {HomeProductService} from '../../../../service/home-product.service';
 })
 export class EditProductComponent implements OnInit {
 
-  selectedFiles?: FileList;
+  idParam:number;
   producto:product;
-  productCharacteristic:ProductCharacteristic
-  currentFile?: File;
+  updateProducto:product;
   message = '';
   errorMsg = '';
-  newProductoId:number=0;
+  newProductForm:FormGroup;
 
   listTallas:Size[]=[];
   listColores:Color[];
 
-  constructor(private addProductService:AddproductService,
+  constructor(private activatedRoute: ActivatedRoute,
+              private addProductService:AddproductService,
               private router: Router,
+              private fb:FormBuilder,
               private productListService:ProductListService,
-              private homeProductService:HomeProductService) { }
+              private homeProductService:HomeProductService) { 
+                this.newProductForm = this.fb.group({
+                codigoProducto: new FormControl('', Validators.required),
+                nombreProducto : new FormControl('', Validators.required),
+                descripcion : new FormControl('', Validators.required),
+                stock : new FormControl('', Validators.required),
+                precio : new FormControl('', Validators.required),
+                administradorId : new FormControl(0, Validators.required),
+                color:new FormControl(0, Validators.required),
+                talla:new FormControl(0, Validators.required),
+              });
+  }  
+  async editProduct(){
+    console.log(this.newProductForm.value);
+    let newProduct:product={
+      codigoProducto: this.producto.codigoProducto,
+      nombreProducto: this.producto.nombreProducto,
+      descripcion: this.producto.descripcion,
+      stock: this.producto.stock,
+      precio: this.producto.precio,
+      colorId: this.producto.colorId,
+      tallaId: this.producto.tallaId,
+      administradorId: this.producto.administradorId,
+      status: this.producto.status
+    }
+    await this.updateProduct(newProduct);
+  }
 
-  public newProductForm = new FormGroup({
-    codigoProducto: new FormControl('', Validators.required),
-    nombreProducto : new FormControl('', Validators.required),
-    descripcion : new FormControl('', Validators.required),
-    stock : new FormControl('', Validators.required),
-    precio : new FormControl('', Validators.required),
-    administradorId : new FormControl(0, Validators.required),
-    color:new FormControl(0, Validators.required),
-    talla:new FormControl(0, Validators.required),
-  });
+  async updateProduct(product:product){
+    let respuesta;
+    this.productListService.updateProduct(this.idParam,product).toPromise().then(async (response) => {
+      respuesta = response;
+      console.log("LA RESPUESTA ES:")
+      console.log(respuesta)
+      console.log("FIN RESPUESTA")
+      if(respuesta!=null){
+          await this.successNotificationLogin();
+      }
+    }).catch(e => console.error(e));
+    return respuesta;
+  
+  }
 
   async ngOnInit(): Promise<void> {
+    this.idParam = this.activatedRoute.snapshot.params.id;
+    console.log(this.idParam);
     function setTwoNumberDecimal(event) {
       this.value = parseFloat(this.value).toFixed(2);
     }
     this.listColores=await this.getColoursData();
     this.listTallas=await this.getSizesData();
     console.log(this.listColores);
+
+    this.producto = await this.getProductById(this.idParam);
+    console.log(this.producto);
+    this.newProductForm.patchValue(
+      {
+      codigoProducto: this.producto.codigoProducto,
+      nombreProducto: this.producto.nombreProducto,
+      descripcion: this.producto.descripcion,
+      stock: this.producto.stock,
+      precio: this.producto.precio,
+      colorId: this.producto.colorId,
+      tallaId: this.producto.tallaId,
+      administradorId: this.producto.administradorId,
+      status: this.producto.status
+
+       
+      });
+    console.log(this.newProductForm.value);
   }
-  selectFile(event: any): void {
-    this.selectedFiles = event.target.files;
+ 
+  async getProductById(id:number):Promise<product>{
+    let respuesta:product;
+    console.log("PRIMER METODO");
+    //let idProvider:number = parseInt(localStorage.getItem('userId'));
+    await this.productListService.getProductById(id).toPromise().then((response) => {
+      respuesta = response;
+    }).catch(e => console.error(e));
+    return respuesta;
   }
+
   async addNewCharacteristicProduct(productCharacteristic:ProductCharacteristic){
     let respuesta;
     await this.homeProductService.postProductCharacteristic(productCharacteristic).toPromise().then((response) => {
@@ -65,89 +124,9 @@ export class EditProductComponent implements OnInit {
   }
 
 
-  async addNewProduct(data: product){
-    var id = localStorage.getItem('userId');
-    console.log(this.newProductForm.value);
-    this.newProductForm.value.administradorId = id;
-    if(this.newProductForm.valid){
-      this.producto={
-        administradorId: parseInt(id),
-        codigoProducto: this.newProductForm.value.codigoProducto,
-        colorId: this.newProductForm.value.color,
-        descripcion: this.newProductForm.value.descripcion,
-        nombreProducto: this.newProductForm.value.nombreProducto,
-        precio: this.newProductForm.value.precio,
-        status: 1,
-        stock: this.newProductForm.value.stock,
-        tallaId: this.newProductForm.value.talla
-      }
+  
 
-      let self = this
-      console.log("EJECUTANDO METODO PARA AGREGAR PRODUCTO");
-      var api = 'http://localhost:8080/v2/products';
-
-      console.log('New Product : ', data);
-      axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('token');
-      await axios.post(api,this.producto).then(function (result){
-      console.log(result.data);
-      console.log(result.data.id);
-      let value:number=result.data.id || 0;
-      self.newProductoId=value;
-      });
-      this.productCharacteristic={
-        colorId: this.newProductForm.value.color,
-        productId: this.newProductoId,
-        stock: this.newProductForm.value.color,
-        tallaId: this.newProductForm.value.color,
-        status:1}
-      let prodcuctChar:ProductCharacteristic= await this.addNewCharacteristicProduct(this.productCharacteristic);
-      await this.upload(prodcuctChar.id);
-
-      this.successNotificationLogin();
-    }else{
-
-      this.wrongNotificationLogin('Complete los espacios vacíos')
-    }
-
-
-  }
-
-  async upload(id:number): Promise<void> {
-    this.errorMsg = '';
-
-    if (this.selectedFiles) {
-      const file: File | null = this.selectedFiles.item(0);
-
-      if (file) {
-        this.currentFile = file;
-        console.log("ARCHIVO");
-        console.log(this.currentFile);
-        await this.addProductService.uploadImageProduct(this.currentFile,id).subscribe(
-          (event: any) => {
-            if (event.type === HttpEventType.UploadProgress) {
-              console.log(Math.round(100 * event.loaded / event.total));
-
-            } else if (event instanceof HttpResponse) {
-              this.message = event.body.responseMessage;
-            }
-          },
-          (err: any) => {
-            console.log(err);
-
-            if (err.error && err.error.responseMessage) {
-              this.errorMsg = err.error.responseMessage;
-            } else {
-              this.errorMsg = 'Error occurred while uploading a file!';
-            }
-
-            this.currentFile = undefined;
-          });
-      }
-
-      this.selectedFiles = undefined;
-    }
-    this.router.navigateByUrl('/providerdashboard');
-  }
+  
   wrongNotificationLogin(mensaje:string){
     Swal.fire({
       icon: 'error',
@@ -157,8 +136,8 @@ export class EditProductComponent implements OnInit {
   }
   successNotificationLogin(){
     Swal.fire({
-      title: 'REGISTRO EXITOSO',
-      text: 'La operacion se ha realizado completamente',
+      title: 'Actualización Exitosa',
+      text: 'Información del producto actualizado correctamente',
       icon: 'success',
       showCancelButton: false,
       confirmButtonText: 'Ok',
