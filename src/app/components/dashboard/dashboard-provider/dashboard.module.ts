@@ -23,6 +23,8 @@ import { NgApexchartsModule } from "ng-apexcharts";
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatGridListModule} from '@angular/material/grid-list';
 
+import { EditProductComponent } from './edit-product/edit-product.component';
+
 @NgModule({
   declarations: [
     DashboardLayoutComponent,
@@ -33,7 +35,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     AddoffersComponent,
     DashboardOffersComponent,
     DashboardInactiveOffersComponent,
-    DashboardChartByCityComponent
+    DashboardChartByCityComponent,
+    EditProductComponent
   ],
   imports: [MatInputModule, MatNativeDateModule, NgApexchartsModule, CommonModule, DashboardRoutingModule, MatExpansionModule, MaterialModule, SharedModule, MatMenuModule, FormsModule, ReactiveFormsModule, MatTableModule, MatPaginatorModule, MatDatepickerModule, MatGridListModule]
 })
