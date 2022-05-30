@@ -1,19 +1,14 @@
 <div>
 	<div style="text-align: center;">
-	  <h1>OFERTAS </h1>
+	  <h1>OFERTAS - PRODUCTOS</h1>
 	</div>
 	<div>
 	  <div class="flex justify-between flex-wrap">
-		<h2 class="mb-3 font-medium">LISTA DE OFERTAS ACTIVAS</h2>
+		<h2 class="mb-3 font-medium">LISTA DE OFERTAS - PRODUCTOS ACTIVOS</h2>
 	  </div>
     </div> 
 	<div class="table-inside">
-		<mat-form-field>
-			<mat-label>Filtro</mat-label>
-			<input matInput (keyup)="applyFilter($event)"  #input>
-		</mat-form-field>
-
-
+		
 		<table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"  class="mat-elevation-z8">
 			<ng-container matColumnDef="id">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by id"> ID </th>
@@ -40,10 +35,6 @@
                 <button mat-menu-item (click)="deleteProviderNotification(element?.id)">
                   <mat-icon>delete</mat-icon>
                   <span>Eliminar oferta</span>
-                </button>
-                <button mat-menu-item (click)="irAInterfazEditar(element?.id)">
-                  <mat-icon>update</mat-icon>
-                  <span>Editar oferta</span>
                 </button>
               </mat-menu>
 

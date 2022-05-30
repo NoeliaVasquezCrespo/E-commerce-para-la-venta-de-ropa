@@ -16,7 +16,7 @@ import {Router} from '@angular/router';
 })
 export class DashboardInactiveOffersComponent implements OnInit {
   offers:OfferProduct[] = [];
-  displayedColumns: string[] = ['id', 'oferta_id', 'producto_id', 'opciones'];
+  displayedColumns: string[] = ['id', 'oferta_id', 'producto_id'];
   dataSource = new MatTableDataSource();
   cad:string;
 

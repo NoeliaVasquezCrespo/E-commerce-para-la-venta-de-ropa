@@ -59,4 +59,14 @@ export class AddofferService {
     console.log(url);
     return this.http.get<OfferProduct[]>(url, { headers: reqHeader });
   }
+
+  deleteOfferProduct(idProvider:number):Observable<void>{
+    const url = `${this.baseUrl}oferta/producto/${idProvider}`;
+    let jwt= localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({
+      'Authorization': `Bearer ${jwt}`
+    });
+    return this.http.delete<void>(url, { headers: reqHeader })
+  }
+  upda
 }
