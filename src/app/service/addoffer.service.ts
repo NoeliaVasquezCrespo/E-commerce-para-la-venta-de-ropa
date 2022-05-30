@@ -41,7 +41,17 @@ export class AddofferService {
   }
 
   getListOfferProduct():Observable<OfferProduct[]> {
-    const url = `${this.baseUrl}oferta/producto`;
+    const url = `${this.baseUrl}oferta/producto/status=1`;
+    let jwt= localStorage.getItem('token')
+    const reqHeader = new HttpHeaders({
+      'Authorization': `Bearer ${jwt}`
+    })
+    console.log(url);
+    return this.http.get<OfferProduct[]>(url, { headers: reqHeader });
+  }
+
+  getInactiveListOfferProduct():Observable<OfferProduct[]> {
+    const url = `${this.baseUrl}oferta/producto/status=0`;
     let jwt= localStorage.getItem('token')
     const reqHeader = new HttpHeaders({
       'Authorization': `Bearer ${jwt}`
