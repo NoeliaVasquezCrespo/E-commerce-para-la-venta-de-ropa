@@ -56,11 +56,7 @@ const routes: Routes = [
     path: '',
     component: DashboardLayoutComponent,
     children: DashboardChildrenRoute
-  },
-  {
-    path: 'edit-product/:id',
-    component: EditProductComponent
-  },
+  }
 ];
 
 @NgModule({

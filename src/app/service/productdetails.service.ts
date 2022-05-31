@@ -2,18 +2,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
-import { Producto } from '../models/Producto';
+import { ProductCharacteristic } from '../models/ProductCharacteristic';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class ProductDetailsService {
   private baseUrl:string = environment.baseUrl;
   constructor(private http:HttpClient){ }
 
-  getProduct(idProducto:number):Observable<Producto> {
-    const url = `${this.baseUrl}products/id=${idProducto}`;
+  getProductDetailsByIdProduct(idProducto:number):Observable<ProductCharacteristic> {
+    const url = `${this.baseUrl}productDescriptions/productId=${idProducto}`;
     console.log(url);
-    return this.http.get<Producto>(url);
+    return this.http.get<ProductCharacteristic>(url);
   }
 }

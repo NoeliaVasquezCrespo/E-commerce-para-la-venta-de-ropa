@@ -5,7 +5,8 @@
     </div>
     <div class="login__content flex flex-col justify-center bg-accent" style="background-color: #2f6394;">
       <div class="login w-full max-w-xl rounded-md mx-auto border p-4 sm:p-8 xl:p-20">
-        <form [formGroup]="newProductForm" (ngSubmit)="addNewProduct(newProductForm.value)">
+        
+        <form [formGroup]="datosProducto" (ngSubmit)="editProduct()">
           <h1 class="text-2xl font-bold">EDITAR PRODUCTO</h1>
           <div class="mb-6 mt-6">
             <label class="block text-gray-700 text-sm font-semibold mb-2" for="codigo"> Código del producto </label>
@@ -49,76 +50,78 @@
                 formControlName="precio"
               />
           </div>
+          
           <h1 class="text-2xl font-bold">AGREGAR CARACTERISTICAS INICIALES</h1>
-          <div class="mb-4 mt-6">
-            <label class="block text-gray-700 text-sm font-semibold mb-2" for="color"> Color </label>
-            <select name="color" id="color" formControlName="color"
-                    class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10">
-                    <option value="	1	" type="number">	Negro	</option>
-                    <option value="	2	" type="number">	Azul	</option>
-                    <option value="	3	" type="number">	Marron	</option>
-                    <option value="	4	" type="number">	Gris	</option>
-                    <option value="	5	" type="number">	Verde	</option>
-                    <option value="	6	" type="number">	Naranja	</option>
-                    <option value="	7	" type="number">	Rosa	</option>
-                    <option value="	8	" type="number">	Purpura	</option>
-                    <option value="	9	" type="number">	Rojo	</option>
-                    <option value="	10	" type="number">	Blanco	</option>
-                    <option value="	11	" type="number">	Amarillo	</option>
-                    <option value="	12	" type="number">	Turquesa	</option>
-                    <option value="	13	" type="number">	Verde oliva	</option>
-                    <option value="	14	" type="number">	Verde Menta	</option>
-                    <option value="	15	" type="number">	Lavanda	</option>
-                    <option value="	16	" type="number">	Magenta	</option>
-                    <option value="	17	" type="number">	Salmon	</option>
-                    <option value="	18	" type="number">	Cian	</option>
-                    <option value="	19	" type="number">	Beige	</option>
-                    <option value="	20	" type="number">	Rosado	</option>
-                    <option value="	21	" type="number">	Verde oscuro	</option>
-                    <option value="	22	" type="number">	Lila	</option>
-                    <option value="	23	" type="number">	Amarillo pálido	</option>
-                    <option value="	24	" type="number">	Fucsia	</option>
-                    <option value="	25	" type="number">	Mostaza	</option>
-                    <option value="	26	" type="number">	Ocre	</option>
-                    <option value="	27	" type="number">	Verde claro	</option>
-                    <option value="	28	" type="number">	Azul claro	</option>
-                    <option value="	29	" type="number">	Borgoña	</option>
-                    <option value="	30	" type="number">	Trullo	</option>
-                    <option value="	31	" type="number">	Verde aceituna	</option>
-                    <option value="	32	" type="number">	Malva	</option>
-                    <option value="	33	" type="number">	Purpura oscuro	</option>
-                    <option value="	34	" type="number">	Verde lima	</option>
-                    <option value="	35	" type="number">	Ciruela	</option>
-                    <option value="	36	" type="number">	Melocoton	</option>
-                    <option value="	37	" type="number">	Violeta	</option>
-                    <option value="	38	" type="number">	Tan	</option>
-                    <option value="	39	" type="number">	Granate	</option>                    
-            </select>
-          </div>
-          <div class="mb-4 mt-6">
-            <label class="block text-gray-700 text-sm font-semibold mb-2" for="talla"> Talla </label>
-            <select
-              name="tallas" id="talla" formControlName="talla"
-              class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10">
-              <option value="1" type="number">XXS</option>
-              <option value="2" type="number">XS</option>
-              <option value="3" type="number">S</option>
-              <option value="4" type="number">M</option>
-              <option value="5" type="number">L</option>
-              <option value="6" type="number">XL</option>
-              <option value="7" type="number">XXL</option>
-            </select>
-          </div>
-          <div class="mb-4 mt-6">
-            <label class="block text-gray-700 text-sm font-semibold mb-2" for="stock"> Stock </label>
-            <input
-              class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
-              id="stock"
-              type="number" min="1" step="any"
-              placeholder="Stock"
-              formControlName="stock"
-            />
-          </div>
+          <form [formGroup]="datosCaracteriticas">
+            <div class="mb-4 mt-6">
+              <label class="block text-gray-700 text-sm font-semibold mb-2" for="color"> Color </label>
+              <select name="color" id="colorId" formControlName="colorId"
+                      class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10">
+                      <option value="1" type="number">	Negro	</option>
+                      <option value="2" type="number">	Azul	</option>
+                      <option value="3" type="number">	Marron	</option>
+                      <option value="4" type="number">	Gris	</option>
+                      <option value="5" type="number">	Verde	</option>
+                      <option value="6" type="number">	Naranja	</option>
+                      <option value="7" type="number">	Rosa	</option>
+                      <option value="8" type="number">	Purpura	</option>
+                      <option value="9" type="number">	Rojo	</option>
+                      <option value="10" type="number">	Blanco	</option>
+                      <option value="11" type="number">	Amarillo	</option>
+                      <option value="12" type="number">	Turquesa	</option>
+                      <option value="13" type="number">	Verde oliva	</option>
+                      <option value="14" type="number">	Verde Menta	</option>
+                      <option value="15" type="number">	Lavanda	</option>
+                      <option value="16" type="number">	Magenta	</option>
+                      <option value="17" type="number">	Salmon	</option>
+                      <option value="18" type="number">	Cian	</option>
+                      <option value="19" type="number">	Beige	</option>
+                      <option value="20" type="number">	Rosado	</option>
+                      <option value="21" type="number">	Verde oscuro	</option>
+                      <option value="22" type="number">	Lila	</option>
+                      <option value="23" type="number">	Amarillo pálido	</option>
+                      <option value="24" type="number">	Fucsia	</option>
+                      <option value="25" type="number">	Mostaza	</option>
+                      <option value="26" type="number">	Ocre	</option>
+                      <option value="27" type="number">	Verde claro	</option>
+                      <option value="28" type="number">	Azul claro	</option>
+                      <option value="29" type="number">	Borgoña	</option>
+                      <option value="30" type="number">	Trullo	</option>
+                      <option value="31" type="number">	Verde aceituna	</option>
+                      <option value="32" type="number">	Malva	</option>
+                      <option value="33" type="number">	Purpura oscuro	</option>
+                      <option value="34" type="number">	Verde lima	</option>
+                      <option value="35" type="number">	Ciruela	</option>
+                      <option value="36" type="number">	Melocoton	</option>
+                      <option value="37" type="number">	Violeta	</option>
+                      <option value="38" type="number">	Tan	</option>
+                      <option value="39" type="number">	Granate	</option>                    
+              </select>
+            </div>
+            <div class="mb-4 mt-6">
+              <label class="block text-gray-700 text-sm font-semibold mb-2" for="talla"> Talla </label>
+              <select id="tallaId" formControlName="tallaId"
+                class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10">
+                <option value="1" type="number">XXS</option>
+                <option value="2" type="number">XS</option>
+                <option value="3" type="number">S</option>
+                <option value="4" type="number">M</option>
+                <option value="5" type="number">L</option>
+                <option value="6" type="number">XL</option>
+                <option value="7" type="number">XXL</option>
+              </select>
+            </div>
+            <div class="mb-4 mt-6">
+              <label class="block text-gray-700 text-sm font-semibold mb-2" for="stock"> Stock </label>
+              <input
+                class="text-sm appearance-none rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline h-10"
+                id="stock"
+                type="number" min="1" step="any"
+                placeholder="Stock"
+                formControlName="stock"
+              />
+            </div>
+          </form>
           <div class="mb-6 mt-6">
             <label class="block text-gray-700 text-sm font-semibold mb-2" for="tipo"> Seleccione fotos </label>
             <input type="file" (change)="selectFile($event)" name="fotos producto[]" multiple>
@@ -127,7 +130,6 @@
             <button
               class="w-full bg-gray-800 hover:bg-grey-900 text-white text-sm py-2 px-4 font-semibold rounded focus:outline-none focus:shadow-outline h-10"
               type="submit"
-
             >
             Agregar Producto
             </button>

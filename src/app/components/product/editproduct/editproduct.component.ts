@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl,FormBuilder, Validators} from '@angular/forms';
-import { product } from '../../../models/Product';
-import { ProductDetails } from '../../../models/ProductDetails';
+import { Producto } from '../../../models/Producto';
 import axios from 'axios';
 import { AddproductService } from 'src/app/service/addproduct.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
@@ -11,8 +10,10 @@ import {Size} from '../../../models/Size';
 import {Color} from '../../../models/Color';
 import {ProductListService} from '../../../service/product-list.service';
 import {ProductCharacteristic} from '../../../models/ProductCharacteristic';
+import {ProductService} from '../../../service/product.service';
+import {ProductDetailsService} from '../../../service/productdetails.service';
 import {HomeProductService} from '../../../service/home-product.service';
-
+import { product } from '../../../models/Product';
 @Component({
   selector: 'll-edit-product',
   templateUrl: './editproduct.component.html',
@@ -20,9 +21,9 @@ import {HomeProductService} from '../../../service/home-product.service';
 })
 export class EditProductComponent implements OnInit {
   selectedFiles?: FileList;
-  producto: product;
-  productoDetails: ProductDetails;
-  productCharacteristic:ProductCharacteristic
+  producto: Producto;
+  productoCaracteristicas: ProductCharacteristic;
+  productCharacteristic:ProductCharacteristic;
   currentFile?: File;
   message = '';
   errorMsg = '';
@@ -35,7 +36,8 @@ export class EditProductComponent implements OnInit {
   listColores:Color[];
 
   constructor(private addProductService:AddproductService,private router: Router,private activatedRoute: ActivatedRoute,
-  private productListService:ProductListService,private homeProductService:HomeProductService, private fb:FormBuilder,) {
+  private productListService:ProductListService,private productService:ProductService,private productDetailsService:ProductDetailsService,
+  private homeProductService:HomeProductService, private fb:FormBuilder,) {
     this.datosProducto=this.fb.group({
       codigoProducto: new FormControl('', Validators.required),
       nombreProducto: new FormControl('', Validators.required),
@@ -43,8 +45,8 @@ export class EditProductComponent implements OnInit {
       precio: new FormControl('', Validators.required)
     })
     this.datosCaracteriticas=this.fb.group({
-      color: new FormControl('', Validators.required),
-      talla: new FormControl('', Validators.required),
+      colorId: new FormControl('', Validators.required),
+      tallaId: new FormControl('', Validators.required),
       stock: new FormControl('', Validators.required)
     })
   }
@@ -60,26 +62,45 @@ export class EditProductComponent implements OnInit {
     talla:new FormControl(0, Validators.required),
   });
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     function setTwoNumberDecimal(event) {
       this.value = parseFloat(this.value).toFixed(2);
     }
-    this.listColores=await this.getColoursData();
-    this.listTallas=await this.getSizesData();
     this.idProduct= this.activatedRoute.snapshot.params.id;
-    this.homeProductService.getProductByProductId(this.idProduct).subscribe(
+    this.productService.getProduct(this.idProduct).subscribe(
       resp => {
-        this.productoDetails = resp;
-        console.log("LOS DATOS DEL USUARIO SON");
-        console.log(this.productoDetails);
+        this.producto = resp;
+        console.log("LOS DATOS DEL PRODUCTO SON");
+        console.log(this.producto);
+        this.datosProducto.setValue({
+          codigoProducto: this.producto.codigoProducto,
+          nombreProducto: this.producto.nombreProducto,
+          descripcion: this.producto.descripcion,
+          precio: this.producto.precio
+        });
       }, error => {
         console.log("error");
    });
-    console.log(this.listColores);
+   this.productDetailsService.getProductDetailsByIdProduct(this.idProduct).subscribe(
+    resp => {
+      this.productoCaracteristicas = resp;
+      console.log("Los detalles del producto son");
+      console.log(this.productoCaracteristicas);
+      this.datosCaracteriticas.setValue({
+        colorId: this.productoCaracteristicas.colorId,
+        tallaId: this.productoCaracteristicas.tallaId,
+        stock: this.productoCaracteristicas.stock
+      })
+    }, error => {
+      console.log("error");
+ });
+
   }
+
   selectFile(event: any): void {
     this.selectedFiles = event.target.files;
   }
+
   async addNewCharacteristicProduct(productCharacteristic:ProductCharacteristic){
     let respuesta;
     await this.homeProductService.postProductCharacteristic(productCharacteristic).toPromise().then((response) => {
@@ -89,51 +110,69 @@ export class EditProductComponent implements OnInit {
   }
 
 
-  async addNewProduct(data: product){
-    var id = localStorage.getItem('userId');
-    console.log(this.newProductForm.value);
-    this.newProductForm.value.administradorId = id;
-    if(this.newProductForm.valid){
-      this.producto={
-        administradorId: parseInt(id),
-        codigoProducto: this.newProductForm.value.codigoProducto,
-        colorId: this.newProductForm.value.color,
-        descripcion: this.newProductForm.value.descripcion,
-        nombreProducto: this.newProductForm.value.nombreProducto,
-        precio: this.newProductForm.value.precio,
-        status: 1,
-        stock: this.newProductForm.value.stock,
-        tallaId: this.newProductForm.value.talla
-      }
-
-      let self = this
-      console.log("EJECUTANDO METODO PARA AGREGAR PRODUCTO");
-      var api = 'http://localhost:8080/v2/products';
-
-      console.log('New Product : ', data);
-      axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('token');
-      await axios.post(api,this.producto).then(function (result){
-      console.log(result.data);
-      console.log(result.data.id);
-      let value:number=result.data.id || 0;
-      self.newProductoId=value;
-      });
-      this.productCharacteristic={
-        colorId: this.newProductForm.value.color,
-        productId: this.newProductoId,
-        stock: this.newProductForm.value.color,
-        tallaId: this.newProductForm.value.talla,
-        status:1}
-      let prodcuctChar:ProductCharacteristic= await this.addNewCharacteristicProduct(this.productCharacteristic);
-      await this.upload(prodcuctChar.id);
-
-      this.successNotificationLogin();
-    }else{
-
-      this.wrongNotificationLogin('Complete los espacios vacíos')
+  async editProduct(){
+    let newProducto:Producto={
+      codigoProducto: this.datosProducto.value.codigoProducto,
+      nombreProducto: this.datosProducto.value.nombreProducto,
+      administradorId: this.producto.administradorId,
+      descripcion: this.datosProducto.value.descripcion,
+      precio: this.datosProducto.value.precio,
+      status: 1,
+    }
+    let newCaracteristicas:ProductCharacteristic={
+      colorId: this.datosCaracteriticas.value.colorId,
+      tallaId: this.datosCaracteriticas.value.tallaId,
+      productId:this.producto.id,
+      stock: this.datosCaracteriticas.value.stock,
+      status: 1
     }
 
+    await this.confirmationUserUpdate(newProducto,newCaracteristicas);
+  }
+  async confirmationUserUpdate(producto: Producto,caracteristicas:ProductCharacteristic){
+    Swal.fire({
+      title: 'Confirmar Actualizacion',
+      text: '¿Está seguro de modificar la informacion del producto?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+    }).then(async (result) => {
+      if (result.value) {
+        await this.updateProduct(producto);
+        console.log(caracteristicas);
+        await this.updateCaracteristicas(caracteristicas);
+        this.successUserNotificationLogin();
+      }
+    })
+  }
 
+  async updateProduct(producto: Producto){
+    var api = 'http://localhost:8080/v2/products/'+this.producto.id;
+    axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('token');
+    await axios.put(api,producto).then(function (result){
+      console.log(result);
+    });
+  }
+  async updateCaracteristicas(caracteristicas: ProductCharacteristic){
+    var api = 'http://localhost:8080/v2/productDescriptions/'+this.productoCaracteristicas.id;
+    axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('token');
+    await axios.put(api,caracteristicas).then(function (result){
+      console.log(result);
+    });
+  }
+  successUserNotificationLogin(){
+    Swal.fire({
+      title: 'Exito',
+      text: 'Productto actualizado correctamente',
+      icon: 'success',
+      showCancelButton: false,
+      confirmButtonText: 'Ok',
+    }).then(async (result) => {
+      if (result.value) {
+        await this.router.navigateByUrl('/providerdashboard/saved-items');
+      }
+    })
   }
 
   async upload(id:number): Promise<void> {
