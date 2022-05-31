@@ -5,6 +5,7 @@ import { HomeProductService } from 'src/app/service/home-product.service';
 import Swal from'sweetalert2';
 import {AdminlistService} from '../../../../service/adminlist.service';
 import {MatTableDataSource} from '@angular/material/table';
+import { Router } from '@angular/router';
 @Component({
   selector: 'll-dashboard-products',
   templateUrl: './dashboard-products.component.html',
@@ -20,7 +21,8 @@ export class DashboardProductsComponent implements OnInit {
 
   products:ProductDetails[]=[];
   constructor(private homeProductService:HomeProductService,
-              private adminlistService:AdminlistService) {}
+              private adminlistService:AdminlistService,
+              private router : Router) {}
 
   async ngOnInit(): Promise<void> {
     this.products = await this.loadData();
@@ -65,6 +67,11 @@ export class DashboardProductsComponent implements OnInit {
         console.log("*NO se eliminara el producto*");
       }
     });
+
+  }
+
+  async irAInterfazEditar(id: number) {
+    await this.router.navigateByUrl(`/providerdashboard/edit-product/${id}`);
 
   }
 

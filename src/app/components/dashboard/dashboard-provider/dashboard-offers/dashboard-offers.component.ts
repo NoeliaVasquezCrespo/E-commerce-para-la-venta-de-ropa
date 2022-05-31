@@ -86,12 +86,30 @@ export class DashboardOffersComponent implements OnInit {
         console.log('SE  ELIMINARA OFERTA')
         console.log(`ID DE OFERTA: ${id}`)
         
-       //   await this.deleteProviderById(id);
+          await this.deleteOfferProductById(id);
           console.log("SE ELIMINO A LA OFERTA")
-         
+          await this.successNotificationDeleteCorrectly();
         
       }
     })
+  }
+  async successNotificationDeleteCorrectly(){
+    let self = this
+    Swal.fire({
+      icon: 'success',
+      title: 'Oferta eliminada correctamente',
+      showConfirmButton: true,
+      confirmButtonText: 'Aceptar',
+    }).then(async (result) => {
+      if (result.value) {
+        console.log('provider home')
+        await self.router.navigateByUrl('/providerdashboard');
+      }
+    })
+  }
+  async deleteOfferProductById(id:number){
+    this.offerlistService.deleteOfferProduct(id).toPromise().then((response) => {
+    }).catch(e => console.error(e));
   }
   ngAfterViewInit(){
     this.dataSource.paginator= this.paginator;

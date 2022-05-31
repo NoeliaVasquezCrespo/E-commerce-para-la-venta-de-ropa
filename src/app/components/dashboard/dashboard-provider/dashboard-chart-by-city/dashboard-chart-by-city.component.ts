@@ -13,6 +13,8 @@ import {ProductDetails} from '../../../../models/ProductDetails';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {formatDate} from '@angular/common';
 import { LOCALE_ID } from "@angular/core";
+import * as html2pdf from 'html2pdf.js'
+
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;
@@ -39,6 +41,9 @@ export class DashboardChartByCityComponent implements OnInit {
   listCantidadVendidos:number[]=[];
   listLabelCiudades:string[]=[];
 
+  private element:HTMLElement;
+  private table:HTMLElement;
+
   public fechaActual:Date=new Date();
   public localID: string;
   constructor( @Inject( LOCALE_ID ) localID: string,
@@ -54,7 +59,7 @@ export class DashboardChartByCityComponent implements OnInit {
     this.chartOptions={
       series: [],
       chart: {
-        width: 380,
+        width: 480,
         type: "pie"
       },
       labels: [],
@@ -181,5 +186,18 @@ export class DashboardChartByCityComponent implements OnInit {
 
     }
 
+  }
+
+  generarReporte() {
+    this.element = document.getElementById('content-print');
+    console.log(this.element)
+    var opt = {
+      margin:       1,
+      filename:     'output.pdf',
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 2 },
+      jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    }
+    html2pdf().from(this.element).set(opt).save();
   }
 }
