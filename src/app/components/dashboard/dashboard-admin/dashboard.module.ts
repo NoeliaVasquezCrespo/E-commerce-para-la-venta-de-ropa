@@ -19,6 +19,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { EditProviderComponent } from './edit-provider/edit-provider.component';
 import { DashboardOrdersComponent } from './dashboard-orders/dashboard-orders.component';
 import { DashboardProductsReportComponent } from './dashboard-products-report/dashboard-products-report.component';
+import { DashboardChartByCategoriesComponent } from './dashboard-chart-by-categories/dashboard-chart-by-categories.component';
 
   @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { DashboardProductsReportComponent } from './dashboard-products-report/da
     AddcategoryComponent,
     EditProviderComponent,
     DashboardOrdersComponent,
-    DashboardProductsReportComponent
+    DashboardProductsReportComponent,
+    DashboardChartByCategoriesComponent
   ],
   imports: [CommonModule, DashboardRoutingModule, SharedModule, MatMenuModule,MatExpansionModule,MaterialModule,FormsModule, ReactiveFormsModule, MatCheckboxModule]
 

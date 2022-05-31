@@ -12,6 +12,7 @@ import { DashboardOrdersComponent } from './dashboard-orders/dashboard-orders.co
 import { AddcategoryComponent } from './addcategory/addcategory.component'
 import { EditProviderComponent } from './edit-provider/edit-provider.component';
 import { DashboardProductsReportComponent } from './dashboard-products-report/dashboard-products-report.component';
+import { DashboardChartByCategoriesComponent } from './dashboard-chart-by-categories/dashboard-chart-by-categories.component';
 
 const DashboardChildrenRoute: Routes = [
   {
@@ -57,6 +58,10 @@ const DashboardChildrenRoute: Routes = [
   {
     path: 'orders',
     component: DashboardOrdersComponent 
+  },
+  {
+    path: 'chart-by-categories',
+    component: DashboardChartByCategoriesComponent,
   }
 
 
