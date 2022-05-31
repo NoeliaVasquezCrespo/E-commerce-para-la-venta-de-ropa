@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EditProductComponent } from './edit-product.component';
+import { EditProductComponent } from './editproduct.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: EditProductComponent
   }
 ];

@@ -3,10 +3,10 @@ export interface product{
     codigoProducto: string;
     nombreProducto : string;
     descripcion : string;
-    stock : number;
+    stock? : number;
     precio : number;
-    colorId : number;
-    tallaId : number;
+    colorId? : number;
+    tallaId? : number;
     administradorId : number;
-    status: number;
+    status?: number;
 }

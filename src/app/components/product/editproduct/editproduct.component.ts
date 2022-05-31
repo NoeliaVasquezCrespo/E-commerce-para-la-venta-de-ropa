@@ -1,37 +1,53 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators} from '@angular/forms';
+import { FormGroup, FormControl,FormBuilder, Validators} from '@angular/forms';
 import { product } from '../../../models/Product';
+import { ProductDetails } from '../../../models/ProductDetails';
 import axios from 'axios';
 import { AddproductService } from 'src/app/service/addproduct.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import Swal from'sweetalert2';
 import {Size} from '../../../models/Size';
 import {Color} from '../../../models/Color';
 import {ProductListService} from '../../../service/product-list.service';
 import {ProductCharacteristic} from '../../../models/ProductCharacteristic';
 import {HomeProductService} from '../../../service/home-product.service';
+
 @Component({
   selector: 'll-edit-product',
-  templateUrl: './edit-product.component.html',
-  styleUrls: ['./edit-product.component.scss']
+  templateUrl: './editproduct.component.html',
+  styleUrls: ['./editproduct.component.scss']
 })
 export class EditProductComponent implements OnInit {
   selectedFiles?: FileList;
-  producto:product;
+  producto: product;
+  productoDetails: ProductDetails;
   productCharacteristic:ProductCharacteristic
   currentFile?: File;
   message = '';
   errorMsg = '';
   newProductoId:number=0;
-
+  datosProducto:FormGroup;
+  datosCaracteriticas:FormGroup;
+  datosFoto: FormGroup;
+  idProduct: number;
   listTallas:Size[]=[];
   listColores:Color[];
 
-  constructor(private addProductService:AddproductService,
-              private router: Router,
-              private productListService:ProductListService,
-              private homeProductService:HomeProductService) { }
+  constructor(private addProductService:AddproductService,private router: Router,private activatedRoute: ActivatedRoute,
+  private productListService:ProductListService,private homeProductService:HomeProductService, private fb:FormBuilder,) {
+    this.datosProducto=this.fb.group({
+      codigoProducto: new FormControl('', Validators.required),
+      nombreProducto: new FormControl('', Validators.required),
+      descripcion: new FormControl('', Validators.required),
+      precio: new FormControl('', Validators.required)
+    })
+    this.datosCaracteriticas=this.fb.group({
+      color: new FormControl('', Validators.required),
+      talla: new FormControl('', Validators.required),
+      stock: new FormControl('', Validators.required)
+    })
+  }
 
   public newProductForm = new FormGroup({
     codigoProducto: new FormControl('', Validators.required),
@@ -50,6 +66,15 @@ export class EditProductComponent implements OnInit {
     }
     this.listColores=await this.getColoursData();
     this.listTallas=await this.getSizesData();
+    this.idProduct= this.activatedRoute.snapshot.params.id;
+    this.homeProductService.getProductByProductId(this.idProduct).subscribe(
+      resp => {
+        this.productoDetails = resp;
+        console.log("LOS DATOS DEL USUARIO SON");
+        console.log(this.productoDetails);
+      }, error => {
+        console.log("error");
+   });
     console.log(this.listColores);
   }
   selectFile(event: any): void {
@@ -97,7 +122,7 @@ export class EditProductComponent implements OnInit {
         colorId: this.newProductForm.value.color,
         productId: this.newProductoId,
         stock: this.newProductForm.value.color,
-        tallaId: this.newProductForm.value.color,
+        tallaId: this.newProductForm.value.talla,
         status:1}
       let prodcuctChar:ProductCharacteristic= await this.addNewCharacteristicProduct(this.productCharacteristic);
       await this.upload(prodcuctChar.id);
