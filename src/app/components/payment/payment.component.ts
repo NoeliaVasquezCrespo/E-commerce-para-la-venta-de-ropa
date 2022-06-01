@@ -1,10 +1,14 @@
 import { Component, OnInit, ViewChild  } from '@angular/core';
 import { user } from 'src/app/models/User';
 import { Address } from 'src/app/models/Address';
+import { Compra } from 'src/app/models/Compra';
+import { DetalleCompra } from 'src/app/models/DetalleCompra';
 import {Router} from '@angular/router';
 import axios from 'axios';
 import { AuthService } from 'src/app/service/auth.service';
 import { AddressService } from 'src/app/service/address.service';
+import { PurchaseService } from 'src/app/service/purchase.service';
+import { ProductDetailsService } from 'src/app/service/productdetails.service';
 import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 import { StripeService, StripeCardComponent } from 'ngx-stripe';
 import Swal from'sweetalert2';
@@ -14,6 +18,8 @@ import {
   StripeElementsOptions
 } from '@stripe/stripe-js';
 import { CartService } from 'src/app/service/cart.service';
+import { async } from 'rxjs';
+import { Producto } from 'src/app/models/Producto';
 
 @Component({
   selector: 'app-payment',
@@ -24,12 +30,16 @@ export class PaymentComponent implements OnInit {
   @ViewChild(StripeCardComponent) card: StripeCardComponent;
   advanceSearchExpanded: boolean = false;
   usuario:user;
+  compraRegistrada: Compra;
   direccionAntigua:Address;
   ciudadId:number;
   datosUsuario:FormGroup;
   datosDireccion:FormGroup;
   direccionA: FormGroup;
   stripeTest: FormGroup;
+  detalleCompra: DetalleCompra;
+  fechaAct = new Date();
+  token: string
   public products : any = [];
 
   cardOptions: StripeCardElementOptions = {
@@ -51,8 +61,8 @@ export class PaymentComponent implements OnInit {
     locale: 'es'
   };
   constructor(private cartService : CartService,private authService:AuthService,
-    private addressService:AddressService,private fb:FormBuilder,
-    private stripeService: StripeService ,private router: Router,) {
+    private addressService:AddressService,private purchaseService:PurchaseService,private fb:FormBuilder,
+    private stripeService: StripeService,private productDetailsService:ProductDetailsService ,private router: Router,) {
     this.datosUsuario=this.fb.group({
       nombre: new FormControl('', Validators.required),
       apellido: new FormControl('', Validators.required),
@@ -76,6 +86,7 @@ export class PaymentComponent implements OnInit {
     .subscribe(res=>{
       this.products = res;
     });
+    console.log(this.products)
     this.stripeTest = this.fb.group({
       name: ['', [Validators.required]]
     });
@@ -119,20 +130,77 @@ export class PaymentComponent implements OnInit {
         console.log("error");
      });
   }
-  createToken(): void {
+  async createToken(){
     const name = this.usuario.nombre +" "+this.usuario.apellido;
-    this.stripeService
+    this.stripeService 
       .createToken(this.card.element, { name })
-      .subscribe((result) => {
+      .subscribe(async (result) => {
         if (result.token) {
           // Token
+          this.token=result.token.id;
+          let newCompra:Compra={
+            usuarioId : localStorage.getItem('clientId'),
+            fecha : this.fechaAct,
+            token: this.token,
+            montoTotal: this.total(),
+            status: 1
+          }
+          console.log(newCompra);
+          await this.registrarCompra(newCompra);
           console.log(result.token.id);
           console.log(result.token);
+          await this.mensajeDeConfirmacion();
         } else if (result.error) {
           this.wrongNotification(result.error.message);
           console.log(result.error.message);
         }
       });
+      //await this.registrarCompra();
+  }
+  async registrarCompra(compra: Compra){
+    await this.purchaseService.registerPurchase(compra).subscribe(
+      resp => {
+        this.compraRegistrada = resp;
+        console.log("COMPRA REGISTRADA");
+        console.log(this.compraRegistrada);
+        this.registroProductoCompra();
+      }, error => {
+        console.log("error");
+     });
+  }
+  async registroProductoCompra(){
+    this.products.forEach(async (p: { idProducto: number; }) =>{
+      let newDetalleCompra:DetalleCompra={
+        compraId: this.compraRegistrada.id,
+        productoId: p.idProducto,
+        cantidad: 1,
+        status:  1
+      }
+      await this.registroDetallesCompra(newDetalleCompra);
+      await this.actualizarStock(p.idProducto, 1);
+      console.log(p.idProducto);
+    });
+  }
+  async registroDetallesCompra(detCompra:DetalleCompra){
+    var api = 'http://localhost:8080/v2/orders';
+    axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('tokenCli');
+    await axios.post(api,detCompra).then(function (result){
+      console.log(result);
+    });
+  }
+  async actualizarStock(idProduct:number, cantidad:number){
+    await this.productDetailsService.updateStock(idProduct,cantidad).subscribe(
+      resp => {
+        console.log("PRODUCTO ACTUALIZADO");
+        console.log(resp);
+      }, error => {
+        console.log("error");
+     });
+    /*var api = 'http://localhost:8080/v2/productDescriptions/productId='+idProduct+'/stock='+cantidad;
+    axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('tokenCli');
+    await axios.put(api).then(function (result){
+      console.log(result);
+    });   */
   }
   wrongNotification(mensaje:string){
     Swal.fire({
@@ -189,6 +257,20 @@ export class PaymentComponent implements OnInit {
     }).then(async (result) => {
       if (result.value) {
         location.reload(); 
+      }
+    })
+  }
+
+  mensajeDeConfirmacion(){
+    Swal.fire({
+      title: 'Exito',
+      text: 'Compra registrada exitosamente',
+      icon: 'success',
+      showCancelButton: false,
+      confirmButtonText: 'Ok',
+    }).then(async (result) => {
+      if (result.value) {
+        await this.router.navigateByUrl('/');
       }
     })
   }

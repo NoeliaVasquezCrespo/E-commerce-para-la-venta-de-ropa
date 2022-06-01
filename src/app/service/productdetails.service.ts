@@ -16,4 +16,13 @@ export class ProductDetailsService {
     console.log(url);
     return this.http.get<ProductCharacteristic>(url);
   }
+  updateStock(idProducto:number,cantidad:number):Observable<ProductCharacteristic> {
+    const url = `${this.baseUrl}productDescriptions/productId=${idProducto}/stock=${cantidad}`;
+    console.log(url);
+    let jwt= localStorage.getItem('tokenCli')
+    const reqHeader = new HttpHeaders({
+      'Authorization': `Bearer ${jwt}`
+    })
+    return this.http.put<ProductCharacteristic>(url ,{},{ headers: reqHeader });
+  }
 }
