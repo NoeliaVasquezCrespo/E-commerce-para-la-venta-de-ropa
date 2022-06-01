@@ -54,7 +54,7 @@ export class CartComponent implements OnInit {
     }).then(async (result) => {
       if (result.value) {
         console.log('Eliminando ítem del carrito')
-        this.removeItem(item);
+        this.removeItem(this.products);
         this.confirmDeleteNotification();
       }
     })   
@@ -101,7 +101,5 @@ export class CartComponent implements OnInit {
     return total;
   }
 }
-function item(item: any) {
-  throw new Error('Function not implemented.');
-}
+
 

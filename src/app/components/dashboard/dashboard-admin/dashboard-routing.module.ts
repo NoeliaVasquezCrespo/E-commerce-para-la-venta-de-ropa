@@ -13,6 +13,7 @@ import { AddcategoryComponent } from './addcategory/addcategory.component'
 import { EditProviderComponent } from './edit-provider/edit-provider.component';
 import { DashboardProductsReportComponent } from './dashboard-products-report/dashboard-products-report.component';
 import { DashboardChartByCategoriesComponent } from './dashboard-chart-by-categories/dashboard-chart-by-categories.component';
+import { DashboardChartByCatComponent } from './dashboard-chart-by-cat/dashboard-chart-by-cat.component';
 
 const DashboardChildrenRoute: Routes = [
   {
@@ -49,19 +50,19 @@ const DashboardChildrenRoute: Routes = [
 
   },{
     path: 'category/:id',
-    component: AddcategoryComponent 
+    component: AddcategoryComponent
   },
   {
     path: 'category',
-    component: AddcategoryComponent 
+    component: AddcategoryComponent
   },
   {
     path: 'orders',
-    component: DashboardOrdersComponent 
+    component: DashboardOrdersComponent
   },
   {
     path: 'chart-by-categories',
-    component: DashboardChartByCategoriesComponent,
+    component: DashboardChartByCatComponent,
   }
 
 
