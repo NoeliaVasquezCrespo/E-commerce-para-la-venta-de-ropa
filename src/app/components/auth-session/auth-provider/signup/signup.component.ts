@@ -4,6 +4,8 @@ import { admin } from '../../../../models/Admin'
 import axios from 'axios';
 import Swal from'sweetalert2';
 
+import {company} from '../../../../models/Company';
+import { CompanyService } from 'src/app/service/company.service';
 @Component({
   selector: 'll-signup',
   templateUrl: './signup.component.html',
@@ -12,8 +14,8 @@ import Swal from'sweetalert2';
 export class SignupComponent implements OnInit {
   hide = true;
   hideconfirm = true;
-  constructor() { }
-
+  constructor(private companyService:CompanyService,) { }
+  companiesList:company[];
   public newAdminForm = new FormGroup({
     nombre: new FormControl('', Validators.required),
     apellido: new FormControl('', Validators.required),
@@ -24,10 +26,21 @@ export class SignupComponent implements OnInit {
     confirmpassword: new FormControl('', Validators.required),
   });
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.companiesList=await this.getCompanies();
+  }
+
+  async getCompanies(){
+    let respuesta:company[];
+    //let idProvider:number = parseInt(localStorage.getItem('userId'));
+    await this.companyService.getListCompany().toPromise().then((response) => {
+      respuesta = response;
+    }).catch(e => console.error(e));
+    return respuesta;
   }
 
   addNewAdmin(data: admin){
+    
     if(this.newAdminForm.valid){
     var api = 'http://localhost:8080/v2/administrators';
     data.status=1;

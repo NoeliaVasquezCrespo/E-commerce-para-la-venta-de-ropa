@@ -97,7 +97,7 @@ export class AddproductComponent implements OnInit {
         colorId: this.newProductForm.value.color,
         productId: this.newProductoId,
         stock: this.newProductForm.value.color,
-        tallaId: this.newProductForm.value.color,
+        tallaId: this.newProductForm.value.talla,
         status:1}
       let prodcuctChar:ProductCharacteristic= await this.addNewCharacteristicProduct(this.productCharacteristic);
       await this.upload(prodcuctChar.id);

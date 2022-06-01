@@ -8,6 +8,7 @@ import { ColorSizeRegisterComponent } from './color-size-register/color-size-reg
 import { AddoffersComponent } from './addoffers/addoffers.component';
 import { DashboardOffersComponent } from './dashboard-offers/dashboard-offers.component';
 import { DashboardInactiveOffersComponent } from './dashboard-inactive-offers/dashboard-inactive-offers.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 import { DashboardChartByCityComponent } from './dashboard-chart-by-city/dashboard-chart-by-city.component';
 const DashboardChildrenRoute: Routes = [
   {

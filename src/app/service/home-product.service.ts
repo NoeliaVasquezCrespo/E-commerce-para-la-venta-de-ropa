@@ -36,12 +36,12 @@ export class HomeProductService {
       map(
         response => response, error => error));
   }
-  getProductByProductId(idProducto:number):Observable<FotosProducto>{
+
+  getProductByProductId(idProducto:number):Observable<ProductDetails>{
     const url = `${this.baseUrl}products/${idProducto}`;
-    return this.http.get<FotosProducto>(url).pipe(
-      map(
-        response => response, error => error));
+    return this.http.get<ProductDetails>(url);
   }
+  
   getProductDetailsByNameAndMarca(name:string, marca:string):Observable<ProductDetails>{
     let url = `${this.baseUrl}products/details/`;
     let newUrl=``;
