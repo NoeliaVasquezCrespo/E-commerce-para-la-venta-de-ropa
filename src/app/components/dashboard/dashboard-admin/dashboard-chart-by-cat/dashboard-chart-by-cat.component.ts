@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {formatDate} from '@angular/common';
 import {CategoryService} from '../../../../service/category.service';
 import {Category} from '../../../../models/Category';
+import * as html2pdf from 'html2pdf.js'
 import {
   ApexChart,
   ApexAxisChartSeries,
@@ -15,6 +16,9 @@ import {
 } from "ng-apexcharts";
 import {PurchasesService} from '../../../../service/purchases.service';
 import {ProductosVentasCategoria} from '../../../../models/ProductosVentasCategoria';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
+import {CompraCityRequest} from '../../../../models/CompraCityRequest';
 type ApexXAxis = {
   type?: "category" | "datetime" | "numeric";
   categories?: any;
@@ -50,10 +54,16 @@ export class DashboardChartByCatComponent implements OnInit {
   hintColor = '#ff0000';
   validHint: boolean=false;
 
+  displayedColumns: string[] = ['Id', 'Categoria', 'SumaCantidad'];
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  dataSource!: MatTableDataSource<ProductosVentasCategoria>;
+
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
   public fechaActual:Date=new Date();
   public localID: string;
+  private element:HTMLElement;
+
   constructor(@Inject( LOCALE_ID ) localID: string,
               private fb:FormBuilder,
               private categoryService:CategoryService,
@@ -113,6 +123,9 @@ export class DashboardChartByCatComponent implements OnInit {
     this.listPurchasesCategories= await this.getVentasCategorias();
     console.log(this.listPurchasesCategories);
     this.cargarDatosGraficoBarras();
+    this.dataSource= new MatTableDataSource<ProductosVentasCategoria>(this.listPurchasesCategories)
+    this.dataSource.paginator = this.paginator;
+
   }
   cargarDatosGraficoBarras(){
     this.chartOptions = {
@@ -172,6 +185,8 @@ export class DashboardChartByCatComponent implements OnInit {
     this.listPurchasesCategories=[];
     this.listPurchasesCategories = await this.getVentasCategoriasDates(this.filterForm.value.startDate,this.filterForm.value.endDate)
     this.cargarDatosGraficoBarras();
+    this.dataSource= new MatTableDataSource<ProductosVentasCategoria>(this.listPurchasesCategories)
+    this.dataSource.paginator = this.paginator;
   }
   async getVentasCategorias(){
     let respuesta;
@@ -202,5 +217,18 @@ export class DashboardChartByCatComponent implements OnInit {
     }catch (exception){
 
     }
+  }
+
+  generarReporte() {
+    this.element = document.getElementById('content-print');
+    console.log(this.element)
+    var opt = {
+      margin:       1,
+      filename:     'output.pdf',
+      image:        { type: 'jpeg', quality: 1.0 },
+      html2canvas:  { scale: 2 },
+      jsPDF:        { unit: 'in', format: 'legal', orientation: 'landscape' }
+    }
+    html2pdf().from(this.element).set(opt).save();
   }
 }
