@@ -21,11 +21,8 @@
           
                             <div class="form-group mb-2">
                                 <label for="cantidad">Cantidad</label>
-                                <input class="form-control form-control-sm" type="number" id="cantidad" value="1" min="1" max="100" formControlName="cantidad" placeholder="1">
-                            </div>
-                            <div class="form-group mb-2">
-                                <label for="cantidad-precio">Total por producto:  Bs. {{item.precio*cantidad}}</label>
-                            </div>    
+                                <input class="form-control form-control-sm" type="number" id="cantidad" value="1" min="1" max="1" formControlName="cantidad" placeholder="1">
+                            </div>   
                             
                         </form>
                         <button class="btn btn-outline-danger btn-sm btn-block mb-2" type="button" (click)="confirmDeleteItemNotification()">
@@ -40,7 +37,8 @@
             </div>
             <div class="col-xl-3 col-md-4 pt-3 pt-md-0">
                 &nbsp;
-                <h2 class="h6 px-4 py-3 bg-secondary text-center">Subtotal</h2>
+                &nbsp;
+                <h2 class="h6 px-4 py-3 bg-secondary text-center">Total a pagar</h2>
                 <div class="h3 font-weight-semibold text-center py-3"> Bs. {{total()}}</div>
                 <hr>
                 <a class="btn btn-primary btn-block" (click)="confirmListProductsNotification()" style="color:#ffffff">
