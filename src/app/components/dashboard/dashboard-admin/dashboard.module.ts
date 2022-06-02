@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule} from '@angular/material/expansion';
 import { DashboardRoutingModule } from './dashboard-routing.module';
@@ -20,9 +19,12 @@ import { EditProviderComponent } from './edit-provider/edit-provider.component';
 import { DashboardOrdersComponent } from './dashboard-orders/dashboard-orders.component';
 import { DashboardProductsReportComponent } from './dashboard-products-report/dashboard-products-report.component';
 import { DashboardChartByCategoriesComponent } from './dashboard-chart-by-categories/dashboard-chart-by-categories.component';
-
+import { MatInputModule } from '@angular/material/input';
 import { DashboardChartByCatComponent } from './dashboard-chart-by-cat/dashboard-chart-by-cat.component';
-
+import {MatGridListModule} from '@angular/material/grid-list';
+import {NgApexchartsModule} from 'ng-apexcharts';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
   @NgModule({
   declarations: [
@@ -39,7 +41,7 @@ import { DashboardChartByCatComponent } from './dashboard-chart-by-cat/dashboard
     DashboardChartByCategoriesComponent,
     DashboardChartByCatComponent
   ],
-  imports: [CommonModule, DashboardRoutingModule, SharedModule, MatMenuModule,MatExpansionModule,MaterialModule,FormsModule, ReactiveFormsModule, MatCheckboxModule]
+      imports: [MatNativeDateModule,MatInputModule,CommonModule, DashboardRoutingModule, SharedModule, MatMenuModule, MatExpansionModule, MaterialModule, FormsModule, ReactiveFormsModule, MatCheckboxModule, MatGridListModule, NgApexchartsModule, MatDatepickerModule]
 
-})
+  })
 export class DashboardModule {}
