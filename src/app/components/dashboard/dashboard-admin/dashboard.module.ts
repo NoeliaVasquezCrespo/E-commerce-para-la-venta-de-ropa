@@ -18,7 +18,6 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { EditProviderComponent } from './edit-provider/edit-provider.component';
 import { DashboardOrdersComponent } from './dashboard-orders/dashboard-orders.component';
 import { DashboardProductsReportComponent } from './dashboard-products-report/dashboard-products-report.component';
-import { DashboardChartByCategoriesComponent } from './dashboard-chart-by-categories/dashboard-chart-by-categories.component';
 import { MatInputModule } from '@angular/material/input';
 import { DashboardChartByCatComponent } from './dashboard-chart-by-cat/dashboard-chart-by-cat.component';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -38,7 +37,6 @@ import { MatNativeDateModule } from '@angular/material/core';
     EditProviderComponent,
     DashboardOrdersComponent,
     DashboardProductsReportComponent,
-    DashboardChartByCategoriesComponent,
     DashboardChartByCatComponent
   ],
       imports: [MatNativeDateModule,MatInputModule,CommonModule, DashboardRoutingModule, SharedModule, MatMenuModule, MatExpansionModule, MaterialModule, FormsModule, ReactiveFormsModule, MatCheckboxModule, MatGridListModule, NgApexchartsModule, MatDatepickerModule]
