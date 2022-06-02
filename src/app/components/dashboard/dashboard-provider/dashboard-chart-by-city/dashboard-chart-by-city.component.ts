@@ -116,7 +116,8 @@ export class DashboardChartByCityComponent implements OnInit {
   async loadData(){
     let respuesta: CompraCityRequest[];
     console.log("PRIMER METODO");
-    await this.purchasesService.getListPurchasesCity().toPromise().then((response) => {
+    let idProveedor = localStorage.getItem("userId")
+    await this.purchasesService.getListPurchasesCity(idProveedor).toPromise().then((response) => {
       respuesta = response;
     }).catch(e => console.error(e));
 
@@ -164,7 +165,8 @@ export class DashboardChartByCityComponent implements OnInit {
   }
   async loadDataWithFilters(start,end){
     let respuesta;
-    await this.purchasesService.getListPurchasesCityAndDatees(start,end).toPromise().then((response) => {
+    let idProveedor = localStorage.getItem("userId")
+    await this.purchasesService.getListPurchasesCityAndDatees(idProveedor,start,end).toPromise().then((response) => {
       respuesta = response;
     }).catch(e => console.error(e));
 

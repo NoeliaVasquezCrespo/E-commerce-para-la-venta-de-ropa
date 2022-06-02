@@ -12,8 +12,8 @@ export class PurchasesService {
   private baseUrl:string = environment.baseUrl;
   constructor(private http:HttpClient) { }
 
-  getListPurchasesCity(){
-    const url = `${this.baseUrl}purchases/city`;
+  getListPurchasesCity(idProveedor){
+    const url = `${this.baseUrl}purchases/city/${idProveedor}`;
     let jwt= localStorage.getItem('token')
     const reqHeader = new HttpHeaders({
       'Authorization': `Bearer ${jwt}`
@@ -21,8 +21,8 @@ export class PurchasesService {
     console.log(url);
     return this.http.get<CompraCityRequest[]>(url, { headers: reqHeader });
   }
-  getListPurchasesCityAndDatees(start,end){
-    const url = `${this.baseUrl}purchases/city/${start}/${end}`;
+  getListPurchasesCityAndDatees(idProveedor,start,end){
+    const url = `${this.baseUrl}purchases/city/${idProveedor}/${start}/${end}`;
     let jwt= localStorage.getItem('token')
     const reqHeader = new HttpHeaders({
       'Authorization': `Bearer ${jwt}`
